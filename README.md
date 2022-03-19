@@ -1,7 +1,6 @@
 # **2022 SW Engineering Team Project**
 </br>
 
-
 <!-- 팀원 소개 -->
 ### 🌊 Our Team
 </br>
