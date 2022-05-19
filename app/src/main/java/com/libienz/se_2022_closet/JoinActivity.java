@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +36,8 @@ public class JoinActivity extends AppCompatActivity {
                             Toast.makeText(JoinActivity.this, "Authentication Success.",
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = auth.getCurrentUser();
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent);
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
