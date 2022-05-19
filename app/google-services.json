@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "663552373712",
+    "project_id": "se-2022-closet",
+    "storage_bucket": "se-2022-closet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663552373712:android:37b9950950187fb3e1ffd5",
+        "android_client_info": {
+          "package_name": "com.libienz.se_2022_closet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663552373712-1kdh5cgck1phd106elu7epqp4nvg4017.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUm2Y_3Mr5qJ8R4Z2sikue-cnje7tJrlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663552373712-1kdh5cgck1phd106elu7epqp4nvg4017.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
