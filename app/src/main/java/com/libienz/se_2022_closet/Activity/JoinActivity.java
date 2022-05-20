@@ -72,7 +72,7 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        //취소 버튼 클릭하면 로그인 화면으로 이동
+        //취소 버튼 클릭하면 로그인 화면으로 이동!!!!
         binding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
