@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet;
+package com.libienz.se_2022_closet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.libienz.se_2022_closet.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(getApplicationContext(),JoinActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),LoginActiyity.class);
                     startActivity(intent);
                 }
             },3000);

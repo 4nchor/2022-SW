@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet;
+package com.libienz.se_2022_closet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.libienz.se_2022_closet.R;
 
 public class MainActivity extends AppCompatActivity {
 

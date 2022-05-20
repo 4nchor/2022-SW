@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Code/SE_2022_Closet/app/src/main/res/layout/activity_join.xml" value="0.25" />
-        <entry key="..\:/Code/SE_2022_Closet/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Code/SE_2022_Closet/app/src/main/res/layout/activity_splash.xml" value="0.5" />
+        <entry key="..\:/Code/2022_SE_dev/app/src/main/res/drawable/btn_blue.xml" value="0.2075" />
+        <entry key="..\:/Code/2022_SE_dev/app/src/main/res/drawable/button.xml" value="0.1" />
+        <entry key="..\:/Code/2022_SE_dev/app/src/main/res/drawable/edit.xml" value="0.1" />
+        <entry key="..\:/Code/2022_SE_dev/app/src/main/res/layout/activity_join.xml" value="0.1875" />
+        <entry key="..\:/Code/2022_SE_dev/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Code/2022_SE_dev/app/src/main/res/layout/activity_login_actiyity.xml" value="0.33" />
+        <entry key="..\:/Code/2022_SE_dev/app/src/main/res/layout/activity_main.xml" value="0.14764492753623187" />
+        <entry key="..\:/Code/2022_SE_dev/app/src/main/res/layout/activity_splash.xml" value="0.1875" />
       </map>
     </option>
   </component>
