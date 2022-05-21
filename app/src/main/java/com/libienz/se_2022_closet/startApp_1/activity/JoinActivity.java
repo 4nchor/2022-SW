@@ -49,6 +49,153 @@ public class JoinActivity extends AppCompatActivity {
 
 
 
+
+
+    //EditText가 비어있는지 확인
+    public boolean isEditTextEmpty(EditText edt) {
+
+        if (edt.getText().toString().equals("")) {return true;}
+        else {return false;}
+    }
+
+    //사용자가 닉네임을 기입했는지 확인
+    public void nicknameEmptyCheck() {
+        String nickname;
+        EditText edt = binding.joinName;
+        if (isEditTextEmpty(edt)) {
+            nickname_filled_flag = false;
+            binding.nameEmptyCheck.setText("닉네임을 기입하세요.");
+        }
+
+        else {
+            nickname_filled_flag = true;
+            binding.nameEmptyCheck.setText("");
+        }
+    }
+
+    //사용자가 성별을 기입했는지 확인
+    public void genderEmptyCheck() {
+
+        RadioGroup radioGroup = binding.genderAll;
+        int genderId = radioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = findViewById(genderId);
+        if (radioButton == null) {
+            binding.genderEmptyCheck.setText("성별을 기입하세요.");
+            gender_filled_flag = false;
+            return;
+        }
+        gender_filled_flag = true;
+        binding.genderEmptyCheck.setText("");
+
+    }
+
+    //비밀번호와 비밀번호 확인이 같은 지 확인하는 메소드 같지 않다면 같지 않다고 텍스트를 보여준다.
+    public void samePasswordCheck() {
+        String pw = binding.joinPassword.getText().toString(); //비밀번호란에 입력된 문자열
+        String pwck = binding.joinPwck.getText().toString(); //비밀번호 확인란에 입력된 문자열
+        TextView isSame = binding.samePasswordCheck;
+
+        if (pw.equals(pwck)) { //비밀번호와 비밀번호 확인이 같은 경우
+            isSame.setText("");
+            password_check_flag = true;
+        }
+        else {
+            password_check_flag = false;
+            isSame.setText("비밀번호가 일치하지 않습니다.");
+        }
+    }
+
+    //비밀번호의 유효성 검사하는 메소드
+    //비밀번호는 8~16자리의 영문, 숫자, 특수문자의 조합으로 이루어지고 공백문자나 아이디를 포함하였는 지 등도 검사한다.
+    public void passwordValidCheck() {
+
+        String userId = binding.joinEmail.getText().toString();
+        EditText edt = binding.joinPassword;
+        String password = edt.getText().toString(); //비밀번호란에 입력된 문자열
+        TextView pw_valid = binding.pwValidCheck;
+
+        String pwPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,16}$";
+        Matcher matcher = Pattern.compile(pwPattern).matcher(password);
+
+        pwPattern = "(.)\\1\\1\\1";
+        Matcher matcher2 = Pattern.compile(pwPattern).matcher(password);
+
+        if(isEditTextEmpty(edt)) { //비밀번호란이 비어있는 경우
+            pw_valid.setText("비밀번호를 기입하세요.");
+            password_validation_flag = false;
+            return;
+        }
+
+        if(password.contains(userId)){ //비밀번호에 아이디가 포함된 경우
+            pw_valid.setText("비밀번호에 아이디가 포함될 수 없습니다.");
+            password_validation_flag = false;
+            return;
+        }
+
+        if(password.contains(" ")){ //비밀번호가 공백문자를 포함한 경우
+            pw_valid.setText("비밀번호는 공백문자를 포함할 수 없습니다.");
+            password_validation_flag = false;
+            return;
+        }
+
+        if(matcher2.find()){ //비밀번호에 같은 문자가 4개이상 나오는 경우
+            pw_valid.setText("비밀번호는 같은 문자를 4개 이상 사용할 수 없습니다.");
+            password_validation_flag = false;
+            return;
+        }
+
+        if(!matcher.matches()){ //비밀번호가 정규식을 만족하지 않는 경우
+            pw_valid.setText("비밀번호는 8~16자리의 영문과 숫자와 특수문자의 조합이어야 합니다.");
+            password_validation_flag = false;
+            return;
+        }
+
+
+
+        pw_valid.setText("");
+        password_validation_flag = true;
+
+    }
+
+    //이메일 입력란이 비어있는지 확인
+    public void emailEmptyCheck() {
+
+        EditText edt = binding.joinEmail;
+        if (isEditTextEmpty(edt)) {
+            binding.emailCheck.setText("이메일을 기입하세요");
+            return;
+        }
+        binding.emailCheck.setText("");
+    }
+
+    public void emailDuplicateCheck() {
+        String inputEmail = binding.joinEmail.getText().toString();
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot userSnaposhot : snapshot.getChildren()) {
+                    String dbItrEmail = userSnaposhot.child("email").getValue().toString();
+
+                    if(inputEmail.equals(dbItrEmail)) { //db에서 긁어온 메일과 입력 메일이 같을 때때
+                        binding.emailCheck.setText("이미 존재하는 이메일 입니다.");
+                       email_checked_flag = false;
+                        return;
+                    }
+                    binding.emailCheck.setText("");
+                    email_checked_flag = true;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
+
+    }
+
     /* 이메일과 비밀번호를 입력인자로 계정 생성해주는 메소드
      * Firebase 기반
      * 성공하면 로그인 까지 완료시키고 메인화면으로
@@ -106,141 +253,6 @@ public class JoinActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    public boolean isEditTextEmpty(EditText edt) {
-        if (edt.getText().toString().equals("")) {return true;}
-        else {return false;}
-    }
-    public void nicknameEmptyCheck() {
-        String nickname;
-        EditText edt = binding.joinName;
-        if (isEditTextEmpty(edt)) {
-            nickname_filled_flag = false;
-            binding.nameEmptyCheck.setText("닉네임을 기입하세요.");
-        }
-
-        else {
-            nickname_filled_flag = true;
-            binding.nameEmptyCheck.setText("");
-        }
-    }
-
-    public void genderEmptyCheck() {
-        RadioGroup radioGroup = binding.genderAll;
-        int genderId = radioGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = findViewById(genderId);
-        if (radioButton == null) {
-            binding.genderEmptyCheck.setText("성별을 기입하세요.");
-            gender_filled_flag = false;
-            return;
-        }
-        gender_filled_flag = true;
-        binding.genderEmptyCheck.setText("");
-
-    }
-    //비밀번호와 비밀번호 확인이 같은 지 확인하는 메소드 같지 않다면 같지 않다고 텍스트를 보여준다.
-    public void samePasswordCheck() {
-        String pw = binding.joinPassword.getText().toString(); //비밀번호란에 입력된 문자열
-        String pwck = binding.joinPwck.getText().toString(); //비밀번호 확인란에 입력된 문자열
-        TextView isSame = binding.samePasswordCheck;
-
-        if (pw.equals(pwck)) { //비밀번호와 비밀번호 확인이 같은 경우
-            isSame.setText("");
-            password_check_flag = true;
-        }
-        else {
-            password_check_flag = false;
-            isSame.setText("비밀번호가 일치하지 않습니다.");
-        }
-    }
-
-    //비밀번호의 유효성 검사하는 메소드
-    //비밀번호는 8~16자리의 영문, 숫자, 특수문자의 조합으로 이루어지고 공백문자나 아이디포함여부, 같은 문자를 4번이상
-    //사용하지 않았는지에 대한 조건을 검사한다.
-    public void passwordValidCheck() {
-        String userId = binding.joinEmail.getText().toString();
-        EditText edt = binding.joinPassword;
-        String password = edt.getText().toString(); //비밀번호란에 입력된 문자열
-        TextView pw_valid = binding.pwValidCheck;
-
-        String pwPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,16}$";
-        Matcher matcher = Pattern.compile(pwPattern).matcher(password);
-
-        pwPattern = "(.)\\1\\1\\1";
-        Matcher matcher2 = Pattern.compile(pwPattern).matcher(password);
-
-        if(isEditTextEmpty(edt)) {
-            pw_valid.setText("비밀번호를 기입하세요.");
-            password_validation_flag = false;
-            return;
-        }
-
-        if(password.contains(userId)){
-            pw_valid.setText("비밀번호에 아이디가 포함될 수 없습니다.");
-            password_validation_flag = false;
-            return;
-        }
-
-        if(password.contains(" ")){
-            pw_valid.setText("비밀번호는 공백문자를 포함할 수 없습니다.");
-            password_validation_flag = false;
-            return;
-        }
-
-        if(matcher2.find()){
-            pw_valid.setText("비밀번호는 같은 문자를 4개 이상 사용할 수 없습니다.");
-            password_validation_flag = false;
-            return;
-        }
-
-        if(!matcher.matches()){
-            pw_valid.setText("비밀번호는 8~16자리의 영문과 숫자와 특수문자의 조합이어야 합니다.");
-            password_validation_flag = false;
-            return;
-        }
-
-
-
-        pw_valid.setText("");
-        password_validation_flag = true;
-
-    }
-
-    public void emailEmptyCheck() {
-        EditText edt = binding.joinEmail;
-        if (isEditTextEmpty(edt)) {
-            binding.emailCheck.setText("이메일을 기입하세요");
-            return;
-        }
-        binding.emailCheck.setText("");
-    }
-
-    public void emailDuplicateCheck() {
-        String inputEmail = binding.joinEmail.getText().toString();
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot userSnaposhot : snapshot.getChildren()) {
-                    String dbItrEmail = userSnaposhot.child("email").getValue().toString();
-                    if(inputEmail.equals(dbItrEmail)) {
-                        binding.emailCheck.setText("이미 존재하는 이메일 입니다.");
-                        email_checked_flag = false;
-                        return;
-                    }
-                    binding.emailCheck.setText("");
-                    email_checked_flag = true;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 디비를 가져오던중 에러 발생 시
-                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
-            }
-        });
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -273,6 +285,7 @@ public class JoinActivity extends AppCompatActivity {
 
             }
         });
+
 
         //취소 버튼 클릭하면 로그인 화면으로 이동!
         binding.cancelBtn.setOnClickListener(new View.OnClickListener() {
