@@ -1,0 +1,54 @@
+@startuml
+class com.libienz.se_2022_closet.startApp_1.activity.JoinActivity {
+- ActivityJoinBinding binding
+- FirebaseAuth auth
+- FirebaseDatabase database
+- DatabaseReference userRef
+- UserInfo user
+- boolean password_check_flag
+- boolean password_validation_flag
+- boolean email_checked_flag
+- boolean nickname_filled_flag
+- boolean gender_filled_flag
++ boolean isEditTextEmpty(EditText)
++ void nicknameEmptyCheck()
++ void genderEmptyCheck()
++ void samePasswordCheck()
++ void passwordValidCheck()
++ void emailEmptyCheck()
++ void emailDuplicateCheck()
++ void createUserWithEmailAndPassword(String,String)
+# void onCreate(Bundle)
+}
+class com.libienz.se_2022_closet.startApp_1.activity.LoginActiyity {
+- ActivityLoginBinding binding
+- FirebaseAuth auth
++ void signInWithEmailAndPassword(String,String)
+# void onCreate(Bundle)
+}
+class com.libienz.se_2022_closet.startApp_1.activity.MainActivity {
+- FirebaseAuth auth
+# void onCreate(Bundle)
+}
+class com.libienz.se_2022_closet.startApp_1.activity.SplashActivity {
+- FirebaseAuth auth
+# void onCreate(Bundle)
+}
+class com.libienz.se_2022_closet.startApp_1.data.UserInfo {
+- String email
+- String password
+- String nickname
+- String gender
++ String getEmail()
++ String getNickname()
++ String getPassword()
++ String getGender()
++ String toString()
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.libienz.se_2022_closet.startApp_1.activity.JoinActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.libienz.se_2022_closet.startApp_1.activity.LoginActiyity
+androidx.appcompat.app.AppCompatActivity <|-- com.libienz.se_2022_closet.startApp_1.activity.MainActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.libienz.se_2022_closet.startApp_1.activity.SplashActivity
+@enduml
