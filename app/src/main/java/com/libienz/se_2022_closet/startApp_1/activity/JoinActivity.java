@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,8 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.databinding.ActivityJoinBinding;
 import com.libienz.se_2022_closet.startApp_1.data.UserInfo;
@@ -40,6 +44,8 @@ public class JoinActivity extends AppCompatActivity {
     private boolean password_check_flag = false; //비밀번호와 비밀번호 확인란의 두 패스워드가 같은지를 나타내는 flag
     private boolean password_validation_flag = false; //비밀번호가 유효한지를 보여주는 flag
     private boolean email_checked_flag = false; //이메일 중복을 확인했는지 나타내는 flag
+    private boolean nickname_filled_flag = false;
+    private boolean gender_filled_flag = false;
 
 
 
@@ -48,11 +54,19 @@ public class JoinActivity extends AppCompatActivity {
      * 성공하면 로그인 까지 완료시키고 메인화면으로
      * 실패하면 토스트메세지 출력 */
     public void createUserWithEmailAndPassword(String email, String password) {
+        emailEmptyCheck();
+        emailDuplicateCheck();
         samePasswordCheck(); //비밀번호와 비밀번호 확인이 같다면 flag값이 바뀐다.
         passwordValidCheck(); //비밀번호가 조건을 담은 정규식을 만족한다면 flag값이 바뀐다.
-        emailCheck(); //이메일 중복체크를 진행해서 사용가능한 아이디임을 확인했다면 flag값이 바뀐다.
+        nicknameEmptyCheck();
+        genderEmptyCheck();
 
-        if (!(password_check_flag && password_validation_flag && email_checked_flag)) {return;} //flag값이 모두 1이 아니라면 메소드 종료 다시 적절한 조건에서 이벤트가 일어나길 기다리게 됨
+
+        if (  !(password_check_flag &&
+                password_validation_flag &&
+                email_checked_flag &&
+                nickname_filled_flag &&
+                gender_filled_flag)) {return;} //flag값이 모두 1이 아니라면 메소드 종료 이벤트 다시기다림
 
         //flag값이 모두 만족하면 유저 생성
         auth.createUserWithEmailAndPassword(email, password)
@@ -65,7 +79,11 @@ public class JoinActivity extends AppCompatActivity {
                             int genderId = radioGroup.getCheckedRadioButtonId();
                             RadioButton radioButton = findViewById(genderId);
                             user = new UserInfo(email,password,nickname,radioButton.getText().toString());
-                            userRef.push().setValue(user.toString());
+                            userRef.child(auth.getCurrentUser().getUid().toString()).child("email").setValue(user.getEmail());
+                            userRef.child(auth.getCurrentUser().getUid().toString()).child("password").setValue(user.getPassword());
+                            userRef.child(auth.getCurrentUser().getUid().toString()).child("nickname").setValue(user.getNickname());
+                            userRef.child(auth.getCurrentUser().getUid().toString()).child("gender").setValue(user.getGender());
+
 
 
 
@@ -89,6 +107,35 @@ public class JoinActivity extends AppCompatActivity {
                 });
     }
 
+    public boolean isEditTextEmpty(EditText edt) {
+        if (edt.getText().toString().equals("")) {return true;}
+        else {return false;}
+    }
+    public void nicknameEmptyCheck() {
+        String nickname;
+        EditText edt = binding.joinName;
+        if (isEditTextEmpty(edt)) {
+            binding.nameEmptyCheck.setText("닉네임을 기입하세요.");
+        }
+
+        else {
+            nickname_filled_flag = true;
+            binding.nameEmptyCheck.setText("");
+        }
+    }
+
+    public void genderEmptyCheck() {
+        RadioGroup radioGroup = binding.genderAll;
+        int genderId = radioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = findViewById(genderId);
+        if (radioButton == null) {
+            binding.genderEmptyCheck.setText("성별을 기입하세요.");
+            return;
+        }
+        gender_filled_flag = true;
+        binding.genderEmptyCheck.setText("");
+
+    }
     //비밀번호와 비밀번호 확인이 같은 지 확인하는 메소드 같지 않다면 같지 않다고 텍스트를 보여준다.
     public void samePasswordCheck() {
         String pw = binding.joinPassword.getText().toString(); //비밀번호란에 입력된 문자열
@@ -109,7 +156,8 @@ public class JoinActivity extends AppCompatActivity {
     //사용하지 않았는지에 대한 조건을 검사한다.
     public void passwordValidCheck() {
         String userId = binding.joinEmail.getText().toString();
-        String password = binding.joinPassword.getText().toString(); //비밀번호란에 입력된 문자열
+        EditText edt = binding.joinPassword;
+        String password = edt.getText().toString(); //비밀번호란에 입력된 문자열
         TextView pw_valid = binding.pwValidCheck;
 
         String pwPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,16}$";
@@ -117,6 +165,11 @@ public class JoinActivity extends AppCompatActivity {
 
         pwPattern = "(.)\\1\\1\\1";
         Matcher matcher2 = Pattern.compile(pwPattern).matcher(password);
+
+        if(isEditTextEmpty(edt)) {
+            pw_valid.setText("비밀번호를 기입하세요.");
+            return;
+        }
 
         if(password.contains(userId)){
             pw_valid.setText("비밀번호에 아이디가 포함될 수 없습니다.");
@@ -145,7 +198,39 @@ public class JoinActivity extends AppCompatActivity {
 
     }
 
-    public void emailCheck() {
+    public void emailEmptyCheck() {
+        EditText edt = binding.joinEmail;
+        if (isEditTextEmpty(edt)) {
+            binding.emailCheck.setText("이메일을 기입하세요");
+            return;
+        }
+        binding.emailCheck.setText("");
+    }
+
+    public void emailDuplicateCheck() {
+        String inputEmail = binding.joinEmail.getText().toString();
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot userSnaposhot : snapshot.getChildren()) {
+                    String dbItrEmail = userSnaposhot.child("email").getValue().toString();
+                    if(inputEmail.equals(dbItrEmail)) {
+                        binding.emailCheck.setText("이미 존재하는 이메일 입니다.");
+                        return;
+                    }
+                    binding.emailCheck.setText("");
+                    email_checked_flag = true;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
+
+
         email_checked_flag=true;
     }
 

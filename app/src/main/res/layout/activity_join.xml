@@ -33,6 +33,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                 <TextView
                     android:fontFamily="@font/bmjua_ttf"
                     android:layout_width="wrap_content"
@@ -42,7 +46,17 @@
                     android:text="아이디"
                     android:textColor="#000000"
                     android:textSize="15dp" />
+                <TextView
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:id="@+id/email_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
+                    android:textColor="#B30000"
+                    android:textSize="12dp" />
 
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="300dp"
@@ -54,7 +68,7 @@
 
                     <EditText
                         android:id="@+id/joinEmail"
-                        android:layout_width="200dp"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit"
                         android:hint=" 이메일 주소를 입력해 주세요."
@@ -63,24 +77,35 @@
                         android:textSize="15dp" />
 
 
-                    <Button
-                        android:fontFamily="@font/bmjua_ttf"
-                        android:id="@+id/findEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="중복확인" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:fontFamily="@font/bmjua_ttf"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="66dp"
-                    android:layout_marginTop="10dp"
-                    android:text="비밀번호"
-                    android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="66dp"
+                        android:layout_marginTop="10dp"
+                        android:text="비밀번호"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:id="@+id/pw_valid_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text=""
+                        android:textColor="#B30000"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
 
                 <EditText
                     android:id="@+id/joinPassword"
@@ -94,25 +119,33 @@
                     android:padding="10dp"
                     android:textSize="15dp" />
 
-                <TextView
-                    android:fontFamily="@font/bmjua_ttf"
-                    android:id="@+id/pw_valid_check"
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="66dp"
-                    android:text=""
-                    android:textColor="#B30000"
-                    android:textSize="15dp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:fontFamily="@font/bmjua_ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="66dp"
-                    android:layout_marginTop="10dp"
-                    android:text="비밀번호 확인"
-                    android:textColor="#000000"
-                    android:textSize="15dp" />
+                    <TextView
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="66dp"
+                        android:layout_marginTop="10dp"
+                        android:text="비밀번호 확인"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:id="@+id/samePasswordCheck"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text=""
+                        android:textColor="#B30000"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
 
                 <EditText
                     android:id="@+id/joinPwck"
@@ -126,40 +159,54 @@
                     android:padding="10dp"
                     android:textSize="15dp" />
 
-                <TextView
-                    android:fontFamily="@font/bmjua_ttf"
-                    android:id="@+id/samePasswordCheck"
+
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="66dp"
-                    android:text=""
-                    android:textColor="#B30000"
-                    android:textSize="15dp" />
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="66dp"
+                        android:layout_marginTop="10dp"
+                        android:text="닉네임"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:id="@+id/name_empty_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:text=""
+                        android:textColor="#B30000"
+                        android:textSize="12dp" />
+                </LinearLayout>
 
-                <TextView
-                    android:fontFamily="@font/bmjua_ttf"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="66dp"
-                    android:layout_marginTop="10dp"
-                    android:text="닉네임"
-                    android:textColor="#000000"
-                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/joinName"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="3dp"
                     android:background="@drawable/edit"
                     android:hint=" 닉네임을 입력해 주세요."
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
                     android:textSize="15dp" />
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                 <TextView
+                    android:fontFamily="@font/bmjua_ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="66dp"
@@ -167,6 +214,16 @@
                     android:text="성별"
                     android:textColor="#000000"
                     android:textSize="15dp" />
+                <TextView
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:id="@+id/gender_empty_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text=""
+                    android:textColor="#B30000"
+                    android:textSize="12dp" />
+                </LinearLayout>
 
                 <RadioGroup
                     android:id="@+id/gender_all"
@@ -208,6 +265,7 @@
 
 
             </LinearLayout>
+
 
             <Button
                 android:fontFamily="@font/bmjua_ttf"

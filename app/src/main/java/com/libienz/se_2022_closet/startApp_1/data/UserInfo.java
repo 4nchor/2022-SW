@@ -13,6 +13,22 @@ public class UserInfo {
     private String nickname;
     private String gender;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
     @Override
     public String toString() {
         return email + "/" + password + "/" + nickname + "/" + gender;
