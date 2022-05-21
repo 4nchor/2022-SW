@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.Activity;
+package com.libienz.se_2022_closet.startApp_1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

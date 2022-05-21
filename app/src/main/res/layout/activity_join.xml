@@ -1,93 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="65dp"
-            android:text="회원가입"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/join_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/join_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:ems="10"
-            android:hint="이름"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/join_email"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/join_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:ems="10"
-            android:hint="비밀번호"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/join_pwck"
-            app:layout_constraintStart_toStartOf="@+id/join_email" />
-
-        <EditText
-            android:id="@+id/join_pwck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="267dp"
-            android:ems="10"
-            android:hint="비밀번호 확인"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/join_password" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
 
-        <EditText
-            android:id="@+id/join_email"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="36dp"
-            android:ems="10"
-            android:hint="이메일"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toTopOf="@+id/join_password"
-            app:layout_constraintEnd_toEndOf="@+id/join_name"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/join_name" />
+            <TextView
+                android:layout_margin="39dp"
+                android:fontFamily="@font/bmjua_ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="프로젝트 이름, 로고 들어갈 자리"
+                android:textColor="#000000"
+                android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginLeft="36dp"
-            android:layout_marginTop="71dp"
-            android:text="취소"
-            app:layout_constraintStart_toEndOf="@+id/join_button"
-            app:layout_constraintTop_toBottomOf="@+id/join_pwck" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/join_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
-            android:layout_marginLeft="96dp"
-            android:text="가입"
-            app:layout_constraintBaseline_toBaselineOf="@+id/delete"
-            app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="66dp"
+                    android:layout_marginTop="10dp"
+                    android:text="아이디"
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/joinEmail"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit"
+                        android:hint=" 이메일 주소를 입력해 주세요."
+                        android:inputType="textEmailAddress"
+                        android:padding="10dp"
+                        android:textSize="15dp" />
+
+
+                    <Button
+                        android:fontFamily="@font/bmjua_ttf"
+                        android:id="@+id/findEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="중복확인" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="66dp"
+                    android:layout_marginTop="10dp"
+                    android:text="비밀번호"
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/joinPassword"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit"
+                    android:hint=" 영문 + 숫자 + 특수문자 8 ~ 16자"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:id="@+id/pw_valid_check"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="66dp"
+                    android:text=""
+                    android:textColor="#B30000"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="66dp"
+                    android:layout_marginTop="10dp"
+                    android:text="비밀번호 확인"
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/joinPwck"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/edit"
+                    android:hint=" 패스워드를 다시 입력해 주세요."
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:id="@+id/samePasswordCheck"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="66dp"
+                    android:text=""
+                    android:textColor="#B30000"
+                    android:textSize="15dp" />
+
+
+                <TextView
+                    android:fontFamily="@font/bmjua_ttf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="66dp"
+                    android:layout_marginTop="10dp"
+                    android:text="닉네임"
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/joinName"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/edit"
+                    android:hint=" 닉네임을 입력해 주세요."
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="66dp"
+                    android:layout_marginTop="10dp"
+                    android:text="성별"
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
+
+                <RadioGroup
+                    android:id="@+id/gender_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="52dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/gender_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="여성"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                    <RadioButton
+                        android:id="@+id/gender_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:padding="10dp"
+                        android:text="남성"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                    <RadioButton
+                        android:id="@+id/gender_etc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:padding="10dp"
+                        android:text="기타"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+            <Button
+                android:fontFamily="@font/bmjua_ttf"
+                android:id="@+id/joinButton"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button"
+                android:text="계정 만들기"
+                android:textSize="16dp" />
+
+            <Button
+                android:fontFamily="@font/bmjua_ttf"
+                android:id="@+id/cancelBtn"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button"
+                android:text="취소"
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
 </layout>

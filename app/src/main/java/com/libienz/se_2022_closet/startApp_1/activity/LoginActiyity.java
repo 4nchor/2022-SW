@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.Activity;
+package com.libienz.se_2022_closet.startApp_1.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,40 +10,43 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.libienz.se_2022_closet.R;
-import com.libienz.se_2022_closet.databinding.ActivityJoinBinding;
+import com.libienz.se_2022_closet.databinding.ActivityLoginBinding;
 
-public class JoinActivity extends AppCompatActivity {
+public class LoginActiyity extends AppCompatActivity {
 
-    private ActivityJoinBinding binding;
+    private ActivityLoginBinding binding;
     private FirebaseAuth auth;
 
-    public void createUserWithEmailAndPassword(String email, String password) {
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(JoinActivity.this, new OnCompleteListener<AuthResult>() {
+
+    /*
+    * 이메일과 비밀번호 기반 로그인 수행하는 메소드
+    * Firebase 기반 동작
+    * 성공하면 메인액티비티로 이동 실패하면 토스트 메세지 띄움 */
+    public void signInWithEmailAndPassword(String email, String password) {
+
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("join", "createUserWithEmail:success");
-                            Toast.makeText(JoinActivity.this, "Authentication Success.",
-                                    Toast.LENGTH_SHORT).show();
+                            Log.d("login", "signInWithEmail:success");
                             FirebaseUser user = auth.getCurrentUser();
+                            //로그인 성공 메인액티비티로 이동!
                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(intent);
-                            //updateUI(user);
+
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.d("join", "createUserWithEmail:failure");
-                            Toast.makeText(JoinActivity.this, "Authentication failed.",
+                            Log.w("login", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActiyity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
                     }
                 });
@@ -53,31 +56,25 @@ public class JoinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_join);
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
 
-        binding.joinButton.setOnClickListener(new View.OnClickListener() {
-
+        binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String email = binding.enterID.getText().toString();
+                String password = binding.enterPW.getText().toString();
 
-                String email = binding.joinEmail.getText().toString();
-                String password = binding.joinPassword.getText().toString();
-                String pwck = binding.joinPwck.getText().toString();
-                String name = binding.joinName.getText().toString();
-
-                createUserWithEmailAndPassword(email,password);
-
+                signInWithEmailAndPassword(email,password);
             }
         });
 
-        //취소 버튼 클릭하면 로그인 화면으로 이동!!!!
-        binding.delete.setOnClickListener(new View.OnClickListener() {
+        binding.register.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(),LoginActiyity.class);
+                Intent intent = new Intent(getApplicationContext(),JoinActivity.class);
                 startActivity(intent);
             }
         });
