@@ -115,6 +115,7 @@ public class JoinActivity extends AppCompatActivity {
         String nickname;
         EditText edt = binding.joinName;
         if (isEditTextEmpty(edt)) {
+            nickname_filled_flag = false;
             binding.nameEmptyCheck.setText("닉네임을 기입하세요.");
         }
 
@@ -130,6 +131,7 @@ public class JoinActivity extends AppCompatActivity {
         RadioButton radioButton = findViewById(genderId);
         if (radioButton == null) {
             binding.genderEmptyCheck.setText("성별을 기입하세요.");
+            gender_filled_flag = false;
             return;
         }
         gender_filled_flag = true;
@@ -147,6 +149,7 @@ public class JoinActivity extends AppCompatActivity {
             password_check_flag = true;
         }
         else {
+            password_check_flag = false;
             isSame.setText("비밀번호가 일치하지 않습니다.");
         }
     }
@@ -168,26 +171,31 @@ public class JoinActivity extends AppCompatActivity {
 
         if(isEditTextEmpty(edt)) {
             pw_valid.setText("비밀번호를 기입하세요.");
+            password_validation_flag = false;
             return;
         }
 
         if(password.contains(userId)){
             pw_valid.setText("비밀번호에 아이디가 포함될 수 없습니다.");
+            password_validation_flag = false;
             return;
         }
 
         if(password.contains(" ")){
             pw_valid.setText("비밀번호는 공백문자를 포함할 수 없습니다.");
+            password_validation_flag = false;
             return;
         }
 
         if(matcher2.find()){
             pw_valid.setText("비밀번호는 같은 문자를 4개 이상 사용할 수 없습니다.");
+            password_validation_flag = false;
             return;
         }
 
         if(!matcher.matches()){
             pw_valid.setText("비밀번호는 8~16자리의 영문과 숫자와 특수문자의 조합이어야 합니다.");
+            password_validation_flag = false;
             return;
         }
 
@@ -216,6 +224,7 @@ public class JoinActivity extends AppCompatActivity {
                     String dbItrEmail = userSnaposhot.child("email").getValue().toString();
                     if(inputEmail.equals(dbItrEmail)) {
                         binding.emailCheck.setText("이미 존재하는 이메일 입니다.");
+                        email_checked_flag = false;
                         return;
                     }
                     binding.emailCheck.setText("");
@@ -230,8 +239,6 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-
-        email_checked_flag=true;
     }
 
     @Override
