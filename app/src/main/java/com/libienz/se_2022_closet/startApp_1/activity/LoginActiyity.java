@@ -36,6 +36,7 @@ public class LoginActiyity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            Log.d("logincheck",email.toString() + password.toString());
                             Log.d("login", "signInWithEmail:success");
                             FirebaseUser user = auth.getCurrentUser();
                             //로그인 성공 메인액티비티로 이동!
@@ -44,6 +45,7 @@ public class LoginActiyity extends AppCompatActivity {
 
                         } else {
                             // If sign in fails, display a message to the user.
+                            Log.d("logincheck",email.toString() + password.toString());
                             Log.w("login", "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActiyity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -51,6 +53,8 @@ public class LoginActiyity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +65,19 @@ public class LoginActiyity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         binding.login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String email = binding.enterID.getText().toString();
                 String password = binding.enterPW.getText().toString();
+                Log.d("logincheck",email.toString() + password.toString());
+
+                //빈칸으로 로그인하려고 하면 입력하라고 토스트 메세지 출력
+                if (email.equals("") || password.equals("")) {
+                    Toast.makeText(LoginActiyity.this, "이메일, 비밀번호를 입력하세요!",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 signInWithEmailAndPassword(email,password);
             }
@@ -75,6 +88,14 @@ public class LoginActiyity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),JoinActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.lostId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),FindEmailActivity.class);
                 startActivity(intent);
             }
         });

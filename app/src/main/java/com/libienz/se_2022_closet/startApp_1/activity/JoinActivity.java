@@ -170,13 +170,16 @@ public class JoinActivity extends AppCompatActivity {
 
     public void emailDuplicateCheck() {
         String inputEmail = binding.joinEmail.getText().toString();
+        Log.d("toFind",inputEmail);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+
                 for (DataSnapshot userSnaposhot : snapshot.getChildren()) {
                     String dbItrEmail = userSnaposhot.child("email").getValue().toString();
 
+                    Log.d("toFind",dbItrEmail);
                     if(inputEmail.equals(dbItrEmail)) { //db에서 긁어온 메일과 입력 메일이 같을 때때
                         binding.emailCheck.setText("이미 존재하는 이메일 입니다.");
                        email_checked_flag = false;
@@ -260,11 +263,6 @@ public class JoinActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_join);
         auth = FirebaseAuth.getInstance();
-
-
-
-
-
 
 
         // 회원가입 버튼을 눌렀을 때 입력된 사용자 정보를 바탕으로 회원가입 한다.
