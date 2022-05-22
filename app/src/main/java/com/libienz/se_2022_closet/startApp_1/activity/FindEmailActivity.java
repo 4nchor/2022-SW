@@ -32,7 +32,7 @@ public class FindEmailActivity extends AppCompatActivity {
         String inputEmail = binding.enterEmailToFindId.getText().toString();
         if (inputEmail.equals("")) {
             binding.notifyFindRes.setText("조회해볼 이메일 아이디를 입력해주세요!");
-            binding.notifyFindRes.setTextColor(Color.parseColor("#B30000ㅁㄴㅇ"));
+            binding.notifyFindRes.setTextColor(Color.parseColor("#B30000"));
             return;
         }
         Log.d("toFind",inputEmail);

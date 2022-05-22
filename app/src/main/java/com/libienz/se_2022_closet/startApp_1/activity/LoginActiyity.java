@@ -47,7 +47,7 @@ public class LoginActiyity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.d("logincheck",email.toString() + password.toString());
                             Log.w("login", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActiyity.this, "Authentication failed.",
+                            Toast.makeText(LoginActiyity.this, "로그인 실패",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -93,9 +93,18 @@ public class LoginActiyity extends AppCompatActivity {
         });
 
         binding.lostId.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),FindEmailActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.lostPw.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),FindPwActivity.class);
                 startActivity(intent);
             }
         });
