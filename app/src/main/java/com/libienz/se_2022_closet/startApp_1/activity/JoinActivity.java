@@ -41,15 +41,24 @@ public class JoinActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference userRef = database.getReference("user");
     private UserInfo user;
-    private boolean password_check_flag = false; //비밀번호와 비밀번호 확인란의 두 패스워드가 같은지를 나타내는 flag
-    private boolean password_validation_flag = false; //비밀번호가 유효한지를 보여주는 flag
-    private boolean email_checked_flag = false; //이메일 중복을 확인했는지 나타내는 flag
-    private boolean nickname_filled_flag = false;
-    private boolean gender_filled_flag = false;
+    private boolean password_check_flag; //비밀번호와 비밀번호 확인란의 두 패스워드가 같은지를 나타내는 flag
+    private boolean password_validation_flag; //비밀번호가 유효한지를 보여주는 flag
+    private boolean email_checked_flag; //이메일 중복을 확인했는지 나타내는 flag
+    private boolean nickname_filled_flag;
+    private boolean gender_filled_flag;
 
+    public void setEmail_checked_flag(boolean email_checked_flag) {
+        this.email_checked_flag = email_checked_flag;
+    }
 
-
-
+    public void clearAllFlag() {
+        password_check_flag = false;
+        password_validation_flag = false;
+        email_checked_flag = false;
+        nickname_filled_flag = false;
+        gender_filled_flag = false;
+        return ;
+    }
 
     //EditText가 비어있는지 확인
     public boolean isEditTextEmpty(EditText edt) {
@@ -157,7 +166,7 @@ public class JoinActivity extends AppCompatActivity {
 
     }
 
-    //이메일 입력란이 비어있는지 확인
+/*    //이메일 입력란이 비어있는지 확인
     public void emailEmptyCheck() {
 
         EditText edt = binding.joinEmail;
@@ -166,25 +175,34 @@ public class JoinActivity extends AppCompatActivity {
             return;
         }
         binding.emailCheck.setText("");
-    }
+    }*/
 
     public void emailDuplicateCheck() {
         String inputEmail = binding.joinEmail.getText().toString();
+        if (inputEmail.equals("")){
+            binding.emailCheck.setText("이메일을 기입하세요");
+            setEmail_checked_flag(false);
+            return;
+        }
+        Log.d("toFind",inputEmail);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot userSnaposhot : snapshot.getChildren()) {
                     String dbItrEmail = userSnaposhot.child("email").getValue().toString();
-
+                    Log.d("toFind",dbItrEmail);
                     if(inputEmail.equals(dbItrEmail)) { //db에서 긁어온 메일과 입력 메일이 같을 때때
                         binding.emailCheck.setText("이미 존재하는 이메일 입니다.");
-                       email_checked_flag = false;
+                        Log.d("direct", String.valueOf(email_checked_flag));
+                        setEmail_checked_flag(false);
                         return;
                     }
-                    binding.emailCheck.setText("");
-                    email_checked_flag = true;
                 }
+                setEmail_checked_flag(true);
+                binding.emailCheck.setText("");
+                Log.d("done?","done");
+                return;
             }
 
             @Override
@@ -201,7 +219,9 @@ public class JoinActivity extends AppCompatActivity {
      * 성공하면 로그인 까지 완료시키고 메인화면으로
      * 실패하면 토스트메세지 출력 */
     public void createUserWithEmailAndPassword(String email, String password) {
-        emailEmptyCheck();
+
+
+        //emailEmptyCheck();
         emailDuplicateCheck();
         samePasswordCheck(); //비밀번호와 비밀번호 확인이 같다면 flag값이 바뀐다.
         passwordValidCheck(); //비밀번호가 조건을 담은 정규식을 만족한다면 flag값이 바뀐다.
@@ -211,11 +231,26 @@ public class JoinActivity extends AppCompatActivity {
 
         if (  !(password_check_flag &&
                 password_validation_flag &&
-                email_checked_flag &&
+                //email_checked_flag &&
                 nickname_filled_flag &&
-                gender_filled_flag)) {return;} //flag값이 모두 1이 아니라면 메소드 종료 이벤트 다시기다림
+                gender_filled_flag)) {
+            Log.d("password_check_flag", String.valueOf(password_check_flag));
+            Log.d("password_valid_flag", String.valueOf(password_validation_flag));
+            Log.d("email_checked_flag", String.valueOf(email_checked_flag));
+            Log.d("nickname_filled_flag", String.valueOf(nickname_filled_flag));
+            Log.d("gender_filled_flag", String.valueOf(gender_filled_flag));
+            Log.d("flag","\n\n");
+
+            return;
+        } //flag값이 모두 1이 아니라면 메소드 종료 이벤트 다시기다림
 
         //flag값이 모두 만족하면 유저 생성
+        Log.d("password_check_flag", String.valueOf(password_check_flag));
+        Log.d("password_valid_flag", String.valueOf(password_validation_flag));
+        Log.d("email_checked_flag", String.valueOf(email_checked_flag));
+        Log.d("nickname_filled_flag", String.valueOf(nickname_filled_flag));
+        Log.d("gender_filled_flag", String.valueOf(gender_filled_flag));
+        Log.d("flag","\n\n");
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(JoinActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -225,13 +260,11 @@ public class JoinActivity extends AppCompatActivity {
                             RadioGroup radioGroup = binding.genderAll;
                             int genderId = radioGroup.getCheckedRadioButtonId();
                             RadioButton radioButton = findViewById(genderId);
-                            user = new UserInfo(email,password,nickname,radioButton.getText().toString());
+                            user = new UserInfo(email,nickname,radioButton.getText().toString());
                             userRef.child(auth.getCurrentUser().getUid().toString()).child("email").setValue(user.getEmail());
-                            userRef.child(auth.getCurrentUser().getUid().toString()).child("password").setValue(user.getPassword());
+                            //userRef.child(auth.getCurrentUser().getUid().toString()).child("password").setValue(user.getPassword());
                             userRef.child(auth.getCurrentUser().getUid().toString()).child("nickname").setValue(user.getNickname());
                             userRef.child(auth.getCurrentUser().getUid().toString()).child("gender").setValue(user.getGender());
-
-
 
 
                             // Sign in success, update UI with the signed-in user's information
@@ -246,8 +279,8 @@ public class JoinActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.d("join", "createUserWithEmail:failure");
-                            Toast.makeText(JoinActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(JoinActivity.this, "Authentication failed.",
+                            //      Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }
                     }
@@ -262,11 +295,6 @@ public class JoinActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
 
-
-
-
-
-
         // 회원가입 버튼을 눌렀을 때 입력된 사용자 정보를 바탕으로 회원가입 한다.
         binding.joinButton.setOnClickListener(new View.OnClickListener() {
 
@@ -277,7 +305,7 @@ public class JoinActivity extends AppCompatActivity {
                 String password = binding.joinPassword.getText().toString();
                 String pwck = binding.joinPwck.getText().toString();
                 String name = binding.joinName.getText().toString();
-
+                clearAllFlag();
                 createUserWithEmailAndPassword(email,password);
 
 
