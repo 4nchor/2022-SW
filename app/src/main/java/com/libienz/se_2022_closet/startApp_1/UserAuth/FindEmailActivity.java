@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.activity;
+package com.libienz.se_2022_closet.startApp_1.UserAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.databinding.ActivityFindEmailBinding;
-import com.libienz.se_2022_closet.databinding.ActivityJoinBinding;
 
 public class FindEmailActivity extends AppCompatActivity {
 

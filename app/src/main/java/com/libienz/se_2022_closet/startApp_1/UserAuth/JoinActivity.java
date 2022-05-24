@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.activity;
+package com.libienz.se_2022_closet.startApp_1.UserAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,8 +6,6 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -29,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.databinding.ActivityJoinBinding;
-import com.libienz.se_2022_closet.startApp_1.data.UserInfo;
+import com.libienz.se_2022_closet.startApp_1.UserAuth.data.UserInfo;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

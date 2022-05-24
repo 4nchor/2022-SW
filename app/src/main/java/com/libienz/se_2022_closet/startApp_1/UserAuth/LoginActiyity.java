@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.activity;
+package com.libienz.se_2022_closet.startApp_1.UserAuth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
