@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.data;
+package com.libienz.se_2022_closet.startApp_1.UserAuth.data;
 
 public class UserInfo {
 

@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SE_2022_Closet">
         <activity
-            android:name=".startApp_1.activity.FindPwActivity"
+            android:name=".startApp_1.UserAuth.FindPwActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.activity.FindEmailActivity"
+            android:name=".startApp_1.UserAuth.FindEmailActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.activity.JoinActivity"
+            android:name=".startApp_1.UserAuth.JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.activity.SplashActivity"
+            android:name=".startApp_1.UserAuth.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +28,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".startApp_1.activity.MainActivity"
+            android:name=".startApp_1.UserAuth.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".startApp_1.activity.LoginActiyity"
+            android:name=".startApp_1.UserAuth.LoginActiyity"
             android:exported="false" />
     </application>
 
