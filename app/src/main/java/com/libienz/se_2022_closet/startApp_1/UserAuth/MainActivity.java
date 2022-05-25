@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.UserAuth.ootd.OOTDActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 auth.signOut();
                 Intent intent = new Intent(getApplicationContext(),SplashActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button ootd_btn = (Button) findViewById(R.id.ootd_btn);
+        ootd_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.signOut();
+                Intent intent = new Intent(getApplicationContext(), OOTDActivity.class);
                 startActivity(intent);
             }
         });
