@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.UserAuth.ootd;
+package com.libienz.se_2022_closet.startApp_1.ootd;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

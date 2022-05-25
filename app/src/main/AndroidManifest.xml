@@ -10,28 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SE_2022_Closet">
         <activity
-            android:name=".startApp_1.UserAuth.ootd.BoardEditActivity"
+            android:name=".startApp_1.ootd.BoardEditActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.UserAuth.ootd.BoardAddActivity"
+            android:name=".startApp_1.ootd.BoardAddActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.UserAuth.ootd.BoardActivity"
+            android:name=".startApp_1.ootd.BoardActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.UserAuth.ootd.OOTDActivity"
+            android:name=".startApp_1.ootd.OOTDActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.UserAuth.FindPwActivity"
+            android:name=".startApp_1.userauth.FindPwActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.UserAuth.FindEmailActivity"
+            android:name=".startApp_1.userauth.FindEmailActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.UserAuth.JoinActivity"
+            android:name=".startApp_1.userauth.JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".startApp_1.UserAuth.SplashActivity"
+            android:name=".startApp_1.userauth.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,10 +40,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".startApp_1.UserAuth.MainActivity"
+            android:name=".startApp_1.userauth.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".startApp_1.UserAuth.LoginActiyity"
+            android:name=".startApp_1.userauth.LoginActiyity"
             android:exported="false" />
     </application>
 

@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.UserAuth.ootd;
+package com.libienz.se_2022_closet.startApp_1.ootd;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.OnProgressListener;
@@ -26,7 +25,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.libienz.se_2022_closet.R;
 
-public class BoardEditActivity extends AppCompatActivity {
+public class BoardAddActivity extends AppCompatActivity {
     private ImageView imageView;
     private ProgressBar progressBar;
     private Uri imageUri;
@@ -34,8 +33,7 @@ public class BoardEditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board_edit);
-
+        setContentView(R.layout.activity_board_add);
         imageView = findViewById(R.id.imageArea);
         progressBar = findViewById(R.id.progress_View);
         Button uploadBtn = findViewById(R.id.writeBtn);
@@ -46,8 +44,6 @@ public class BoardEditActivity extends AppCompatActivity {
 
         //프로그래스바 숨기기
         progressBar.setVisibility(View.INVISIBLE);
-
-        getImageData(takeKeyDate);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,22 +70,12 @@ public class BoardEditActivity extends AppCompatActivity {
                     uploadToFirebase(imageUri,takeKeyDate);
 
                 } else {
-                    Toast.makeText(BoardEditActivity.this, "사진을 다시 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BoardAddActivity.this, "사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
     } //onCreate
-    private void getImageData(String takeKeyDate){
-        FBRef.reference.child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getApplicationContext())
-                        .load(uri)
-                        .into(imageView);
-            }
-        });
-    }
 
     //사진 가져오기
     ActivityResultLauncher<Intent> activityResult = registerForActivityResult(
@@ -100,6 +86,7 @@ public class BoardEditActivity extends AppCompatActivity {
                     if( result.getResultCode() == RESULT_OK && result.getData() != null){
 
                         imageUri = result.getData().getData();
+                        Log.d("이미지uri값", String.valueOf(imageUri));
                         imageView.setImageURI(imageUri);
                     }
                 }
@@ -119,7 +106,7 @@ public class BoardEditActivity extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         //프로그래스바 숨김
                         progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(BoardEditActivity.this, key+"수정 성공", Toast.LENGTH_LONG).show();
+                        Toast.makeText(BoardAddActivity.this, key+"업로드 성공", Toast.LENGTH_LONG).show();
                         setResult(RESULT_OK);
                         finish();
                     }
@@ -139,7 +126,7 @@ public class BoardEditActivity extends AppCompatActivity {
 
                 //프로그래스바 숨김
                 progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(BoardEditActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BoardAddActivity.this, "업로드 실패", Toast.LENGTH_SHORT).show();
             }
         });
     }

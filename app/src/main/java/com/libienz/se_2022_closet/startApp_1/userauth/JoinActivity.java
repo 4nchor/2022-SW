@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.UserAuth;
+package com.libienz.se_2022_closet.startApp_1.userauth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.databinding.ActivityJoinBinding;
-import com.libienz.se_2022_closet.startApp_1.UserAuth.data.UserInfo;
+import com.libienz.se_2022_closet.startApp_1.userauth.data.UserInfo;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
