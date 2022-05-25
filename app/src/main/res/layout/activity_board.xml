@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".startApp_1.UserAuth.ootd.BoardActivity">
+
+    <LinearLayout
+        android:id="@+id/dateBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#7087FF"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/boardDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="xx월 xx일"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/dateBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/getImageArea"
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            />
+        <TextView
+            android:id="@+id/getTextArea"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:textSize="20dp"
+            android:text=""/>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_24"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSub1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_delete_24"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="90dp"
+        android:layout_marginRight="10sp"
+        android:visibility="invisible"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSub2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_settings_backup_restore_24"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="160dp"
+        android:layout_marginRight="10sp"
+        android:visibility="invisible"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSub3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_post_add_24"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="230dp"
+        android:layout_marginRight="10sp"
+        android:visibility="invisible"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
