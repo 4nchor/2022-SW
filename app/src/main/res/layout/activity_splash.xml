@@ -8,7 +8,7 @@
     android:background="@color/black"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".startApp_1.UserAuth.SplashActivity">
+    tools:context=".startApp_1.userauth.SplashActivity">
 
 
     <TextView

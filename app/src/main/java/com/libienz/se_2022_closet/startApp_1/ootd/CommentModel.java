@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.UserAuth.ootd;
+package com.libienz.se_2022_closet.startApp_1.ootd;
 
 public class CommentModel {
 
