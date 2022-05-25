@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SE_2022_Closet">
         <activity
+            android:name=".startApp_1.UserAuth.ootd.BoardEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".startApp_1.UserAuth.ootd.BoardAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".startApp_1.UserAuth.ootd.BoardActivity"
             android:exported="false" />
         <activity
