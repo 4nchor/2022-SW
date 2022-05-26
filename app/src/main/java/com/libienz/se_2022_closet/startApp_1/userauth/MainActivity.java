@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         ootd_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auth.signOut();
                 Intent intent = new Intent(getApplicationContext(), OOTDActivity.class);
                 startActivity(intent);
             }

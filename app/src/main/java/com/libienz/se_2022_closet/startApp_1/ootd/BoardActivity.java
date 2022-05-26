@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -30,10 +31,16 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
     private Animation fab_open, fab_close;
     private Boolean isFabOpen = false;
     private FloatingActionButton fabMain, fabSub1, fabSub2, fabSub3;
+    private FirebaseAuth auth=FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
+
+        String uidString =auth.getCurrentUser().getUid().toString();
+        Log.d("uidString",uidString);
+
         Intent intent = getIntent();
         String takeDate = intent.getStringExtra("boardDate");
         TextView textView = findViewById(R.id.boardDate);
@@ -41,9 +48,8 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
 
         String takeKeyDate = intent.getStringExtra("dateKey");
 
-
-        getBoardData(takeKeyDate);
-        getImageData(takeKeyDate);
+        getBoardData(uidString,takeKeyDate);
+        getImageData(uidString,takeKeyDate);
 
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
@@ -60,36 +66,34 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
         fabSub3.setOnClickListener(this);
 
     }
-
-    private void getBoardData(String takeKeyDate){
-        ValueEventListener postListener = new ValueEventListener() {
+    private void getBoardData(String Uid,String takeKeyDate){
+        FBRef.boardRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                TextView commentTextView = findViewById(R.id.getTextArea);
-                Log.w("데이터받아오기",snapshot.toString());
                 try {
-                    int 데이터받아오기 = Log.w("데이터받아오기", snapshot.getValue().toString());
-                } catch (Exception e) {
-                    FBRef.boardRef.child(takeKeyDate).setValue(new CommentModel("uid",""));
+                    Log.d("값있니?", snapshot.child(Uid).child(takeKeyDate).getValue().toString());
+                }catch (NullPointerException e){
+                    FBRef.boardRef.child(Uid).child(takeKeyDate).setValue(new CommentModel(Uid,""));
                 }
-                CommentModel commentModel =snapshot.getValue(CommentModel.class);
+                CommentModel commentModel = snapshot.child(Uid).child(takeKeyDate).getValue(CommentModel.class);
+
+                TextView commentTextView = findViewById(R.id.getTextArea);
                 try {
                     commentTextView.setText(commentModel.comment);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                }catch (NullPointerException e){
+                    Log.d("처음값이라 ", String.valueOf(e));
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            }
 
-        };
-        FBRef.boardRef.child(takeKeyDate).addValueEventListener(postListener);
+            }
+        });
     }
-    private void getImageData(String takeKeyDate) {
+    private void getImageData(String Uid,String takeKeyDate) {
         try {
             ImageView imageView = findViewById(R.id.getImageArea);
-            FBRef.reference.child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            FBRef.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Glide.with(getApplicationContext())
@@ -106,10 +110,10 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
     }
-    private void checkImageData(String takeKeyDate){
+    private void checkImageData(String Uid,String takeKeyDate){
         try {
             ImageView imageView = findViewById(R.id.getImageArea);
-            FBRef.reference.child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            FBRef.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Intent editIntent = new Intent(BoardActivity.this, BoardEditActivity.class);
@@ -132,6 +136,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
         int id = v.getId();
         Intent intent = getIntent();
         String takeKeyDate = intent.getStringExtra("dateKey");
+        String uidString =auth.getCurrentUser().getUid().toString();
         switch (id) {
             case R.id.fabMain:
                 anim();
@@ -140,13 +145,13 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
             case R.id.fabSub1:
                 anim();
                 Toast.makeText(this, "Button1 삭제버튼", Toast.LENGTH_SHORT).show();
-                onDeleteComment(takeKeyDate);
-                onDeleteImage(takeKeyDate);
+                onDeleteComment(uidString,takeKeyDate);
+                onDeleteImage(uidString,takeKeyDate);
                 break;
             case R.id.fabSub2:
                 anim();
                 Toast.makeText(this, "Button2 수정버튼", Toast.LENGTH_SHORT).show();
-                checkImageData(takeKeyDate);
+                checkImageData(uidString,takeKeyDate);
                 break;
             case R.id.fabSub3:
                 anim();
@@ -159,9 +164,9 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void onDeleteImage(String key)
+    private void onDeleteImage(String Uid,String key)
     {
-        FBRef.reference.child(key+".png").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        FBRef.reference.child(Uid).child(key+".png").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(BoardActivity.this, key+"이미지삭제 성공", Toast.LENGTH_SHORT).show();
@@ -174,8 +179,8 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
-    private void onDeleteComment(String key) {
-        FBRef.boardRef.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+    private void onDeleteComment(String Uid,String key) {
+        FBRef.boardRef.child(Uid).child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(BoardActivity.this, "코멘트삭제 성공", Toast.LENGTH_SHORT).show();

@@ -5,10 +5,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.libienz.se_2022_closet.R;
 
 import java.util.ArrayList;
@@ -18,12 +21,11 @@ import java.util.Date;
 public class OOTDActivity extends AppCompatActivity {
     TextView monthYearText; //년월 텍스트뷰
     RecyclerView recyclerView;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ootdactivity);
+
         //초기화
         monthYearText = findViewById(R.id.monthYearText);
         ImageButton preBtn = findViewById(R.id.pre_btn);
