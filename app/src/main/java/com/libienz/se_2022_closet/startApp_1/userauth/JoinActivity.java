@@ -1,5 +1,12 @@
 package com.libienz.se_2022_closet.startApp_1.userauth;
 
+
+import static com.libienz.se_2022_closet.startApp_1.util.InputCheckUtility.emailNotExistCheckAndNotify;
+import static com.libienz.se_2022_closet.startApp_1.util.InputCheckUtility.isEditTextEmpty;
+import static com.libienz.se_2022_closet.startApp_1.util.InputCheckUtility.nicknameNotEmptyCheckAndNotify;
+import static com.libienz.se_2022_closet.startApp_1.util.InputCheckUtility.passwordNotEmptyCheckAndNotify;
+
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -45,9 +52,7 @@ public class JoinActivity extends AppCompatActivity {
     private boolean nickname_filled_flag;
     private boolean gender_filled_flag;
 
-    public void setEmail_checked_flag(boolean email_checked_flag) {
-        this.email_checked_flag = email_checked_flag;
-    }
+
 
     public void clearAllFlag() {
         password_check_flag = false;
@@ -58,27 +63,7 @@ public class JoinActivity extends AppCompatActivity {
         return ;
     }
 
-    //EditText가 비어있는지 확인
-    public boolean isEditTextEmpty(EditText edt) {
 
-        if (edt.getText().toString().equals("")) {return true;}
-        else {return false;}
-    }
-
-    //사용자가 닉네임을 기입했는지 확인
-    public void nicknameEmptyCheck() {
-        String nickname;
-        EditText edt = binding.joinName;
-        if (isEditTextEmpty(edt)) {
-            nickname_filled_flag = false;
-            binding.nameEmptyCheck.setText("닉네임을 기입하세요.");
-        }
-
-        else {
-            nickname_filled_flag = true;
-            binding.nameEmptyCheck.setText("");
-        }
-    }
 
     //사용자가 성별을 기입했는지 확인
     public void genderEmptyCheck() {
@@ -107,8 +92,8 @@ public class JoinActivity extends AppCompatActivity {
             password_check_flag = true;
         }
         else {
-            password_check_flag = false;
             isSame.setText("비밀번호가 일치하지 않습니다.");
+            password_check_flag = false;
         }
     }
 
@@ -118,8 +103,12 @@ public class JoinActivity extends AppCompatActivity {
 
         String userId = binding.joinEmail.getText().toString();
         EditText edt = binding.joinPassword;
-        String password = edt.getText().toString(); //비밀번호란에 입력된 문자열
         TextView pw_valid = binding.pwValidCheck;
+        if(!passwordNotEmptyCheckAndNotify(edt,pw_valid,"","비밀번호를 기입하세요")) {
+            return;
+        }
+        String password = edt.getText().toString(); //비밀번호란에 입력된 문자열
+
 
         String pwPattern = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,16}$";
         Matcher matcher = Pattern.compile(pwPattern).matcher(password);
@@ -127,13 +116,10 @@ public class JoinActivity extends AppCompatActivity {
         pwPattern = "(.)\\1\\1\\1";
         Matcher matcher2 = Pattern.compile(pwPattern).matcher(password);
 
-        if(isEditTextEmpty(edt)) { //비밀번호란이 비어있는 경우
-            pw_valid.setText("비밀번호를 기입하세요.");
-            password_validation_flag = false;
-            return;
-        }
 
-        if(password.contains(userId)){ //비밀번호에 아이디가 포함된 경우
+
+
+        if(!userId.equals("") && password.contains(userId)){ //비밀번호에 아이디가 포함된 경우
             pw_valid.setText("비밀번호에 아이디가 포함될 수 없습니다.");
             password_validation_flag = false;
             return;
@@ -164,53 +150,7 @@ public class JoinActivity extends AppCompatActivity {
 
     }
 
-/*    //이메일 입력란이 비어있는지 확인
-    public void emailEmptyCheck() {
 
-        EditText edt = binding.joinEmail;
-        if (isEditTextEmpty(edt)) {
-            binding.emailCheck.setText("이메일을 기입하세요");
-            return;
-        }
-        binding.emailCheck.setText("");
-    }*/
-
-    public void emailDuplicateCheck() {
-        String inputEmail = binding.joinEmail.getText().toString();
-        if (inputEmail.equals("")){
-            binding.emailCheck.setText("이메일을 기입하세요");
-            setEmail_checked_flag(false);
-            return;
-        }
-        Log.d("toFind",inputEmail);
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for (DataSnapshot userSnaposhot : snapshot.getChildren()) {
-                    String dbItrEmail = userSnaposhot.child("email").getValue().toString();
-                    Log.d("toFind",dbItrEmail);
-                    if(inputEmail.equals(dbItrEmail)) { //db에서 긁어온 메일과 입력 메일이 같을 때때
-                        binding.emailCheck.setText("이미 존재하는 이메일 입니다.");
-                        Log.d("direct", String.valueOf(email_checked_flag));
-                        setEmail_checked_flag(false);
-                        return;
-                    }
-                }
-                setEmail_checked_flag(true);
-                binding.emailCheck.setText("");
-                Log.d("done?","done");
-                return;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 디비를 가져오던중 에러 발생 시
-                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
-            }
-        });
-
-    }
 
     /* 이메일과 비밀번호를 입력인자로 계정 생성해주는 메소드
      * Firebase 기반
@@ -218,18 +158,24 @@ public class JoinActivity extends AppCompatActivity {
      * 실패하면 토스트메세지 출력 */
     public void createUserWithEmailAndPassword(String email, String password) {
 
+        clearAllFlag();
 
-        //emailEmptyCheck();
-        emailDuplicateCheck();
+        EditText edt = binding.joinEmail;
+        TextView tv = binding.emailCheck;
+
+        emailNotExistCheckAndNotify(edt,tv,"","이미 존재하는 이메일 입니다");
+
         samePasswordCheck(); //비밀번호와 비밀번호 확인이 같다면 flag값이 바뀐다.
         passwordValidCheck(); //비밀번호가 조건을 담은 정규식을 만족한다면 flag값이 바뀐다.
-        nicknameEmptyCheck();
+
+        edt = binding.joinName;
+        tv = binding.nameEmptyCheck;
+        nickname_filled_flag = nicknameNotEmptyCheckAndNotify(edt,tv,"","닉네임을 기입하세요");
         genderEmptyCheck();
 
 
         if (  !(password_check_flag &&
                 password_validation_flag &&
-                //email_checked_flag &&
                 nickname_filled_flag &&
                 gender_filled_flag)) {
             Log.d("password_check_flag", String.valueOf(password_check_flag));
@@ -301,8 +247,6 @@ public class JoinActivity extends AppCompatActivity {
 
                 String email = binding.joinEmail.getText().toString();
                 String password = binding.joinPassword.getText().toString();
-                String pwck = binding.joinPwck.getText().toString();
-                String name = binding.joinName.getText().toString();
                 clearAllFlag();
                 createUserWithEmailAndPassword(email,password);
 
