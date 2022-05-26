@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -29,6 +32,7 @@ public class BoardAddActivity extends AppCompatActivity {
     private ImageView imageView;
     private ProgressBar progressBar;
     private Uri imageUri;
+    private FirebaseAuth auth=FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,8 @@ public class BoardAddActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageArea);
         progressBar = findViewById(R.id.progress_View);
         Button uploadBtn = findViewById(R.id.writeBtn);
+
+        String uidString =auth.getCurrentUser().getUid().toString();
 
         Intent intent = getIntent();
         String takeKeyDate = intent.getStringExtra("keyDate");
@@ -63,11 +69,14 @@ public class BoardAddActivity extends AppCompatActivity {
                 //선택한 이미지가 있다면
                 if (imageUri != null) {
                     EditText editText = findViewById(R.id.commentArea);
+
                     String  comment =editText.getText().toString();
-
-                    FBRef.boardRef.child(takeKeyDate).setValue(new CommentModel("uid",comment)); //uid는 추후 합병할때 추가
-
-                    uploadToFirebase(imageUri,takeKeyDate);
+                    Log.d("comment",comment);
+                    FirebaseDatabase database =FirebaseDatabase.getInstance();
+                    DatabaseReference boardref= database.getReference("board");
+                    boardref.child(uidString).child(takeKeyDate).child("comment").setValue(comment);
+                   // FBRef.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel(uidString,comment));
+                    uploadToFirebase(imageUri,uidString,takeKeyDate);
 
                 } else {
                     Toast.makeText(BoardAddActivity.this, "사진을 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -93,9 +102,9 @@ public class BoardAddActivity extends AppCompatActivity {
             });
 
     //파이어베이스 이미지 업로드
-    private void uploadToFirebase(Uri uri, String key) {
+    private void uploadToFirebase(Uri uri,String Uid, String key) {
 
-        StorageReference fileRef = FBRef.reference.child(key+".png");
+        StorageReference fileRef = FBRef.reference.child(Uid).child(key+".png");
         Log.w("사진저장", String.valueOf(fileRef));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

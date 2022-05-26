@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -30,12 +31,13 @@ public class BoardEditActivity extends AppCompatActivity {
     private ImageView imageView;
     private ProgressBar progressBar;
     private Uri imageUri;
-
+    private FirebaseAuth auth=FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_edit);
 
+        String uidString =auth.getCurrentUser().getUid().toString();
         imageView = findViewById(R.id.imageArea);
         progressBar = findViewById(R.id.progress_View);
         Button uploadBtn = findViewById(R.id.writeBtn);
@@ -47,7 +49,7 @@ public class BoardEditActivity extends AppCompatActivity {
         //프로그래스바 숨기기
         progressBar.setVisibility(View.INVISIBLE);
 
-        getImageData(takeKeyDate);
+        getImageData(uidString,takeKeyDate);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,9 +71,9 @@ public class BoardEditActivity extends AppCompatActivity {
                     EditText editText = findViewById(R.id.commentArea);
                     String  comment =editText.getText().toString();
 
-                    FBRef.boardRef.child(takeKeyDate).setValue(new CommentModel("uid",comment)); //uid는 추후 합병할때 추가
+                    FBRef.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel("uid",comment));
 
-                    uploadToFirebase(imageUri,takeKeyDate);
+                    uploadToFirebase(imageUri,uidString,takeKeyDate);
 
                 } else {
                     Toast.makeText(BoardEditActivity.this, "사진을 다시 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -80,8 +82,8 @@ public class BoardEditActivity extends AppCompatActivity {
         });
 
     } //onCreate
-    private void getImageData(String takeKeyDate){
-        FBRef.reference.child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+    private void getImageData(String Uid,String takeKeyDate){
+        FBRef.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(getApplicationContext())
@@ -106,9 +108,9 @@ public class BoardEditActivity extends AppCompatActivity {
             });
 
     //파이어베이스 이미지 업로드
-    private void uploadToFirebase(Uri uri, String key) {
+    private void uploadToFirebase(Uri uri,String Uid, String key) {
 
-        StorageReference fileRef = FBRef.reference.child(key+".png");
+        StorageReference fileRef = FBRef.reference.child(Uid).child(key+".png");
         Log.w("사진저장", String.valueOf(fileRef));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

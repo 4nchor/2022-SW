@@ -1,0 +1,73 @@
+@startuml
+class com.libienz.se_2022_closet.startApp_1.ootd.CommentModel {
++ String uid
++ String comment
+}
+class com.libienz.se_2022_closet.startApp_1.ootd.OOTDActivity {
+~ TextView monthYearText
+~ RecyclerView recyclerView
+# void onCreate(Bundle)
+- String monthYearFromDate(Calendar)
+- void setMonthView()
+- ArrayList<Date> daysInMonthArray()
+}
+class com.libienz.se_2022_closet.startApp_1.ootd.CalenderUtil {
++ {static} Calendar selectedDate
+}
+class com.libienz.se_2022_closet.startApp_1.ootd.BoardAddActivity {
+- ImageView imageView
+- ProgressBar progressBar
+- Uri imageUri
+~ ActivityResultLauncher<Intent> activityResult
+# void onCreate(Bundle)
+- void uploadToFirebase(Uri,String)
+}
+class com.libienz.se_2022_closet.startApp_1.ootd.CalendarAdapter {
+~ ArrayList<Date> dayList
++ CalendarViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(CalendarViewHolder,int)
++ int getItemCount()
+}
+class com.libienz.se_2022_closet.startApp_1.ootd.CalendarAdapter.CalendarViewHolder {
+~ TextView dayText
+~ View parentView
+}
+class com.libienz.se_2022_closet.startApp_1.ootd.BoardActivity {
+- Animation fab_open
+- Boolean isFabOpen
+- FloatingActionButton fabMain
+# void onCreate(Bundle)
+- void getBoardData(String)
+- void getImageData(String)
+- void checkImageData(String)
++ void onClick(View)
+- void onDeleteImage(String)
+- void onDeleteComment(String)
+# void onActivityResult(int,int,Intent)
++ void anim()
+}
+class com.libienz.se_2022_closet.startApp_1.ootd.BoardEditActivity {
+- ImageView imageView
+- ProgressBar progressBar
+- Uri imageUri
+~ ActivityResultLauncher<Intent> activityResult
+# void onCreate(Bundle)
+- void getImageData(String)
+- void uploadToFirebase(Uri,String)
+}
+class com.libienz.se_2022_closet.startApp_1.ootd.FBRef {
++ {static} FirebaseDatabase database
++ {static} DatabaseReference boardRef
++ {static} StorageReference reference
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.libienz.se_2022_closet.startApp_1.ootd.OOTDActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.libienz.se_2022_closet.startApp_1.ootd.BoardAddActivity
+com.libienz.se_2022_closet.startApp_1.ootd.Adapter <|-- com.libienz.se_2022_closet.startApp_1.ootd.CalendarAdapter
+com.libienz.se_2022_closet.startApp_1.ootd.CalendarAdapter +.. com.libienz.se_2022_closet.startApp_1.ootd.CalendarAdapter.CalendarViewHolder
+com.libienz.se_2022_closet.startApp_1.ootd.ViewHolder <|-- com.libienz.se_2022_closet.startApp_1.ootd.CalendarAdapter.CalendarViewHolder
+com.libienz.se_2022_closet.startApp_1.ootd.OnClickListener <|.. com.libienz.se_2022_closet.startApp_1.ootd.BoardActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.libienz.se_2022_closet.startApp_1.ootd.BoardActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.libienz.se_2022_closet.startApp_1.ootd.BoardEditActivity
+@enduml
