@@ -48,7 +48,6 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
 
         String takeKeyDate = intent.getStringExtra("dateKey");
 
-
         getBoardData(uidString,takeKeyDate);
         getImageData(uidString,takeKeyDate);
 
@@ -67,30 +66,29 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
         fabSub3.setOnClickListener(this);
 
     }
-
     private void getBoardData(String Uid,String takeKeyDate){
-        ValueEventListener postListener = new ValueEventListener() {
+        FBRef.boardRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                TextView commentTextView = findViewById(R.id.getTextArea);
                 try {
-                    Log.w("데이터받아오기", snapshot.child(Uid).child(takeKeyDate).getValue().toString());
-                } catch (Exception e) {
+                    Log.d("값있니?", snapshot.child(Uid).child(takeKeyDate).getValue().toString());
+                }catch (NullPointerException e){
                     FBRef.boardRef.child(Uid).child(takeKeyDate).setValue(new CommentModel(Uid,""));
                 }
+                CommentModel commentModel = snapshot.child(Uid).child(takeKeyDate).getValue(CommentModel.class);
+
+                TextView commentTextView = findViewById(R.id.getTextArea);
                 try {
-                    String comment =snapshot.child(Uid).child(takeKeyDate).getValue().toString();
-                    commentTextView.setText(comment);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    commentTextView.setText(commentModel.comment);
+                }catch (NullPointerException e){
+                    Log.d("처음값이라 ", String.valueOf(e));
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            }
 
-        };
-        FBRef.boardRef.child(Uid).child(takeKeyDate).addValueEventListener(postListener);
+            }
+        });
     }
     private void getImageData(String Uid,String takeKeyDate) {
         try {

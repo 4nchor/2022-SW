@@ -72,10 +72,7 @@ public class BoardAddActivity extends AppCompatActivity {
 
                     String  comment =editText.getText().toString();
                     Log.d("comment",comment);
-                    FirebaseDatabase database =FirebaseDatabase.getInstance();
-                    DatabaseReference boardref= database.getReference("board");
-                    boardref.child(uidString).child(takeKeyDate).child("comment").setValue(comment);
-                   // FBRef.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel(uidString,comment));
+                    FBRef.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel(uidString,comment));
                     uploadToFirebase(imageUri,uidString,takeKeyDate);
 
                 } else {
