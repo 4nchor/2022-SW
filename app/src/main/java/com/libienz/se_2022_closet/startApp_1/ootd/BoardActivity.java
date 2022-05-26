@@ -26,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.util.FirebaseReference;
 
 public class BoardActivity extends AppCompatActivity implements View.OnClickListener {
     private Animation fab_open, fab_close;
@@ -67,13 +68,13 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
 
     }
     private void getBoardData(String Uid,String takeKeyDate){
-        FBRef.boardRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseReference.boardRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
                     Log.d("값있니?", snapshot.child(Uid).child(takeKeyDate).getValue().toString());
                 }catch (NullPointerException e){
-                    FBRef.boardRef.child(Uid).child(takeKeyDate).setValue(new CommentModel(Uid,""));
+                    FirebaseReference.boardRef.child(Uid).child(takeKeyDate).setValue(new CommentModel(Uid,""));
                 }
                 CommentModel commentModel = snapshot.child(Uid).child(takeKeyDate).getValue(CommentModel.class);
 
@@ -93,7 +94,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
     private void getImageData(String Uid,String takeKeyDate) {
         try {
             ImageView imageView = findViewById(R.id.getImageArea);
-            FBRef.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            FirebaseReference.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Glide.with(getApplicationContext())
@@ -113,7 +114,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
     private void checkImageData(String Uid,String takeKeyDate){
         try {
             ImageView imageView = findViewById(R.id.getImageArea);
-            FBRef.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            FirebaseReference.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Intent editIntent = new Intent(BoardActivity.this, BoardEditActivity.class);
@@ -166,7 +167,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
 
     private void onDeleteImage(String Uid,String key)
     {
-        FBRef.reference.child(Uid).child(key+".png").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        FirebaseReference.reference.child(Uid).child(key+".png").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(BoardActivity.this, key+"이미지삭제 성공", Toast.LENGTH_SHORT).show();
@@ -180,7 +181,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
         });
     }
     private void onDeleteComment(String Uid,String key) {
-        FBRef.boardRef.child(Uid).child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+        FirebaseReference.boardRef.child(Uid).child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(BoardActivity.this, "코멘트삭제 성공", Toast.LENGTH_SHORT).show();

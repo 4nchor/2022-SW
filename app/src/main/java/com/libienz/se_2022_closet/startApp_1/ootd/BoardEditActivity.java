@@ -26,6 +26,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.util.FirebaseReference;
 
 public class BoardEditActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -71,7 +72,7 @@ public class BoardEditActivity extends AppCompatActivity {
                     EditText editText = findViewById(R.id.commentArea);
                     String  comment =editText.getText().toString();
 
-                    FBRef.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel("uid",comment));
+                    FirebaseReference.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel("uid",comment));
 
                     uploadToFirebase(imageUri,uidString,takeKeyDate);
 
@@ -83,7 +84,7 @@ public class BoardEditActivity extends AppCompatActivity {
 
     } //onCreate
     private void getImageData(String Uid,String takeKeyDate){
-        FBRef.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        FirebaseReference.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(getApplicationContext())
@@ -110,7 +111,7 @@ public class BoardEditActivity extends AppCompatActivity {
     //파이어베이스 이미지 업로드
     private void uploadToFirebase(Uri uri,String Uid, String key) {
 
-        StorageReference fileRef = FBRef.reference.child(Uid).child(key+".png");
+        StorageReference fileRef = FirebaseReference.reference.child(Uid).child(key+".png");
         Log.w("사진저장", String.valueOf(fileRef));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

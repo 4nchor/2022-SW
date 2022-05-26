@@ -21,12 +21,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.util.FirebaseReference;
 
 public class BoardAddActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -72,7 +71,7 @@ public class BoardAddActivity extends AppCompatActivity {
 
                     String  comment =editText.getText().toString();
                     Log.d("comment",comment);
-                    FBRef.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel(uidString,comment));
+                    FirebaseReference.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel(uidString,comment));
                     uploadToFirebase(imageUri,uidString,takeKeyDate);
 
                 } else {
@@ -101,7 +100,7 @@ public class BoardAddActivity extends AppCompatActivity {
     //파이어베이스 이미지 업로드
     private void uploadToFirebase(Uri uri,String Uid, String key) {
 
-        StorageReference fileRef = FBRef.reference.child(Uid).child(key+".png");
+        StorageReference fileRef = FirebaseReference.reference.child(Uid).child(key+".png");
         Log.w("사진저장", String.valueOf(fileRef));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

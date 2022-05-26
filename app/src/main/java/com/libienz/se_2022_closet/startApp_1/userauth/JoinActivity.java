@@ -27,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.databinding.ActivityJoinBinding;
-import com.libienz.se_2022_closet.startApp_1.userauth.data.UserInfo;
+import com.libienz.se_2022_closet.startApp_1.data.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +38,7 @@ public class JoinActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference userRef = database.getReference("user");
-    private UserInfo user;
+    private User user;
     private boolean password_check_flag; //비밀번호와 비밀번호 확인란의 두 패스워드가 같은지를 나타내는 flag
     private boolean password_validation_flag; //비밀번호가 유효한지를 보여주는 flag
     private boolean email_checked_flag; //이메일 중복을 확인했는지 나타내는 flag
@@ -258,7 +258,7 @@ public class JoinActivity extends AppCompatActivity {
                             RadioGroup radioGroup = binding.genderAll;
                             int genderId = radioGroup.getCheckedRadioButtonId();
                             RadioButton radioButton = findViewById(genderId);
-                            user = new UserInfo(email,nickname,radioButton.getText().toString());
+                            user = new User(email,nickname,radioButton.getText().toString());
                             userRef.child(auth.getCurrentUser().getUid().toString()).child("email").setValue(user.getEmail());
                             //userRef.child(auth.getCurrentUser().getUid().toString()).child("password").setValue(user.getPassword());
                             userRef.child(auth.getCurrentUser().getUid().toString()).child("nickname").setValue(user.getNickname());

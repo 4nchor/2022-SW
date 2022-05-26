@@ -1,11 +1,11 @@
-package com.libienz.se_2022_closet.startApp_1.ootd;
+package com.libienz.se_2022_closet.startApp_1.util;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class FBRef {
+public class FirebaseReference {
 
     public static final FirebaseDatabase database = FirebaseDatabase.getInstance();
 

@@ -1,8 +1,8 @@
-package com.libienz.se_2022_closet.startApp_1.userauth.data;
+package com.libienz.se_2022_closet.startApp_1.data;
 
-public class UserInfo {
+public class User {
 
-    public UserInfo(String email, String nickname, String gender) {
+    public User(String email, String nickname, String gender) {
         this.email = email;
         this.nickname = nickname;
         this.gender = gender;
