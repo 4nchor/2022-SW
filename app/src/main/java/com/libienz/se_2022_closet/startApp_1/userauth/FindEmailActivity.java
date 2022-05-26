@@ -1,5 +1,7 @@
 package com.libienz.se_2022_closet.startApp_1.userauth;
 
+import static com.libienz.se_2022_closet.startApp_1.util.InputCheckUtility.emailNotExistCheckAndNotify;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -9,6 +11,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.databinding.ActivityFindEmailBinding;
+import com.libienz.se_2022_closet.startApp_1.util.InputCheckUtility;
 
 public class FindEmailActivity extends AppCompatActivity {
 
@@ -25,44 +30,6 @@ public class FindEmailActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference userRef = database.getReference("user");
-
-    public void emailDuplicateCheck() {
-
-        String inputEmail = binding.enterEmailToFindId.getText().toString();
-        if (inputEmail.equals("")) {
-            binding.notifyFindRes.setText("조회해볼 이메일 아이디를 입력해주세요!");
-            binding.notifyFindRes.setTextColor(Color.parseColor("#B30000"));
-            return;
-        }
-        Log.d("toFind",inputEmail);
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for (DataSnapshot userSnaposhot : snapshot.getChildren()) {
-
-                    String dbItrEmail = userSnaposhot.child("email").getValue().toString();
-
-                    Log.d("toFind",dbItrEmail);
-                    if(inputEmail.equals(dbItrEmail)) { //db에서 긁어온 메일과 입력 메일이 같을 때때
-                        binding.notifyFindRes.setText("회원가입되어 있는 아이디입니다!");
-                        binding.notifyFindRes.setTextColor(Color.parseColor("#008000"));
-                        return;
-                    }
-                }
-                binding.notifyFindRes.setText("회원가입되어 있지 않은 아이디입니다!");
-                binding.notifyFindRes.setTextColor(Color.parseColor("#B30000"));
-                return;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 디비를 가져오던중 에러 발생 시
-                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
-            }
-        });
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +44,11 @@ public class FindEmailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                emailDuplicateCheck();
+                EditText edt = binding.enterEmailToFindId;
+                TextView tv = binding.notifyFindRes;
+                emailNotExistCheckAndNotify(edt, tv, "가입되지 않은 아이디 입니다.", "이미 가입되어 있는 아이디입니다");
+
+
             }
         });
 
