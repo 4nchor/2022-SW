@@ -64,8 +64,15 @@
             android:layout_weight="1"
             android:text="의류 열람하기" />
 
-        <TextView
+        <Button
+            android:id="@+id/searchOutfit_btn"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="의류 검색하기" />
+
+        <TextView
+            android:layout_width="231dp"
             android:layout_height="43dp"
             android:layout_gravity="center"
             android:layout_weight="1"

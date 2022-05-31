@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_main.xml" value="0.5536458333333333" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_search_clothes.xml" value="0.5390625" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_search_outfit.xml" value="0.4598623853211009" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_add_clothes.xml" value="0.5536458333333333" />
         <entry key="..\:/Code/SE_dev/app/src/main/res/layout/activity_main.xml" value="0.17806484295845998" />
         <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_add_clothes.xml" value="0.25" />
         <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.19927536231884058" />

@@ -1,10 +1,8 @@
-package com.libienz.se_2022_closet.startApp_1.fragments;
+package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import static android.app.Activity.RESULT_OK;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
-import android.app.Instrumentation;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,15 +10,11 @@ import android.os.Bundle;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,22 +25,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
-import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
-import com.libienz.se_2022_closet.startApp_1.util.FirebaseReference;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -89,23 +75,28 @@ public class addClothesFrag extends Fragment {
         });
 
         //태그 정보를 입력받음
-        EditText tag = view.findViewById(R.id.addTag);
+        EditText addTag_et = view.findViewById(R.id.addTag_et);
         TextView showAddedTag_tv = view.findViewById(R.id.showAddedTag_tv);
-        tag.setOnKeyListener(new View.OnKeyListener() {
+        addTag_et.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 switch (keyCode){
                     case KeyEvent.KEYCODE_ENTER:
-                        hashtag.add(tag.getText().toString());
+                        hashtag.add(addTag_et.getText().toString());
                         showAddedTag_tv.append("#" + hashtag.get(hashtag.size() - 1) + " ");
-                        tag.setText(null);
+                        addTag_et.setText(null);
+                        return true;
+                    //이 아래 실행 안 됨... 이유가 뭘까?
+                    case KeyEvent.KEYCODE_SPACE:
+                        Toast.makeText(container.getContext(), "공백은 입력할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        return true;
                 }
                 return false;
             }
         });
 
         //의류 정보를 입력받음
-        EditText info = view.findViewById(R.id.addInfo);
+        EditText addInfo_et = view.findViewById(R.id.addInfo_et);
 
         //등록하기 버튼을 눌러 의류를 등록함
         Button add_btn = (Button) view.findViewById(R.id.doneAddClothes_btn);
@@ -116,19 +107,16 @@ public class addClothesFrag extends Fragment {
                 //유저 정보 및 이미지 삽입 확인 후 의류 등록
                 if (user != null && imguri != null){
                     //addClothes(user.getUid(), imguri.toString(), tag.getText().toString(), info.getText().toString(), container);
-                    addClothes(user.getUid(), imguri.toString(), hashtag, info.getText().toString(), container);
+                    addClothes(user.getUid(), imguri.toString(), hashtag, addInfo_et.getText().toString(), container);
                     Toast successmsg = Toast.makeText(container.getContext(), "의류 정보가 등록되었습니다", Toast.LENGTH_SHORT);
                     successmsg.show();
                 }
                 else {
-                    Toast failedmsg = Toast.makeText(container.getContext(), "Failed to Add", Toast.LENGTH_SHORT);
-                    failedmsg.show();
+                    Toast.makeText(container.getContext(), "Failed to Add", Toast.LENGTH_SHORT).show();
                 }
 
                 //프래그먼트 종료, 추가하기 전 화면으로 돌아감
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(addClothesFrag.this).commit();
-                fragmentManager.popBackStack();
+                getParentFragmentManager().beginTransaction().remove(addClothesFrag.this).commit();
 
             }
         });
@@ -144,8 +132,7 @@ public class addClothesFrag extends Fragment {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast failedmsg = Toast.makeText(container.getContext(), "Failed to Add Img", Toast.LENGTH_SHORT);
-                failedmsg.show();
+                Toast.makeText(container.getContext(), "Failed to Add Img", Toast.LENGTH_SHORT).show();
             }
         });
     }

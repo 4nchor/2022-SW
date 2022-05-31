@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.fragments;
+package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import static android.app.Activity.RESULT_OK;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
@@ -13,18 +13,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
-import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
