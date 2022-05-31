@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".startApp_1.fragments.addClothesFrag">
+    tools:context=".startApp_1.clothes.addClothesFrag">
 
 
     <ImageView
@@ -27,16 +27,16 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/addTag"
+        android:id="@+id/addTag_et"
         android:layout_width="match_parent"
         android:hint="태그 입력"
         android:layout_height="50dp"></EditText>
 
     <EditText
-        android:id="@+id/addInfo"
+        android:id="@+id/addInfo_et"
         android:layout_width="match_parent"
-        android:hint="추가 정보 입력"
-        android:layout_height="50dp"></EditText>
+        android:layout_height="231dp"
+        android:hint="추가 정보 입력"></EditText>
 
     <Button
         android:id="@+id/doneAddClothes_btn"

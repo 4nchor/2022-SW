@@ -11,8 +11,9 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.libienz.se_2022_closet.R;
-import com.libienz.se_2022_closet.startApp_1.fragments.addClothesFrag;
-import com.libienz.se_2022_closet.startApp_1.fragments.readClothesFrag;
+import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
+import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
+import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
 import com.libienz.se_2022_closet.startApp_1.ootd.OOTDActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -71,5 +72,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button searchOutfit_btn = (Button) findViewById(R.id.searchOutfit_btn);
+        searchOutfit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), searchOutfitActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
