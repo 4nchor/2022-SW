@@ -25,7 +25,9 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -72,14 +74,12 @@
             android:text="의류 검색하기" />
 
         <TextView
-            android:layout_width="231dp"
-            android:layout_height="43dp"
-            android:layout_gravity="center"
+            android:id="@+id/tv_temp"
+            android:layout_width="97dp"
+            android:layout_height="59dp"
             android:layout_weight="1"
-            android:fontFamily="@font/bmjua_ttf"
-            android:gravity="center"
-            android:text="로그인되어 메인화면으로 이동되었습니다!"
             android:textSize="20sp" />
+
     </LinearLayout>
 
 

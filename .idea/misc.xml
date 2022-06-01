@@ -3,20 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/activity_login.xml" value="0.17806484295845998" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/activity_main.xml" value="0.17806484295845998" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/activity_ootdactivity.xml" value="0.17806484295845998" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/activity_search_outfit.xml" value="0.2259963768115942" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_add_clothes.xml" value="0.17777777777777778" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.19927536231884058" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_read_clothes.xml" value="0.19927536231884058" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_board.xml" value="0.1" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_find_pw.xml" value="0.1" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_initial_setting.xml" value="0.12" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_join.xml" value="0.22" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_login.xml" value="0.11956521739130435" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_ootdactivity.xml" value="0.11956521739130435" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_splash.xml" value="0.11956521739130435" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/fragment_add_clothes.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
