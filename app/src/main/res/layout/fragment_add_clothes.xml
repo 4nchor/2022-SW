@@ -35,7 +35,7 @@
     <EditText
         android:id="@+id/addInfo_et"
         android:layout_width="match_parent"
-        android:layout_height="231dp"
+        android:layout_height="wrap_content"
         android:hint="추가 정보 입력"></EditText>
 
     <Button
