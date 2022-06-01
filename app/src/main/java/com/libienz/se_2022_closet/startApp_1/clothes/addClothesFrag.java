@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,16 +81,11 @@ public class addClothesFrag extends Fragment {
         addTag_et.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                switch (keyCode){
-                    case KeyEvent.KEYCODE_ENTER:
-                        hashtag.add(addTag_et.getText().toString());
-                        showAddedTag_tv.append("#" + hashtag.get(hashtag.size() - 1) + " ");
-                        addTag_et.setText(null);
-                        return true;
-                    //이 아래 실행 안 됨... 이유가 뭘까?
-                    case KeyEvent.KEYCODE_SPACE:
-                        Toast.makeText(container.getContext(), "공백은 입력할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                        return true;
+                if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    hashtag.add(addTag_et.getText().toString());
+                    showAddedTag_tv.append("#" + hashtag.get(hashtag.size() - 1) + " ");
+                    addTag_et.setText(null);
+                    return true;
                 }
                 return false;
             }
@@ -115,6 +111,8 @@ public class addClothesFrag extends Fragment {
                     Toast.makeText(container.getContext(), "Failed to Add", Toast.LENGTH_SHORT).show();
                 }
 
+                hashtag.clear();
+                addInfo_et.setText(null);
                 //프래그먼트 종료, 추가하기 전 화면으로 돌아감
                 getParentFragmentManager().beginTransaction().remove(addClothesFrag.this).commit();
 
