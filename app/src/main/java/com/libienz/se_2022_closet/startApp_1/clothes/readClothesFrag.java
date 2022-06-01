@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,11 +56,12 @@ public class readClothesFrag extends Fragment {
         }
 
         //의류 정보를 띄우는 코드
-        userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addValueEventListener(new ValueEventListener() {
+        userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Clothes clothes = snapshot.getValue(Clothes.class);
 
+                Log.d("cloth",clothes.toString());
                 tag = clothes.gettag();
                 info = clothes.getClothesInfo();
 

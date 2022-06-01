@@ -9,9 +9,10 @@
 
 
     <ImageView
+        android:layout_gravity="center"
         android:id="@+id/addclothes_iv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
     <Button
@@ -34,7 +35,7 @@
     <EditText
         android:id="@+id/addInfo_et"
         android:layout_width="match_parent"
-        android:layout_height="231dp"
+        android:layout_height="wrap_content"
         android:hint="추가 정보 입력"></EditText>
 
     <Button
