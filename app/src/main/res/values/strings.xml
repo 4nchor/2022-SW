@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SE_2022_Closet</string>
+    <string name="weather_url">http://api.openweathermap.org/</string>
+    <string name="weather_app_id">e398d3858dd3576aeca03314c9776d92</string>
 </resources>
