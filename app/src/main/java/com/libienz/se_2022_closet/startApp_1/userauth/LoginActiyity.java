@@ -40,7 +40,7 @@ public class LoginActiyity extends AppCompatActivity {
                             Log.d("login", "signInWithEmail:success");
                             FirebaseUser user = auth.getCurrentUser();
                             //로그인 성공 메인액티비티로 이동!
-                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(),InitialSettingActivity.class);
                             startActivity(intent);
 
                         } else {

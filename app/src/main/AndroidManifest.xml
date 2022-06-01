@@ -45,6 +45,8 @@
         <activity
             android:name=".startApp_1.userauth.LoginActiyity"
             android:exported="false" />
+        <activity android:name=".startApp_1.userauth.InitialSettingActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
