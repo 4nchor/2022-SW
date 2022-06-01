@@ -32,6 +32,7 @@
         android:id="@+id/search_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="검색하기" />
 
     <Switch
@@ -39,13 +40,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:visibility="gone"
-        android:text="  키워드로 검색하기" />
+        android:text="  키워드로 검색하기"
+        android:visibility="gone" />
 
     <RadioGroup
         android:id="@+id/searchWhat_rg"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -65,5 +66,10 @@
             android:minHeight="48dp"
             android:text="코디 세트" />
     </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchResult_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
