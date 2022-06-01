@@ -1,5 +1,7 @@
 package com.libienz.se_2022_closet.startApp_1.userauth;
 
+import static com.libienz.se_2022_closet.startApp_1.util.UpdateUserUtility.passwordReset;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -47,7 +49,7 @@ public class FindPwActivity extends AppCompatActivity {
             public void onClick(View view) {
                 EditText edt = binding.enterEmailToFindPw;
                 TextView tv = binding.notifyEmailRes;
-                UpdateUserUtility.passwordReset(edt,tv);
+                passwordReset(edt,tv);
             }
         });
 

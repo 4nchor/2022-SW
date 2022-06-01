@@ -10,5 +10,6 @@ public class FirebaseReference {
     public static final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     public static DatabaseReference boardRef = database.getReference("board");
+    public static DatabaseReference userRef = database.getReference("user");
     public static final StorageReference reference = FirebaseStorage.getInstance().getReference();
 }

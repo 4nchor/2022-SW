@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".startApp_1.clothes.addClothesFrag">
+
+
+    <ImageView
+        android:id="@+id/editImg_iv"
+        android:layout_width="match_parent"
+        android:layout_height="316dp"
+        android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+
+    <Button
+        android:id="@+id/editClothesImg_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이미지 추가" />
+
+    <EditText
+        android:id="@+id/editTag_et"
+        android:layout_width="match_parent"
+        android:hint="태그 입력"
+        android:layout_height="50dp"></EditText>
+
+    <EditText
+        android:id="@+id/editInfo_et"
+        android:layout_width="match_parent"
+        android:hint="추가 정보 입력"
+        android:layout_height="50dp"></EditText>
+
+    <Button
+        android:id="@+id/doneeditClothes_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="수정 완료" />
+
+
+</LinearLayout>

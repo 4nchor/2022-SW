@@ -1,33 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".startApp_1.userauth.MainActivity">
 
-    <Button
-        android:id="@+id/logout_btn"
-        android:text="로그아웃"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <FrameLayout
+        android:id="@+id/readClothes_fg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/ootd_btn"
-        android:text="ootd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/addClothes_fg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="로그아웃" />
+
+        <Button
+            android:id="@+id/ootd_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ootd" />
+
+        <Button
+            android:id="@+id/addClothes_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="의류 추가하기" />
+
+        <Button
+            android:id="@+id/readClothes_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="의류 열람하기" />
+
+        <Button
+            android:id="@+id/searchOutfit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="의류 검색하기" />
+
+        <TextView
+            android:layout_width="231dp"
+            android:layout_height="43dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/bmjua_ttf"
+            android:gravity="center"
+            android:text="로그인되어 메인화면으로 이동되었습니다!"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 
-    <TextView
-        android:textSize="20sp"
-        android:gravity="center"
-        android:fontFamily="@font/bmjua_ttf"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="로그인되어 메인화면으로 이동되었습니다!"/>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
