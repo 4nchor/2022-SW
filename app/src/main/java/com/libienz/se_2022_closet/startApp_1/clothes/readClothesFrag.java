@@ -51,8 +51,13 @@ public class readClothesFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_read_clothes, container, false);
 
+        //다른 프래그먼트에서 열람할 ClothesKey 받아오는 경우
         if (getArguments() != null) {
             ClothesKey = getArguments().getString("ClothesKey");
+        }
+        //다른 액티비티에서 열람할 ClothesKey 받아오는 경우
+        else {
+
         }
 
         //의류 정보를 띄우는 코드
@@ -62,7 +67,7 @@ public class readClothesFrag extends Fragment {
                 Clothes clothes = snapshot.getValue(Clothes.class);
 
                 Log.d("cloth",clothes.toString());
-                tag = clothes.gettag();
+                tag = clothes.getClothesTag();
                 info = clothes.getClothesInfo();
 
                 ImageView readimg_iv = (ImageView) view.findViewById(R.id.readClothes_iv);
@@ -133,9 +138,7 @@ public class readClothesFrag extends Fragment {
                 });
 
                 //열람 이전에 보고 있던 화면으로 돌아감
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(readClothesFrag.this).commit();
-                fragmentManager.popBackStack();
+                getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
             }
         });
 
@@ -144,13 +147,10 @@ public class readClothesFrag extends Fragment {
         readtomain_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(readClothesFrag.this).commit();
-                fragmentManager.popBackStack();
+                getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
             }
         });
 
         return view;
     }
 }
-
