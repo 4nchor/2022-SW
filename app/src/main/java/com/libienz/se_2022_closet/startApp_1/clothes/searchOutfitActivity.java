@@ -225,6 +225,5 @@ public class searchOutfitActivity extends AppCompatActivity {
                 }
             }
         }
-
     }
 }
