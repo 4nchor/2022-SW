@@ -64,7 +64,7 @@ public class editClothesFrag extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Clothes clothes = snapshot.getValue(Clothes.class);
 
-                imguri = Uri.parse(clothes.getimg());
+                //imguri = Uri.parse(clothes.getClothesImg());
                 //editTag_et.setText(clothes.gettag());
                 editInfo_et.setText(clothes.getClothesInfo());
 
@@ -150,7 +150,7 @@ public class editClothesFrag extends Fragment {
     }
 
     public void editClothes(String idToken, String Img, ArrayList<String> Tag, String Info, ViewGroup container){
-        Clothes clothes = new Clothes(Img, Tag, Info);
+        Clothes clothes = new Clothes(Img, Tag, Info, ClothesKey);
 
         //파이어베이스 리얼타임 데이터베이스에 의류 정보 저장
         userRef.child(idToken).child("Clothes").child(ClothesKey).setValue(clothes);

@@ -4,7 +4,8 @@ import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userR
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,8 +44,6 @@ import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-//검색 결과는 검색창 아래에 프래그먼트 이용해서 띄울 생각인데 아직 프래그먼트를 안 만들어서 연결을 안 했음
 
 public class searchOutfitActivity extends AppCompatActivity {
 
@@ -98,7 +97,8 @@ public class searchOutfitActivity extends AppCompatActivity {
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
                     findRes.clear();
-                } else {
+                }
+                else {
                     searchCodyforKeyword_swt.setChecked(false);
                     searchOutfit_tv.setText(null);
                     searchCodyforKeyword_swt.setVisibility(View.GONE);
@@ -117,7 +117,8 @@ public class searchOutfitActivity extends AppCompatActivity {
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
                     findRes.clear();
-                } else {
+                }
+                else {
                     searchOutfit_et.setHint("태그로 검색");
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
@@ -134,7 +135,7 @@ public class searchOutfitActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     searchKey = searchOutfit_et.getText().toString();
                     tag_want_to_find.add(searchKey);
-                    if (!searchCodyforKeyword_swt.isChecked()) {
+                    if (!searchCodyforKeyword_swt.isChecked()){
                         searchOutfit_tv.append("  #" + searchKey);
                         searchOutfit_et.setText(null);
                     }
@@ -166,64 +167,47 @@ public class searchOutfitActivity extends AppCompatActivity {
                             //코디에도 완전 똑같은 코드 쓰시면 됩니다. 데베 긁어오는 부분 한부분만 고치면 되겠네요 <- 감사합니다
                             for (DataSnapshot cloth_snapshot : snapshot.getChildren()) {
                                 Clothes dbItrCloth = cloth_snapshot.getValue(Clothes.class);
-                                if (checkAllTagisIn(tag_want_to_find, dbItrCloth.gettag())) {
+                                if (checkAllTagisIn(tag_want_to_find, dbItrCloth.getClothesTag())) {
                                     findRes.add(dbItrCloth);
                                 }
-
                             }
                             Log.d("wantfind", tag_want_to_find.toString());
                             for (Clothes clth : findRes) {
-                                Log.d("seq", clth.gettag().toString());
+                                Log.d("seq", clth.getClothesTag().toString());
                             }
 
                             //검색 결과 출력
                             ClothesAdapter adapter = new ClothesAdapter(findRes);
                             searchResult_rv.setAdapter(adapter);
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                } else if (searchCody_rb.isChecked() && !searchCodyforKeyword_swt.isChecked())
-                    ; //태그로 코디 검색하는 경우
-                else if (searchCody_rb.isChecked() && searchCodyforKeyword_swt.isChecked())
-                    ; //키워드로 코디 검색하는 경우
+                }
+
+                else if (searchCody_rb.isChecked() && !searchCodyforKeyword_swt.isChecked()); //태그로 코디 검색하는 경우
+                else if (searchCody_rb.isChecked() && searchCodyforKeyword_swt.isChecked()); //키워드로 코디 검색하는 경우
+            }
+        });
+
+        //검색 결과 클릭했을 때 열람 페이지를 띄움 //수정 필요...
+        ClothesAdapter adapter = new ClothesAdapter(findRes);
+        adapter.setOnItemClickListener(new ClothesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                //ClothesKey를 열람 프래그먼트에 번들로 전달
+                String ClothesKey = findRes.get(pos).getClothesKey();
+                Bundle bundle = new Bundle();
+                bundle.putString("ClothesKey", ClothesKey);
+
+                readClothesFrag fragment = new readClothesFrag();
+                fragment.setArguments(bundle);
+
+                //열람 프래그먼트 띄움, 레이아웃 완성 안 됨 (프레임이 안 들어감!!!!!!!!!!!!!!!!!!!!)
+                //getSupportFragmentManager().beginTransaction().replace("프래그먼트 들어갈 레이아웃 이름", fragment).commit();
             }
         });
     }
 
-
-    /*
-    수정할 태그 값을 입력하세요 -> 이 태그를 어떤 태그로 수정하나요? 새로운 레이아웃에서 받음 -> 기존의 태그를 바꿀 태그로 치환
-    */
-    private Button editHashTag_btn;
-    private EditText editHashTag_et;
-    private String tag_name;
-
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_hashtag);
-
-        editHashTag_btn = (Button) findViewById(R.id.editHashTag_btn);
-        editHashTag_et = (EditText) findViewById(R.id.editHashTag_et);
-        editHashTag_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //버튼을 누르면 수정할 태그의 이름을 임시 저장
-                tag_name = editHashTag_et.getText().toString();
-                for (String str : tag_want_to_find){
-                    if(str==tag_name){
-                        //해당 태그가 존재할 시 레이아웃 전환
-                        Intent intent = new Intent(searchOutfitActivity.this, editHashTagActivity.class);
-                        intent.putExtra("tag_name", tag_name);
-                        startActivity(intent);
-                    }
-                    else {
-                        //팝업창 푸시 '해당 태그가 존재하지 않습니다.'
-                    }
-                }
-            }
-        }
-    }
 }
