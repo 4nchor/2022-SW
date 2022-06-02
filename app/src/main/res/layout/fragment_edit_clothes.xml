@@ -1,42 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".startApp_1.clothes.addClothesFrag">
+    android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/editImg_iv"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="316dp"
-        android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".startApp_1.clothes.addClothesFrag">
 
-    <Button
-        android:id="@+id/editClothesImg_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이미지 추가" />
+        <ImageView
+            android:id="@+id/editImg_iv"
+            android:layout_width="match_parent"
+            android:layout_height="316dp"
+            android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
-    <EditText
-        android:id="@+id/editTag_et"
-        android:layout_width="match_parent"
-        android:hint="태그 입력"
-        android:layout_height="50dp"></EditText>
+        <Button
+            android:id="@+id/editClothesImg_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이미지 추가" />
 
-    <EditText
-        android:id="@+id/editInfo_et"
-        android:layout_width="match_parent"
-        android:hint="추가 정보 입력"
-        android:layout_height="50dp"></EditText>
+        <EditText
+            android:id="@+id/editTag_et"
+            android:layout_width="match_parent"
+            android:hint="태그 입력"
+            android:layout_height="50dp"></EditText>
 
-    <Button
-        android:id="@+id/doneeditClothes_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="수정 완료" />
+        <EditText
+            android:id="@+id/editInfo_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="추가 정보 입력"></EditText>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".MainActivity">
 
-</LinearLayout>
+            <Button
+                android:id="@+id/editHashTag_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="확인"
+                app:layout_constraintBottom_toBottomOf="@+id/editHashTag_et"
+                tools:layout_editor_absoluteX="" />
+
+            <EditText
+                android:id="@+id/editHashTag_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="수정할 태그 입력"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY=" "></EditText>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/doneeditClothes_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수정 완료"
+            tools:layout_editor_absoluteY="" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

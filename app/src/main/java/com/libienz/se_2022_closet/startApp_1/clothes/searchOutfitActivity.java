@@ -4,6 +4,7 @@ import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userR
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -97,8 +98,7 @@ public class searchOutfitActivity extends AppCompatActivity {
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
                     findRes.clear();
-                }
-                else {
+                } else {
                     searchCodyforKeyword_swt.setChecked(false);
                     searchOutfit_tv.setText(null);
                     searchCodyforKeyword_swt.setVisibility(View.GONE);
@@ -117,8 +117,7 @@ public class searchOutfitActivity extends AppCompatActivity {
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
                     findRes.clear();
-                }
-                else {
+                } else {
                     searchOutfit_et.setHint("태그로 검색");
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
@@ -135,7 +134,7 @@ public class searchOutfitActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     searchKey = searchOutfit_et.getText().toString();
                     tag_want_to_find.add(searchKey);
-                    if (!searchCodyforKeyword_swt.isChecked()){
+                    if (!searchCodyforKeyword_swt.isChecked()) {
                         searchOutfit_tv.append("  #" + searchKey);
                         searchOutfit_et.setText(null);
                     }
@@ -181,16 +180,36 @@ public class searchOutfitActivity extends AppCompatActivity {
                             ClothesAdapter adapter = new ClothesAdapter(findRes);
                             searchResult_rv.setAdapter(adapter);
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                }
-
-                else if (searchCody_rb.isChecked() && !searchCodyforKeyword_swt.isChecked()); //태그로 코디 검색하는 경우
-                else if (searchCody_rb.isChecked() && searchCodyforKeyword_swt.isChecked()); //키워드로 코디 검색하는 경우
+                } else if (searchCody_rb.isChecked() && !searchCodyforKeyword_swt.isChecked())
+                    ; //태그로 코디 검색하는 경우
+                else if (searchCody_rb.isChecked() && searchCodyforKeyword_swt.isChecked())
+                    ; //키워드로 코디 검색하는 경우
             }
         });
     }
 
+    /*
+    수정할 태그 값을 입력하세요 -> 레이어에 수정할 태그값을 새로운 레이아웃에서 받음 -> 이 태그를 어떤 태그로 수정하나요? ->
+    입력값을 받음 -> 기존의 태그를 바꿀 태그로 치환
+    */
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Button editHashTag_btn;
+        EditText editHashTag_et;
+
+        editHashTag_btn = (Button) findViewById(R.id.editHashTag_btn);
+        editHashTag_et = (EditText) findViewById(R.id.editHashTag_et);
+        editHashTag_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new intent(searchOutfitActivity.this, editHashTagActivity.this);
+                startActivity(intent);
+            }
+        }
+    }
 }
