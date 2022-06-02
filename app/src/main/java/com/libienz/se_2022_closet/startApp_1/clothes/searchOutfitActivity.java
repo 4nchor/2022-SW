@@ -193,23 +193,38 @@ public class searchOutfitActivity extends AppCompatActivity {
         });
     }
 
+
     /*
-    수정할 태그 값을 입력하세요 -> 레이어에 수정할 태그값을 새로운 레이아웃에서 받음 -> 이 태그를 어떤 태그로 수정하나요? ->
-    입력값을 받음 -> 기존의 태그를 바꿀 태그로 치환
+    수정할 태그 값을 입력하세요 -> 이 태그를 어떤 태그로 수정하나요? 새로운 레이아웃에서 받음 -> 기존의 태그를 바꿀 태그로 치환
     */
+    private Button editHashTag_btn;
+    private EditText editHashTag_et;
+    private String tag_name;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Button editHashTag_btn;
-        EditText editHashTag_et;
+        setContentView(R.layout.activity_edit_hashtag);
 
         editHashTag_btn = (Button) findViewById(R.id.editHashTag_btn);
         editHashTag_et = (EditText) findViewById(R.id.editHashTag_et);
         editHashTag_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new intent(searchOutfitActivity.this, editHashTagActivity.this);
-                startActivity(intent);
+                //버튼을 누르면 수정할 태그의 이름을 임시 저장
+                tag_name = editHashTag_et.getText().toString();
+                for (String str : tag_want_to_find){
+                    if(str==tag_name){
+                        //해당 태그가 존재할 시 레이아웃 전환
+                        Intent intent = new Intent(searchOutfitActivity.this, editHashTagActivity.class);
+                        intent.putExtra("tag_name", tag_name);
+                        startActivity(intent);
+                    }
+                    else {
+                        //팝업창 푸시 '해당 태그가 존재하지 않습니다.'
+                    }
+                }
             }
         }
+
     }
 }
