@@ -64,7 +64,7 @@ public class editClothesFrag extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Clothes clothes = snapshot.getValue(Clothes.class);
 
-                imguri = Uri.parse(clothes.getClothesImg());
+                //imguri = Uri.parse(clothes.getClothesImg());
                 //editTag_et.setText(clothes.gettag());
                 editInfo_et.setText(clothes.getClothesInfo());
 

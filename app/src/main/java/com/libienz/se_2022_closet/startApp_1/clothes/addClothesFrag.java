@@ -137,7 +137,7 @@ public class addClothesFrag extends Fragment {
 
     //의류 추가 메소드
     public void addClothes(String idToken, String Img, ArrayList<String> Tag, String Info, ViewGroup container) {
-        String Key = Img.substring(Img.lastIndexOf("/" + 1));
+        String Key = Img.substring(Img.lastIndexOf("/") + 1);
         Clothes clothes = new Clothes(Img, Tag, Info, Key);
 
         //파이어베이스 리얼타임 데이터베이스에 의류 정보 저장

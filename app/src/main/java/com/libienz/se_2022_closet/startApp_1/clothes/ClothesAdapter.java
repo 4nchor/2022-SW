@@ -72,8 +72,15 @@ public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHold
     @Override
     public void onBindViewHolder (ClothesAdapter.ViewHolder viewHolder, int position) {
         if (storageReference != null) {
+            Log.d("포지션", findRes.get(position).getClothesKey());
             StorageReference submitReference = storageReference.child(findRes.get(position).getClothesKey() + ".png");
-            Glide.with(viewHolder.itemView.getContext()).load(submitReference.getDownloadUrl()).override(100, 100).into(viewHolder.viewClothes_iv);
+            submitReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+
+                    Glide.with(viewHolder.itemView).load(uri).into(viewHolder.viewClothes_iv);
+                }
+            });
         }
         ArrayList<String> tag = findRes.get(position).getClothesTag();
         viewHolder.viewClothes_tv.setText(null);

@@ -191,7 +191,7 @@ public class searchOutfitActivity extends AppCompatActivity {
             }
         });
 
-        //검색 결과 클릭했을 때 열람 페이지를 띄움
+        //검색 결과 클릭했을 때 열람 페이지를 띄움 //수정 필요...
         ClothesAdapter adapter = new ClothesAdapter(findRes);
         adapter.setOnItemClickListener(new ClothesAdapter.OnItemClickListener() {
             @Override
