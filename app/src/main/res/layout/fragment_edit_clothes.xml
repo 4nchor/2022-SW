@@ -43,19 +43,9 @@
 
             <Button
                 android:id="@+id/editHashTag_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="확인"
-                app:layout_constraintBottom_toBottomOf="@+id/editHashTag_et"
-                tools:layout_editor_absoluteX="" />
-
-            <EditText
-                android:id="@+id/editHashTag_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="수정할 태그 입력"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:layout_editor_absoluteY=" "></EditText>
+                android:text="태그 수정하기" />
 
         </LinearLayout>
 
