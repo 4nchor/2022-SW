@@ -21,6 +21,7 @@ import java.util.Date;
 public class OOTDActivity extends AppCompatActivity {
     TextView monthYearText; //년월 텍스트뷰
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,5 +126,46 @@ public class OOTDActivity extends AppCompatActivity {
         }
 
         return dayList;
+    }
+    //finish를 통해 되돌아왔을때 새로고침하기 위한 용도
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_ootdactivity);
+
+        //초기화
+        monthYearText = findViewById(R.id.monthYearText);
+        ImageButton preBtn = findViewById(R.id.pre_btn);
+        ImageButton nextBtn = findViewById(R.id.next_btn);
+        recyclerView = findViewById(R.id.recyclerView);
+
+        //현재 날짜
+        CalenderUtil.selectedDate = Calendar.getInstance();
+
+        //화면 설정
+        setMonthView();
+
+        //이전 달 버튼 이벤트
+        preBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //-1한 월을 넣어준다. (2월 -> 1월)
+                CalenderUtil.selectedDate.add(Calendar.MONTH, -1);// -1
+                setMonthView();
+            }
+        });
+
+        //다음 달 버튼 이벤트
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //+1한 월을 넣어준다.(2월 -> 3월)
+                CalenderUtil.selectedDate.add(Calendar.MONTH, 1); //+1
+                setMonthView();
+            }
+        });
+
     }
 }
