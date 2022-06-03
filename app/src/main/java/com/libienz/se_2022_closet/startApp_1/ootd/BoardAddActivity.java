@@ -100,7 +100,7 @@ public class BoardAddActivity extends AppCompatActivity {
     //파이어베이스 이미지 업로드
     private void uploadToFirebase(Uri uri,String Uid, String key) {
 
-        StorageReference fileRef = FirebaseReference.reference.child(Uid).child(key+".png");
+        StorageReference fileRef = FirebaseReference.reference.child("board").child(Uid).child(key+".png");
         Log.w("사진저장", String.valueOf(fileRef));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
