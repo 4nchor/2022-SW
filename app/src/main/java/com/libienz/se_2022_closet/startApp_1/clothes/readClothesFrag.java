@@ -2,6 +2,7 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -152,5 +154,36 @@ public class readClothesFrag extends Fragment {
         });
 
         return view;
+    }
+    /*
+    수정할 태그 값을 입력 -> 이 태그를 어떤 태그로 수정하나요? 새로운 레이아웃에서 받음 -> 기존의 태그를 바꿀 태그로 치환
+    */
+    private Button editHashTag_btn;
+    private EditText editHashTag_et;
+    private String prev_tag;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_hashtag);
+
+        editHashTag_btn = (Button) findViewById(R.id.editHashTag_btn);
+        editHashTag_et = (EditText) findViewById(R.id.editHashTag_et);
+        editHashTag_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //버튼을 누르면 수정할 태그의 이름을 임시 저장
+                prev_tag = editHashTag_et.getText().toString();
+                for (String str : tag) {
+                    if (str == prev_tag) {
+                        //해당 태그가 존재할 시 레이아웃 전환
+                        Intent intent = new Intent(searchOutfitActivity.this, editHashTagActivity.class);
+                        intent.putExtra("prev_tag", prev_tag);
+                        startActivity(intent);
+                    } else {
+                        //팝업창 푸시 '해당 태그가 존재하지 않습니다.'
+                    }
+                }
+            }
+        });
     }
 }
