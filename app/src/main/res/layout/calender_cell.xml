@@ -10,8 +10,7 @@
     <!--사각 테두리용-->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/square_background_border_black" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/dayText"
