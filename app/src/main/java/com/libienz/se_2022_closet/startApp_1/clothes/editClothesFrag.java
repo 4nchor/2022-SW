@@ -131,7 +131,7 @@ public class editClothesFrag extends Fragment {
 
                     //TODO : 의류 수정이 완료된 다음 나오는 열람 페이지에서 뒤로가기 버튼이 잘 동작하는지 확인합니다. 문제가 있다면 프래그먼트의 백스택을 점검합니다.
                     //수정된 의류 정보를 열람하도록 함
-                    getParentFragmentManager().beginTransaction().replace(R.id.readClothes_fg, readClothesFrag).commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readClothesFrag).commit();
                 }
             }
         });

@@ -7,6 +7,7 @@
         <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_search_clothes.xml" value="0.5390625" />
         <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_search_outfit.xml" value="0.4598623853211009" />
         <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_add_clothes.xml" value="0.5536458333333333" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_add_cody.xml" value="0.32065217391304346" />
         <entry key="..\:/AS-workspace/test/app/src/main/res/layout/recyclerview_clothes.xml" value="0.25" />
         <entry key="..\:/Code/SE_dev/app/src/main/res/layout/activity_main.xml" value="0.17806484295845998" />
         <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_add_clothes.xml" value="0.25" />
@@ -19,11 +20,6 @@
         <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/fragment_add_clothes.xml" value="0.264" />
         <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.2" />
         <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/fragment_read_clothes.xml" value="0.2" />
-        <entry key="..\:/Users/202010848/AndroidStudioProjects/2022-SW-Engineering/app/src/main/res/drawable-v24/square_background_border_black.xml" value="0.1185" />
-        <entry key="..\:/Users/202010848/AndroidStudioProjects/2022-SW-Engineering/app/src/main/res/layout/activity_board.xml" value="0.18795289855072464" />
-        <entry key="..\:/Users/202010848/AndroidStudioProjects/2022-SW-Engineering/app/src/main/res/layout/activity_board_edit.xml" value="0.18795289855072464" />
-        <entry key="..\:/Users/202010848/AndroidStudioProjects/2022-SW-Engineering/app/src/main/res/layout/activity_ootdactivity.xml" value="0.18795289855072464" />
-        <entry key="..\:/Users/202010848/AndroidStudioProjects/2022-SW-Engineering/app/src/main/res/layout/calender_cell.xml" value="0.28541666666666665" />
       </map>
     </option>
   </component>

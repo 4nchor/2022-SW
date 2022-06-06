@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".startApp_1.cody.addCodyFrag">
+
+    <Button
+        android:id="@+id/addCodyComp_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="의류 추가" />
+
+    <EditText
+        android:id="@+id/addCodyKey_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="코디 세트 이름 입력"
+        android:minHeight="48dp"></EditText>
+
+    <TextView
+        android:id="@+id/showAddedCodyTag_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/addCodyTag_et"
+        android:layout_width="match_parent"
+        android:hint="태그 입력"
+        android:layout_height="50dp"></EditText>
+
+    <Button
+        android:id="@+id/doneAddCody_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="코디 세트 등록" />
+
+</LinearLayout>

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Cody {
     private String CodyKey;
-    private ArrayList<Clothes> CodyComp;
+    private ArrayList<String> CodyComp; //코디를 구성하는 의류들의 ClothesKey를 저장하는 ArrayList
     private ArrayList<String> CodyTag;
 
-    Cody (String CodyKey, ArrayList<Clothes> CodyComp, ArrayList<String> CodyTag) {
+    public Cody(String CodyKey, ArrayList<String> CodyComp, ArrayList<String> CodyTag) {
         this.CodyKey = CodyKey;
         this.CodyComp = CodyComp;
         this.CodyTag = CodyTag;
@@ -15,11 +15,11 @@ public class Cody {
 
     //getter
     public String getCodyKey() { return CodyKey; }
-    public ArrayList<Clothes> getCodyComp() { return CodyComp; }
+    public ArrayList<String> getCodyComp() { return CodyComp; }
     public ArrayList<String> getCodyTag() { return CodyTag; }
 
     //setter
     public void setCodyKey(String CodyKey) { this.CodyKey = CodyKey; }
-    public void setCodyComp(ArrayList<Clothes> CodyComp) { this.CodyComp = CodyComp; }
+    public void setCodyComp(ArrayList<String> CodyComp) { this.CodyComp = CodyComp; }
     public void setCodyTag(ArrayList<String> CodyTag) { this.CodyTag = CodyTag; }
 }

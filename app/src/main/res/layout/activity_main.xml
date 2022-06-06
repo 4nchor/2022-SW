@@ -8,18 +8,7 @@
     tools:context=".startApp_1.userauth.MainActivity">
 
     <FrameLayout
-        android:id="@+id/readClothes_fg"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/addClothes_fg"
+        android:id="@+id/frag_fl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -72,6 +61,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="의류 검색하기" />
+
+        <Button
+            android:id="@+id/addCody_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="코디 세트 추가하기" />
 
         <TextView
             android:id="@+id/tv_temp"

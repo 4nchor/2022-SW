@@ -124,7 +124,7 @@ public class readClothesFrag extends Fragment {
                 editClothesFrag.setArguments(bundle);
 
                 //열람 중이었던 의류를 수정하도록 함
-                getParentFragmentManager().beginTransaction().replace(R.id.readClothes_fg, editClothesFrag).addToBackStack(null).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, editClothesFrag).addToBackStack(null).commit();
             }
         });
 
