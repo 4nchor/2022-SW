@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
     private addClothesFrag addClothesFrag;
     private readClothesFrag readClothesFrag;
+    private ReadAllClothesFrag readAllClothesFrag;
 
     public static String TAG = "["+MainActivity.class.getSimpleName() +"] ";
     Context context = MainActivity.this;
@@ -52,7 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
         addClothesFrag = new addClothesFrag();
         readClothesFrag = new readClothesFrag();
+        readAllClothesFrag = new ReadAllClothesFrag();
 
+        //
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.clothes_recyclerview, readAllClothesFrag).commit();
 
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
 

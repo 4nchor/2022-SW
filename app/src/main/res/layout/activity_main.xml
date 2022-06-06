@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context=".startApp_1.userauth.MainActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/clothes_recyclerview"
+        android:layout_width="408dp"
+        android:layout_height="483dp"
+        android:layout_marginStart="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/readClothes_fg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
         android:id="@+id/readClothes_fg"
         android:layout_width="374dp"

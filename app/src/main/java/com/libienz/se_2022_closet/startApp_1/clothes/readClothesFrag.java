@@ -2,6 +2,7 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +42,7 @@ public class readClothesFrag extends Fragment {
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
 
     //열람할 의류의 키값, 나중에 프래그먼트 간 통신을 통해 [홈 > 열람] 또는 [검색 > 열람]으로 값을 받아올 것
-    private String ClothesKey = "1635478168";
+    private String ClothesKey = "1364804085";
 
     private ArrayList<String> tag;
     private String info;
@@ -51,8 +53,13 @@ public class readClothesFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_read_clothes, container, false);
 
+        //다른 프래그먼트에서 열람할 ClothesKey 받아오는 경우
         if (getArguments() != null) {
             ClothesKey = getArguments().getString("ClothesKey");
+        }
+        //다른 액티비티에서 열람할 ClothesKey 받아오는 경우
+        else {
+
         }
 
         //의류 정보를 띄우는 코드
@@ -62,7 +69,7 @@ public class readClothesFrag extends Fragment {
                 Clothes clothes = snapshot.getValue(Clothes.class);
 
                 Log.d("cloth",clothes.toString());
-                tag = clothes.gettag();
+                tag = clothes.getClothesTag();
                 info = clothes.getClothesInfo();
 
                 ImageView readimg_iv = (ImageView) view.findViewById(R.id.readClothes_iv);
@@ -133,9 +140,7 @@ public class readClothesFrag extends Fragment {
                 });
 
                 //열람 이전에 보고 있던 화면으로 돌아감
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(readClothesFrag.this).commit();
-                fragmentManager.popBackStack();
+                getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
             }
         });
 
@@ -144,13 +149,10 @@ public class readClothesFrag extends Fragment {
         readtomain_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(readClothesFrag.this).commit();
-                fragmentManager.popBackStack();
+                getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
             }
         });
 
         return view;
     }
 }
-

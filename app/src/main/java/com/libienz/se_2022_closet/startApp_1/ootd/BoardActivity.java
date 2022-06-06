@@ -94,7 +94,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
     private void getImageData(String Uid,String takeKeyDate) {
         try {
             ImageView imageView = findViewById(R.id.getImageArea);
-            FirebaseReference.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            FirebaseReference.reference.child("board").child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Glide.with(getApplicationContext())
@@ -104,7 +104,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(), "저장된 사진이 없네용", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "저장된 사진이 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (Exception e) {
@@ -114,7 +114,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
     private void checkImageData(String Uid,String takeKeyDate){
         try {
             ImageView imageView = findViewById(R.id.getImageArea);
-            FirebaseReference.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            FirebaseReference.reference.child("board").child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Intent editIntent = new Intent(BoardActivity.this, BoardEditActivity.class);
@@ -124,7 +124,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(), "수정할 내용이 없네용", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "수정할 내용이 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (Exception e) {
@@ -145,18 +145,18 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.fabSub1:
                 anim();
-                Toast.makeText(this, "Button1 삭제버튼", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Button1 삭제버튼", Toast.LENGTH_SHORT).show();
                 onDeleteComment(uidString,takeKeyDate);
                 onDeleteImage(uidString,takeKeyDate);
                 break;
             case R.id.fabSub2:
                 anim();
-                Toast.makeText(this, "Button2 수정버튼", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Button2 수정버튼", Toast.LENGTH_SHORT).show();
                 checkImageData(uidString,takeKeyDate);
                 break;
             case R.id.fabSub3:
                 anim();
-                Toast.makeText(this, "Button3 추가버튼", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Button3 추가버튼", Toast.LENGTH_SHORT).show();
                 Intent addIntent = new Intent(this, BoardAddActivity.class);
                 addIntent.putExtra("keyDate",takeKeyDate);
                 startActivityForResult(addIntent,0);
@@ -167,16 +167,16 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
 
     private void onDeleteImage(String Uid,String key)
     {
-        FirebaseReference.reference.child(Uid).child(key+".png").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        FirebaseReference.reference.child("board").child(Uid).child(key+".png").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(BoardActivity.this, key+"이미지삭제 성공", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BoardActivity.this, key+"삭제 성공", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(BoardActivity.this,"삭제할이미지가 없나봐",Toast.LENGTH_SHORT).show();
+                Toast.makeText(BoardActivity.this,"삭제할 내용이 없습니다.",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -184,12 +184,12 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
         FirebaseReference.boardRef.child(Uid).child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(BoardActivity.this, "코멘트삭제 성공", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(BoardActivity.this, "코멘트삭제 성공", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(BoardActivity.this,"삭제할 comment가 없나봐",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(BoardActivity.this,"삭제할 comment가 없나봐",Toast.LENGTH_SHORT).show();
             }
         });
 

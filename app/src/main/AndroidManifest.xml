@@ -57,6 +57,9 @@
             android:exported="false" />
         <activity android:name=".startApp_1.userauth.InitialSettingActivity"
             android:exported="false"/>
+        <activity android:name=".startApp_1.clothes.editHashTagActivity"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

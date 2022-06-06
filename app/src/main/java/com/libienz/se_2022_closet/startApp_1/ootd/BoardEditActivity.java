@@ -84,7 +84,7 @@ public class BoardEditActivity extends AppCompatActivity {
 
     } //onCreate
     private void getImageData(String Uid,String takeKeyDate){
-        FirebaseReference.reference.child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        FirebaseReference.reference.child("board").child(Uid).child(takeKeyDate+".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(getApplicationContext())
@@ -111,7 +111,7 @@ public class BoardEditActivity extends AppCompatActivity {
     //파이어베이스 이미지 업로드
     private void uploadToFirebase(Uri uri,String Uid, String key) {
 
-        StorageReference fileRef = FirebaseReference.reference.child(Uid).child(key+".png");
+        StorageReference fileRef = FirebaseReference.reference.child("board").child(Uid).child(key+".png");
         Log.w("사진저장", String.valueOf(fileRef));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

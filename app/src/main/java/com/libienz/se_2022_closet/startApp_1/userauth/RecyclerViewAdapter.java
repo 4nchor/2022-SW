@@ -48,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ClothesViewHolder holder, int position) {
         Glide.with(holder.itemView)
-                .load(mClothesList.get(position).getimg())
+                .load(mClothesList.get(position).getClothesImg())
                 .into(holder.iv_clothes);
     }
 
