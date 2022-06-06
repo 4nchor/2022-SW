@@ -26,31 +26,25 @@
     </LinearLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/clothes_recyclerview"
-        android:layout_width="357dp"
-        android:layout_height="452dp"
-        android:layout_below="@id/title_layout"
-        android:layout_alignBottom="@+id/readClothes_fg"
-        android:layout_marginStart="3dp"
-        android:layout_marginBottom="31dp"
-        app:layout_constraintBottom_toBottomOf="@+id/readClothes_fg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:id="@+id/readAllClothes_fg"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        android:layout_below="@id/title_layout">
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/readClothes_fg"
         android:layout_width="match_parent"
-        android:layout_height="424dp"
+        android:layout_height="520dp"
         android:layout_below="@id/title_layout">
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/addClothes_fg"
-        android:layout_width="352dp"
-        android:layout_height="420dp"
+        android:layout_width="403dp"
+        android:layout_height="520dp"
         android:layout_below="@id/title_layout"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp">
@@ -60,9 +54,9 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/clothes_recyclerview"
+        android:layout_height="63dp"
         android:layout_marginTop="-2dp"
+        android:layout_below="@id/readClothes_fg"
         android:orientation="horizontal">
 
 
@@ -86,9 +80,9 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="104dp"
+        android:layout_height="112dp"
         android:layout_below="@id/linearLayout2"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="6dp"
         android:orientation="horizontal">
 
         <ImageButton

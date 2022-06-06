@@ -36,6 +36,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mListener = listener;
     }
 
+    public RecyclerViewAdapter(){
+
+    }
+
     public RecyclerViewAdapter(ArrayList<Clothes> mClothesList, Context context)
     {
         this.mClothesList = mClothesList;
@@ -43,6 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //storage = FirebaseStorage.getInstance();
         notifyDataSetChanged();
     }
+
 
 
     @NonNull

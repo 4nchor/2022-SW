@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
         readAllClothesFrag = new ReadAllClothesFrag();
 
 
-        //transaction = fragmentManager.beginTransaction();
-        //transaction.replace(R.id.clothes_recyclerview, readAllClothesFrag).commit();
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.readAllClothes_fg, readAllClothesFrag).commit();
 
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
 
