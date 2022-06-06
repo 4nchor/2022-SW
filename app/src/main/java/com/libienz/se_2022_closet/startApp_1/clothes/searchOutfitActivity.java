@@ -38,7 +38,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.cody.CodyAdapter;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
+import com.libienz.se_2022_closet.startApp_1.data.Cody;
 import com.libienz.se_2022_closet.startApp_1.userauth.LoginActiyity;
 import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
@@ -48,7 +50,8 @@ import java.util.ArrayList;
 public class searchOutfitActivity extends AppCompatActivity {
 
     private String searchKey; //사용자가 입력하는 검색어
-    private ArrayList<Clothes> findRes = new ArrayList<Clothes>();
+    private ArrayList<Clothes> findClothes = new ArrayList<Clothes>();
+    private ArrayList<Cody> findCody = new ArrayList<Cody>();
     private ArrayList<String> tag_want_to_find = new ArrayList<String>();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth auth;
@@ -66,6 +69,11 @@ public class searchOutfitActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public void clearFindArray() {
+        findClothes.clear();
+        findCody.clear();
     }
 
     @Override
@@ -95,14 +103,14 @@ public class searchOutfitActivity extends AppCompatActivity {
                     searchCodyforKeyword_swt.setVisibility(View.VISIBLE);
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
-                    findRes.clear();
+                    clearFindArray();
                 }
                 else {
                     searchCodyforKeyword_swt.setChecked(false);
                     searchOutfit_tv.setText(null);
                     searchCodyforKeyword_swt.setVisibility(View.GONE);
                     tag_want_to_find.clear();
-                    findRes.clear();
+                    clearFindArray();
                 }
             }
         });
@@ -115,13 +123,13 @@ public class searchOutfitActivity extends AppCompatActivity {
                     searchOutfit_et.setHint("키워드로 검색");
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
-                    findRes.clear();
+                    clearFindArray();
                 }
                 else {
                     searchOutfit_et.setHint("태그로 검색");
                     searchOutfit_tv.setText(null);
                     tag_want_to_find.clear();
-                    findRes.clear();
+                    clearFindArray();
                 }
             }
         });
@@ -133,13 +141,13 @@ public class searchOutfitActivity extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     searchKey = searchOutfit_et.getText().toString();
-                    tag_want_to_find.add(searchKey);
                     if (!searchCodyforKeyword_swt.isChecked()){
+                        tag_want_to_find.add(searchKey);
                         searchOutfit_tv.append("  #" + searchKey);
                         searchOutfit_et.setText(null);
                     }
                     search_btn.performClick();
-                    findRes.clear();
+                    clearFindArray();
                     return true;
                 }
                 return false;
@@ -152,7 +160,7 @@ public class searchOutfitActivity extends AppCompatActivity {
 
                 //태그로 의류를 검색하는 경우
                 if (searchClothes_rb.isChecked()) {
-                    searchOutfit_et.getText().toString();
+                    //searchOutfit_et.getText().toString();
                     userRef.child(user.getUid()).child("Clothes").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -167,16 +175,18 @@ public class searchOutfitActivity extends AppCompatActivity {
                             for (DataSnapshot cloth_snapshot : snapshot.getChildren()) {
                                 Clothes dbItrCloth = cloth_snapshot.getValue(Clothes.class);
                                 if (checkAllTagisIn(tag_want_to_find, dbItrCloth.getClothesTag())) {
-                                    findRes.add(dbItrCloth);
+                                    findClothes.add(dbItrCloth);
                                 }
                             }
                             Log.d("wantfind", tag_want_to_find.toString());
-                            for (Clothes clth : findRes) {
+                            for (Clothes clth : findClothes) {
                                 Log.d("seq", clth.getClothesTag().toString());
                             }
 
+                            if (findClothes.isEmpty()) Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+
                             //검색 결과 출력
-                            ClothesAdapter adapter = new ClothesAdapter(findRes);
+                            ClothesAdapter adapter = new ClothesAdapter(findClothes);
                             searchResult_rv.setAdapter(adapter);
                         }
                         @Override
@@ -185,26 +195,91 @@ public class searchOutfitActivity extends AppCompatActivity {
                     });
                 }
 
-                else if (searchCody_rb.isChecked() && !searchCodyforKeyword_swt.isChecked()); //태그로 코디 검색하는 경우
-                else if (searchCody_rb.isChecked() && searchCodyforKeyword_swt.isChecked()); //키워드로 코디 검색하는 경우
+                //태그로 코디 검색하는 경우
+                else if (searchCody_rb.isChecked() && !searchCodyforKeyword_swt.isChecked()) {
+                    userRef.child(user.getUid()).child("Cody").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot cody_snapshot : snapshot.getChildren()) {
+                                Cody dbItrCody = cody_snapshot.getValue(Cody.class);
+                                if (checkAllTagisIn(tag_want_to_find, dbItrCody.getCodyTag())) {
+                                    findCody.add(dbItrCody);
+                                }
+                            }
+                            Log.d("wantfind", tag_want_to_find.toString());
+                            for (Cody cody : findCody) {
+                                Log.d("seq", cody.getCodyTag().toString());
+                            }
+
+                            if (findCody.isEmpty()) Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+
+                            //검색 결과 출력
+                            CodyAdapter adapter = new CodyAdapter(findCody);
+                            searchResult_rv.setAdapter(adapter);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+
+                }
+
+                //키워드로 코디 검색하는 경우
+                else if (searchCody_rb.isChecked() && searchCodyforKeyword_swt.isChecked()){
+                    userRef.child(user.getUid()).child("Cody").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot cody_snapshot : snapshot.getChildren()) {
+                                Cody dbItrCody = cody_snapshot.getValue(Cody.class);
+                                if (dbItrCody.getCodyKey().equals(searchKey)) {
+                                    findCody.add(dbItrCody);
+                                }
+                            }
+
+                            if (findCody.isEmpty()) Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+
+                            //검색 결과 출력
+                            CodyAdapter adapter = new CodyAdapter(findCody);
+                            searchResult_rv.setAdapter(adapter);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
             }
         });
 
-        //검색 결과 클릭했을 때 열람 페이지를 띄움 //수정 필요...
-        ClothesAdapter adapter = new ClothesAdapter(findRes);
-        adapter.setOnItemClickListener(new ClothesAdapter.OnItemClickListener() {
+        //TODO : 아래 부분을 수정합니다... 검색 결과 클릭이 안 먹어요 ㅜㅜ 해결하고 싶었는데 안 되는 이유를 못 찾아 실패했습니다 (죄송...)
+        //검색 결과 클릭했을 때 열람 페이지를 띄움 (의류)
+        ClothesAdapter clothesAdapter = new ClothesAdapter(findClothes);
+        clothesAdapter.setOnItemClickListener(new ClothesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
+                readClothesFrag fragment = new readClothesFrag();
+
+                //열람 프래그먼트 띄움, 프래그먼트 띄울 프레임 추가가 필요함
+                //getSupportFragmentManager().beginTransaction().replace("프래그먼트 들어갈 프레임 이름", fragment).commit();
+
                 //ClothesKey를 열람 프래그먼트에 번들로 전달
-                String ClothesKey = findRes.get(pos).getClothesKey();
+                String ClothesKey = findClothes.get(pos).getClothesKey();
+
                 Bundle bundle = new Bundle();
                 bundle.putString("ClothesKey", ClothesKey);
 
-                readClothesFrag fragment = new readClothesFrag();
                 fragment.setArguments(bundle);
 
-                //열람 프래그먼트 띄움, 레이아웃 완성 안 됨 (프레임이 안 들어감!!!!!!!!!!!!!!!!!!!!)
-                //getSupportFragmentManager().beginTransaction().replace("프래그먼트 들어갈 레이아웃 이름", fragment).commit();
+                Log.d("Clicked", findClothes.get(pos).getClothesKey());
+            }
+        });
+
+        //TODO : 아래 부분을 완성합니다. 의류 열람 페이지 띄우는 것과 같은 이유로 실패해서 완성하지 못했습니다...
+        //검색 결과 클릭했을 때 열람 페이지를 띄움 (코디)
+        CodyAdapter codyAdapter = new CodyAdapter(findCody);
+        codyAdapter.setOnItemClickListener(new CodyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+
             }
         });
     }
