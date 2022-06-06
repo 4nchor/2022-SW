@@ -52,7 +52,7 @@ public class editHashTagActivity extends AppCompatActivity {
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
     
     //editClothesFrag에서 해시태그 이름을 변경할 의류 키 값을 받아옴
-    private String ClothesKey = "1364804085";
+    private String ClothesKey = "0";
     private ArrayList<String> prev_tag; //기존 태그 리스트
     private ArrayList<String> new_tag; //새로운 태그를 받을 리스트
     private ArrayList<String> tag;

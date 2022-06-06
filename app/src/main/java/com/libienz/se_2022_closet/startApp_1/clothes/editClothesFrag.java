@@ -45,7 +45,7 @@ public class editClothesFrag extends Fragment {
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
     private String ClothesKey;
     private Uri imguri;
-    private Button editHashTag_btn;
+    //private Button editHashTag_btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -133,21 +133,23 @@ public class editClothesFrag extends Fragment {
             }
         });
 
-        return view;
 
 
-
-
-
-        //태그 수정하기 버튼을 누르면 activiy_edit_hashtag 레이아웃으로 화면이 전환됨s
+        //태그 수정하기 버튼을 누르면 activiy_edit_hashtag 레이아웃으로 화면이 전환됨
+        //수정할 의류의 키값을 editHashTagActivity로 넘김
         Button editHashTag_btn = (Button) view.findViewById(R.id.editHashTag_btn);
         editHashTag_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //화면 전환
+                Intent intent = new Intent(getActivity(), editHashTagActivity.class);
+                startActivity(intent);
             }
         });
 
+
+
+        return view;
     }
 
     //파이어베이스 이미지 업로드 메소드
