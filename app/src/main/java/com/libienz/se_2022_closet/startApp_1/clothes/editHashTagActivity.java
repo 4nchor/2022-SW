@@ -81,7 +81,7 @@ public class editHashTagActivity extends AppCompatActivity {
                 show_tag = (ListView) findViewById(R.id.show_tag);
 
                 //어뎁터 설정
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_edit_hashtag, prev_tag);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(editHashTagActivity.this, R.layout.activity_edit_hashtag, prev_tag);
                 show_tag.setAdapter(adapter);
                 //listview(tag)를 클릭할 경우 다음 동작을 실행
                 show_tag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,8 +95,9 @@ public class editHashTagActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 name_tag = editHashTag_et.getText().toString();
                                 new_tag.set(where_tag, name_tag);
-                                //확인 메세지
-                                Toast.makeText(this, "이 으로 변경되었습니다.", Toast.LENGTH_LONG).show();
+                                //확인 메세지 출력
+                                Toast t = Toast.makeText(editHashTagActivity.this, "해시태그가 변경되었습니다.", Toast.LENGTH_LONG);
+                                t.show();
                             }
                         });
 
