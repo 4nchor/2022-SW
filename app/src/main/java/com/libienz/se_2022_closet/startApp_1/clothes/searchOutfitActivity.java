@@ -57,7 +57,6 @@ public class searchOutfitActivity extends AppCompatActivity {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
 
-
     //유저가 입력한 태그들로 리스트를 만들었습니다 : want_to_find_list
     //목적 배열에 want_to_find_list에 있는 모든 원소들이 있는지 알려주는 메소드 입니다.
     public boolean checkAllTagisIn(ArrayList<String> want_to_find_list, ArrayList<String> obj) {

@@ -80,6 +80,7 @@ public class editHashTagActivity extends AppCompatActivity {
                 editHashTag_et = (EditText) findViewById(R.id.editHashTag_et);
                 show_tag = (ListView) findViewById(R.id.show_tag);
 
+                /*
                 //어뎁터 설정
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(editHashTagActivity.this, R.layout.activity_edit_hashtag, prev_tag);
                 show_tag.setAdapter(adapter);
@@ -102,7 +103,8 @@ public class editHashTagActivity extends AppCompatActivity {
                         });
 
                     }
-                });
+                });*/
+
 
             }
 
