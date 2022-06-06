@@ -3,15 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable-v24/ic_baseline_add_24.xml" value="0.1155" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable-v24/ic_baseline_add_photo_alternate_24.xml" value="0.1155" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable-v24/ic_baseline_delete_24.xml" value="0.1155" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1155" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable/button.xml" value="0.1155" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable/edit.xml" value="0.1155" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1155" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1155" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_board.xml" value="0.1" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_board_edit.xml" value="0.190625" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_find_pw.xml" value="0.1" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_initial_setting.xml" value="0.12" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_join.xml" value="0.22" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_login.xml" value="0.11956521739130435" />
-        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_ootdactivity.xml" value="0.11956521739130435" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_search_outfit.xml" value="0.16666666666666666" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_splash.xml" value="0.11956521739130435" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/clothes_items.xml" value="0.1" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/fragment_add_clothes.xml" value="0.1" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/fragment_read_clothes.xml" value="0.16666666666666666" />
       </map>
     </option>
   </component>
