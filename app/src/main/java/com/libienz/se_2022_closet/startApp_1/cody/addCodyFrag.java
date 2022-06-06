@@ -39,9 +39,11 @@ public class addCodyFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_add_cody, container, false);
 
-        //TODO : 코디를 구성하는 의류를 입력받는 부분을 작성합니다
-        //아래 부분은 기능 테스트를 위해 임시로 add함
+        //TODO : 코디를 구성하는 의류를 입력받는 부분을 작성합니다. 입력받은 의류의 키를 ArrayList<String> codycomp에 집어넣는 것만 구현하면 됩니다
+        //아래 부분은 기능 테스트를 위해 임시로 add함. LINE 42 TODO를 완료하면 아래 세 줄은 삭제
         codycomp.add("178809003");
+        codycomp.add("000000000");
+        codycomp.add("111111111");
 
         //코디세트 이름(키워드)을 입력받음
         EditText addCodyKey_et = (EditText) view.findViewById(R.id.addCodyKey_et);
@@ -74,6 +76,7 @@ public class addCodyFrag extends Fragment {
 
                     hashtag.clear();
                     addCodyTag_et.setText(null);
+                    addCodyKey_et.setText(null);
                     //프래그먼트 종료, 추가하기 전 화면으로 돌아감
                     getParentFragmentManager().beginTransaction().remove(addCodyFrag.this).commit();
                 }

@@ -4,22 +4,18 @@ import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userR
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +40,7 @@ public class readClothesFrag extends Fragment {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
 
-    //TODO : 지금은 ClothesKey가 정적으로 초기화되어 있지만, 나중에 다른 프래그먼트나 액티비티로부터 값을 받아오도록 합니다. Line 58의 TODO 참고
+    //TODO : searchOutfitActivity에서 검색 결과를 클릭하면 readClothesFrag로 넘어오는 리스너가 먹통이라 지금은 ClothesKey가 정적으로 초기화되어 있습니다. searchOutfitActivity를 해결하면 아래 ClotheyKey = "178809003"으로 초기화돼 있는 부분을 삭제합니다.
     private String ClothesKey = "178809003";
 
     private ArrayList<String> tag;
@@ -57,14 +53,9 @@ public class readClothesFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_read_clothes, container, false);
 
-        //TODO : [검색 기능 / 홈 화면 기능]이 완성되면 아래 if-else를 완성합니다
-        //다른 프래그먼트에서 열람할 ClothesKey 받아오는 경우
+        //다른 프래그먼트나 액티비티에서 넘겨 준 ClothesKey 받아옴
         if (getArguments() != null) {
             ClothesKey = getArguments().getString("ClothesKey");
-        }
-        //다른 액티비티에서 열람할 ClothesKey 받아오는 경우
-        else {
-
         }
 
         //의류 정보를 띄우는 코드
@@ -172,7 +163,6 @@ public class readClothesFrag extends Fragment {
                 .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(fragment.getContext(), "삭제가 취소되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
