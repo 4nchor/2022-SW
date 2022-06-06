@@ -22,7 +22,9 @@ import com.google.gson.JsonParser;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
+import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
+import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.ootd.OOTDActivity;
 import com.libienz.se_2022_closet.startApp_1.util.RequestHttpUrlConnection;
 import com.libienz.se_2022_closet.startApp_1.util.WeatherModel;
@@ -34,10 +36,14 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
     private addClothesFrag addClothesFrag;
     private readClothesFrag readClothesFrag;
+    private addCodyFrag addCodyFrag;
+    private boolean isFrag = false; //프래그먼트 백스택에 남은 것이 있는지 여부를 나타내는 변수
 
     public static String TAG = "["+MainActivity.class.getSimpleName() +"] ";
     Context context = MainActivity.this;
     TextView tv_temp;
+
+    private long backKeyPressedTime = 0;
 
     String strUrl = "";  //통신할 URL
     NetworkTask networkTask = null;
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         addClothesFrag = new addClothesFrag();
         readClothesFrag = new readClothesFrag();
+        addCodyFrag = new addCodyFrag();
 
 
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
@@ -83,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.addClothes_fg, addClothesFrag).commit();
+                transaction.replace(R.id.frag_fl, addClothesFrag).addToBackStack(null).commit();
+                isFrag = true;
             }
         });
 
@@ -92,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.readClothes_fg, readClothesFrag).commit();
+                transaction.replace(R.id.frag_fl, readClothesFrag).addToBackStack(null).commit();
+                isFrag = true;
             }
         });
 
@@ -104,6 +113,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button addCody_btn = (Button) findViewById(R.id.addCody_btn);
+        addCody_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frag_fl, addCodyFrag).addToBackStack(null).commit();
+                isFrag = true;
+            }
+        });
+    }
+
+    //뒤로가기 버튼 두 번 누르면 앱 종료
+    @Override
+    public void onBackPressed() {
+        if (isFrag == true) {
+            super.onBackPressed();
+            if (fragmentManager.getBackStackEntryCount() == 0) isFrag = false;
+        }
+        else if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(getApplicationContext(), "한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else finish();
     }
 
 

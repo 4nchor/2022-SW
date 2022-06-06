@@ -3,7 +3,9 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 import static android.app.Activity.RESULT_OK;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorEventListener;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -35,6 +37,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
+import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
 import java.util.ArrayList;
 
@@ -45,7 +48,19 @@ public class editClothesFrag extends Fragment {
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
     private String ClothesKey;
     private Uri imguri;
-    private Button editHashTag_btn;
+    //private Button editHashTag_btn;
+    
+    //의류키를 editHashTagActivity로 보내기 위한 작업 (인터페이스 세팅)
+    private SendClothesKey sendCKey;
+    @Override
+    public void onAttach(@NonNull Context context){
+        super.onAttach(context);
+        try {
+            sendCKey = (SendClothesKey) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + "must implement SendClothesKey");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +80,6 @@ public class editClothesFrag extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Clothes clothes = snapshot.getValue(Clothes.class);
 
-                //imguri = Uri.parse(clothes.getClothesImg());
                 //editTag_et.setText(clothes.gettag());
                 editInfo_et.setText(clothes.getClothesInfo());
 
@@ -127,29 +141,37 @@ public class editClothesFrag extends Fragment {
                     readClothesFrag readClothesFrag = new readClothesFrag();
                     readClothesFrag.setArguments(bundle);
 
+                    //TODO : 의류 수정이 완료된 다음 나오는 열람 페이지에서 뒤로가기 버튼이 잘 동작하는지 확인합니다. 문제가 있다면 프래그먼트의 백스택을 점검합니다.
                     //수정된 의류 정보를 열람하도록 함
-                    getParentFragmentManager().beginTransaction().replace(R.id.readClothes_fg, readClothesFrag).commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readClothesFrag).commit();
                 }
             }
         });
 
 
 
-
-
-
-
-        //태그 수정하기 버튼을 누르면 activiy_edit_hashtag 레이아웃으로 화면이 전환됨s
-        Button editHashTag_btn = (Button)view.findViewById(R.id.editHashTag_btn);
+        //태그 수정하기 버튼을 누르면 activiy_edit_hashtag 레이아웃으로 화면이 전환됨
+        //수정할 의류의 키값을 editHashTagActivity로 넘김
+        Button editHashTag_btn = (Button) view.findViewById(R.id.editHashTag_btn);
         editHashTag_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //화면 전환
+                //화면 전환 및 키 전달
+                sendCKey.sendCkey(ClothesKey);
+                Intent intent = new Intent(getActivity(), editHashTagActivity.class);
+                startActivity(intent);
             }
         });
 
         return view;
     }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        sendCKey = null;
+    }
+
 
     //파이어베이스 이미지 업로드 메소드
     private void uploadToFirebase(Uri uri, String idToken, String ClothesKey, ViewGroup container){
@@ -159,7 +181,7 @@ public class editClothesFrag extends Fragment {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast failedmsg = Toast.makeText(container.getContext(), "Failed to Edit Img", Toast.LENGTH_SHORT);
+                Toast failedmsg = Toast.makeText(container.getContext(), "이미지 등록에 실패했습니다.", Toast.LENGTH_SHORT);
                 failedmsg.show();
             }
         });
