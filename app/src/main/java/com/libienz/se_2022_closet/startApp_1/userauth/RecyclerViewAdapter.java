@@ -23,18 +23,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private FirebaseStorage storage;
     private Context context;
 
+
+    //아이템 클릭 리스너 인터페이스
+    public interface OnItemClickListener{
+        void onItemClick(View view, int position); //뷰와 포지션값
+    }
+    //리스너 객체 참조 변수
+    private OnItemClickListener mListener = null;
+
+    //리스너 객체 참조를 어댑터에 전달 메서드
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
+
     public RecyclerViewAdapter(ArrayList<Clothes> mClothesList, Context context)
     {
         this.mClothesList = mClothesList;
         this.context=context;
-        storage = FirebaseStorage.getInstance();
+        //storage = FirebaseStorage.getInstance();
         notifyDataSetChanged();
     }
-    /*
-    public RecyclerViewAdapter(ArrayList<Clothes> mClothesList, Context context) {
-        this.mClothesList = mClothesList;
-        this.context = context;
-    }*/
+
 
     @NonNull
     @Override
@@ -57,12 +66,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return (mClothesList!=null ? mClothesList.size() : 0);
     }
 
+
+
     public class ClothesViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_clothes;
 
         public ClothesViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_clothes=itemView.findViewById(R.id.iv_clothes);
+
+            itemView.setClickable(true);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getBindingAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        // TODO : use pos.
+                        mListener.onItemClick(v, pos);
+                    }
+
+                }
+            });
         }
     }
 }

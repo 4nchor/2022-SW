@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         readClothesFrag = new readClothesFrag();
         readAllClothesFrag = new ReadAllClothesFrag();
 
-        //
-        transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.clothes_recyclerview, readAllClothesFrag).commit();
+
+        //transaction = fragmentManager.beginTransaction();
+        //transaction.replace(R.id.clothes_recyclerview, readAllClothesFrag).commit();
 
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         tv_rcmd_outfit=(TextView) findViewById(R.id.tv_rcmd_outfit);
         requestNetwork();
 
-        Button logout_btn = (Button) findViewById(R.id.logout_btn);
+        ImageButton logout_btn = (ImageButton) findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button ootd_btn = (Button) findViewById(R.id.ootd_btn);
+        ImageButton ootd_btn = (ImageButton) findViewById(R.id.ootd_btn);
         ootd_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button addClothes_btn = (Button) findViewById(R.id.addClothes_btn);
+        ImageButton addClothes_btn = (ImageButton) findViewById(R.id.addClothes_btn);
         addClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button readClothes_btn = (Button) findViewById(R.id.readClothes_btn);
+        ImageButton readClothes_btn = (ImageButton) findViewById(R.id.readClothes_btn);
         readClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button searchOutfit_btn = (Button) findViewById(R.id.searchOutfit_btn);
+        ImageButton searchOutfit_btn = (ImageButton) findViewById(R.id.searchOutfit_btn);
         searchOutfit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,11 +7,33 @@
     android:orientation="vertical"
     tools:context=".startApp_1.userauth.MainActivity">
 
+    <LinearLayout
+        android:id="@+id/title_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="464dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="#MyCloset"
+            android:textAlignment="center"
+            android:textColor="#FF8BB2"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/clothes_recyclerview"
-        android:layout_width="408dp"
-        android:layout_height="483dp"
+        android:layout_width="357dp"
+        android:layout_height="452dp"
+        android:layout_below="@id/title_layout"
+        android:layout_alignBottom="@+id/readClothes_fg"
         android:layout_marginStart="3dp"
+        android:layout_marginBottom="31dp"
         app:layout_constraintBottom_toBottomOf="@+id/readClothes_fg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,102 +41,104 @@
 
     <FrameLayout
         android:id="@+id/readClothes_fg"
-        android:layout_width="374dp"
-        android:layout_height="492dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="424dp"
+        android:layout_below="@id/title_layout">
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/addClothes_fg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="352dp"
+        android:layout_height="420dp"
+        android:layout_below="@id/title_layout"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/readClothes_fg">
+        android:layout_marginRight="8dp">
 
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/readClothes_fg">
-
-        <Button
-            android:id="@+id/logout_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="로그아웃" />
-
-        <Button
-            android:id="@+id/ootd_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ootd" />
-
-        <Button
-            android:id="@+id/addClothes_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="의류 추가하기" />
-
-        <Button
-            android:id="@+id/readClothes_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="의류 열람하기" />
-
-        <Button
-            android:id="@+id/searchOutfit_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="의류 검색하기" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/clothes_recyclerview"
+        android:layout_marginTop="-2dp"
+        android:orientation="horizontal">
 
 
         <TextView
             android:id="@+id/tv_temp"
-            android:layout_width="138dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_rcmd_outfit"
-            android:layout_width="345dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:layout_below="@id/linearLayout2"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/logout_btn"
+            android:layout_width="2dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_logout" />
+
+        <ImageButton
+            android:id="@+id/ootd_btn"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_ootd" />
+
+        <ImageButton
+            android:id="@+id/addClothes_btn"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_plus" />
+
+        <ImageButton
+            android:id="@+id/readClothes_btn"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_tshirts" />
+
+        <ImageButton
+            android:id="@+id/searchOutfit_btn"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_search" />
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

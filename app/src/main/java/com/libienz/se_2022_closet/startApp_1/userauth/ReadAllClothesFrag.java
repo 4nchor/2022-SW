@@ -3,11 +3,13 @@ package com.libienz.se_2022_closet.startApp_1.userauth;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 
 import java.util.ArrayList;
@@ -60,8 +63,7 @@ public class ReadAllClothesFrag extends Fragment {
 
         context=container.getContext();
         mRecyclerAdapter = new RecyclerViewAdapter(mClothesList, context);
-        mRecyclerView.setAdapter(mRecyclerAdapter);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
 
 
@@ -83,6 +85,23 @@ public class ReadAllClothesFrag extends Fragment {
             }
         });
 
+        mRecyclerAdapter.setOnItemClickListener (new RecyclerViewAdapter.OnItemClickListener() {
+
+            //아이템 클릭시
+            @Override
+            public void onItemClick(View view, int position) {
+                //의류 열람 페이지로 넘어감
+                /*Intent intent = new Intent(getActivity(), readClothesFrag.class);
+                startActivity(intent);*/
+                Toast.makeText(view.getContext(),"테스트",Toast.LENGTH_LONG).show();
+            }
+
+        });
+
+
+        mRecyclerView.setAdapter(mRecyclerAdapter);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
         return view; //super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -92,7 +111,6 @@ public class ReadAllClothesFrag extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-
 
 
 }
