@@ -29,23 +29,25 @@
     <FrameLayout
         android:id="@+id/readAllClothes_fg"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
-        android:layout_below="@id/title_layout">
-    </FrameLayout>
+        android:layout_height="420dp"
+        android:layout_below="@id/title_layout"
+        android:background="#FFFFFF"></FrameLayout>
 
     <FrameLayout
         android:id="@+id/readClothes_fg"
         android:layout_width="match_parent"
-        android:layout_height="520dp"
-        android:layout_below="@id/title_layout">
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_layout"
+        android:background="#FFFFFF">
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/addClothes_fg"
-        android:layout_width="403dp"
-        android:layout_height="520dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/title_layout"
+        android:background="#FFFFFF"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp">
 
@@ -54,9 +56,9 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/readAllClothes_fg"
         android:layout_marginTop="-2dp"
-        android:layout_below="@id/readClothes_fg"
         android:orientation="horizontal">
 
 
