@@ -150,8 +150,6 @@ public class editClothesFrag extends Fragment {
             }
         });
 
-
-
         return view;
     }
 

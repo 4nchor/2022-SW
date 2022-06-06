@@ -24,7 +24,7 @@ import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
-import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
+import com.libienz.se_2022_closet.startApp_1.cody.readCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.ootd.OOTDActivity;
 import com.libienz.se_2022_closet.startApp_1.util.RequestHttpUrlConnection;
 import com.libienz.se_2022_closet.startApp_1.util.WeatherModel;
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private addClothesFrag addClothesFrag;
     private readClothesFrag readClothesFrag;
     private addCodyFrag addCodyFrag;
+    private readCodyFrag readCodyFrag;
     private boolean isFrag = false; //프래그먼트 백스택에 남은 것이 있는지 여부를 나타내는 변수
 
     public static String TAG = "["+MainActivity.class.getSimpleName() +"] ";
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         addClothesFrag = new addClothesFrag();
         readClothesFrag = new readClothesFrag();
         addCodyFrag = new addCodyFrag();
+        readCodyFrag = new readCodyFrag();
 
 
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
@@ -120,6 +122,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, addCodyFrag).addToBackStack(null).commit();
+                isFrag = true;
+            }
+        });
+
+        Button readCody_btn = (Button) findViewById(R.id.readCody_btn);
+        readCody_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frag_fl, readCodyFrag).addToBackStack(null).commit();
                 isFrag = true;
             }
         });

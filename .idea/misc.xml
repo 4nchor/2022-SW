@@ -8,7 +8,12 @@
         <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_search_outfit.xml" value="0.4598623853211009" />
         <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_add_clothes.xml" value="0.5536458333333333" />
         <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_add_cody.xml" value="0.32065217391304346" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.5536458333333333" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_edit_cody.xml" value="0.5390625" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_read_clothes.xml" value="0.31614583333333335" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_read_cody.xml" value="0.31197916666666664" />
         <entry key="..\:/AS-workspace/test/app/src/main/res/layout/recyclerview_clothes.xml" value="0.25" />
+        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/recyclerview_cody.xml" value="0.34556159420289856" />
         <entry key="..\:/Code/SE_dev/app/src/main/res/layout/activity_main.xml" value="0.17806484295845998" />
         <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_add_clothes.xml" value="0.25" />
         <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.19927536231884058" />

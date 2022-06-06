@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="의류 검색하기" />
+            android:text="검색하기" />
 
         <Button
             android:id="@+id/addCody_btn"
@@ -68,6 +68,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="코디 세트 추가하기" />
+
+        <Button
+            android:id="@+id/readCody_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="코디 세트 열람하기" />
 
         <TextView
             android:id="@+id/tv_temp"

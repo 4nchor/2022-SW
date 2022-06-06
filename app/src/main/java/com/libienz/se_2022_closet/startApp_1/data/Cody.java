@@ -13,6 +13,8 @@ public class Cody {
         this.CodyTag = CodyTag;
     }
 
+    public Cody () {}
+
     //getter
     public String getCodyKey() { return CodyKey; }
     public ArrayList<String> getCodyComp() { return CodyComp; }
