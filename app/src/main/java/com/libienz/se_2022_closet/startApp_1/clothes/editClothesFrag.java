@@ -5,6 +5,7 @@ import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userR
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorEventListener;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -48,7 +49,18 @@ public class editClothesFrag extends Fragment {
     private String ClothesKey;
     private Uri imguri;
     //private Button editHashTag_btn;
-
+    
+    //의류키를 editHashTagActivity로 보내기 위한 작업 (인터페이스 세팅)
+    private SendClothesKey sendCKey;
+    @Override
+    public void onAttach(@NonNull Context context){
+        super.onAttach(context);
+        try {
+            sendCKey = (SendClothesKey) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + "must implement SendClothesKey");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -144,16 +156,22 @@ public class editClothesFrag extends Fragment {
         editHashTag_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //화면 전환
+                //화면 전환 및 키 전달
+                sendCKey.sendCkey(ClothesKey);
                 Intent intent = new Intent(getActivity(), editHashTagActivity.class);
                 startActivity(intent);
             }
         });
 
-
-
         return view;
     }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        sendCKey = null;
+    }
+
 
     //파이어베이스 이미지 업로드 메소드
     private void uploadToFirebase(Uri uri, String idToken, String ClothesKey, ViewGroup container){

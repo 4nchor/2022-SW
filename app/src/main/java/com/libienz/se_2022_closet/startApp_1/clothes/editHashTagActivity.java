@@ -32,6 +32,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
+import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 import com.libienz.se_2022_closet.startApp_1.util.FirebaseReference;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
   DB에 다시 넣음
    */
 
-public class editHashTagActivity extends AppCompatActivity {
+public class editHashTagActivity extends AppCompatActivity implements SendClothesKey {
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth auth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -61,6 +62,11 @@ public class editHashTagActivity extends AppCompatActivity {
     protected ListView show_tag; //태그를 출력해줄 리스트뷰
     protected Button editHashTag_btn;
     protected EditText editHashTag_et;
+
+    @Override //키 값을 받아옴
+    public void sendCkey(String s) {
+        ClothesKey = s;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +86,6 @@ public class editHashTagActivity extends AppCompatActivity {
                 editHashTag_et = (EditText) findViewById(R.id.editHashTag_et);
                 show_tag = (ListView) findViewById(R.id.show_tag);
 
-                /*
                 //어뎁터 설정
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(editHashTagActivity.this, R.layout.activity_edit_hashtag, prev_tag);
                 show_tag.setAdapter(adapter);
@@ -103,9 +108,7 @@ public class editHashTagActivity extends AppCompatActivity {
                         });
 
                     }
-                });*/
-
-
+                });
             }
 
             @Override
