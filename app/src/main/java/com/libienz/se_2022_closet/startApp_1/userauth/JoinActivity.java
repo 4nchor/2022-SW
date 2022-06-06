@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -121,24 +122,28 @@ public class JoinActivity extends AppCompatActivity {
 
         if(!userId.equals("") && password.contains(userId)){ //비밀번호에 아이디가 포함된 경우
             pw_valid.setText("비밀번호에 아이디가 포함될 수 없습니다.");
+            pw_valid.setTextColor(Color.parseColor("#B30000"));
             password_validation_flag = false;
             return;
         }
 
         if(password.contains(" ")){ //비밀번호가 공백문자를 포함한 경우
             pw_valid.setText("비밀번호는 공백문자를 포함할 수 없습니다.");
+            pw_valid.setTextColor(Color.parseColor("#B30000"));
             password_validation_flag = false;
             return;
         }
 
         if(matcher2.find()){ //비밀번호에 같은 문자가 4개이상 나오는 경우
             pw_valid.setText("비밀번호는 같은 문자를 4개 이상 사용할 수 없습니다.");
+            pw_valid.setTextColor(Color.parseColor("#B30000"));
             password_validation_flag = false;
             return;
         }
 
         if(!matcher.matches()){ //비밀번호가 정규식을 만족하지 않는 경우
             pw_valid.setText("비밀번호는 8~16자리의 영문과 숫자와 특수문자의 조합이어야 합니다.");
+            pw_valid.setTextColor(Color.parseColor("#B30000"));
             password_validation_flag = false;
             return;
         }
@@ -146,6 +151,7 @@ public class JoinActivity extends AppCompatActivity {
 
 
         pw_valid.setText("");
+        pw_valid.setTextColor(Color.parseColor("#008000"));
         password_validation_flag = true;
 
     }
