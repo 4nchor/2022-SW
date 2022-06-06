@@ -3,6 +3,7 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 import static android.app.Activity.RESULT_OK;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
+import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
 import java.util.ArrayList;
 
@@ -100,21 +102,26 @@ public class addClothesFrag extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //유저 정보 및 이미지 삽입 확인 후 의류 등록
-                if (user != null && imguri != null){
-                    //addClothes(user.getUid(), imguri.toString(), tag.getText().toString(), info.getText().toString(), container);
+                //유저 정보 및 이미지 삽입, 태그 작성을 확인 후 의류 등록
+                if (user != null && imguri != null && !hashtag.isEmpty()){
                     addClothes(user.getUid(), imguri.toString(), hashtag, addInfo_et.getText().toString(), container);
                     Toast successmsg = Toast.makeText(container.getContext(), "의류 정보가 등록되었습니다", Toast.LENGTH_SHORT);
                     successmsg.show();
+
+                    hashtag.clear();
+                    addInfo_et.setText(null);
+                    //프래그먼트 종료, 추가하기 전 화면으로 돌아감
+                    getParentFragmentManager().beginTransaction().remove(addClothesFrag.this).commit();
+                }
+                else if (imguri == null) {
+                    Toast.makeText(container.getContext(), "사진을 등록해 주세요.", Toast.LENGTH_SHORT).show();
+                }
+                else if (hashtag.isEmpty()) {
+                    Toast.makeText(container.getContext(), "태그를 작성해 주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(container.getContext(), "Failed to Add", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(container.getContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
-
-                hashtag.clear();
-                addInfo_et.setText(null);
-                //프래그먼트 종료, 추가하기 전 화면으로 돌아감
-                getParentFragmentManager().beginTransaction().remove(addClothesFrag.this).commit();
 
             }
         });
@@ -146,4 +153,5 @@ public class addClothesFrag extends Fragment {
         //파이어베이스 스토리지에 의류 사진 저장
         uploadToFirebase(imguri, idToken, container);
     }
+
 }

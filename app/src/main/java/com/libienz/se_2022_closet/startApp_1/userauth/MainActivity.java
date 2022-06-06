@@ -34,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
     private addClothesFrag addClothesFrag;
     private readClothesFrag readClothesFrag;
+    private boolean isFrag = false;
 
     public static String TAG = "["+MainActivity.class.getSimpleName() +"] ";
     Context context = MainActivity.this;
     TextView tv_temp;
+
+    private long backKeyPressedTime = 0;
 
     String strUrl = "";  //통신할 URL
     NetworkTask networkTask = null;
@@ -83,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.addClothes_fg, addClothesFrag).commit();
+                transaction.replace(R.id.addClothes_fg, addClothesFrag).addToBackStack(null).commit();
+                isFrag = true;
             }
         });
 
@@ -92,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.readClothes_fg, readClothesFrag).commit();
+                transaction.replace(R.id.readClothes_fg, readClothesFrag).addToBackStack(null).commit();
+                isFrag = true;
             }
         });
 
@@ -104,6 +109,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    //뒤로가기 버튼 두 번 누르면 앱 종료
+    @Override
+    public void onBackPressed() {
+        if (isFrag == true) {
+            super.onBackPressed();
+            if (fragmentManager.getBackStackEntryCount() == 0) isFrag = false;
+        }
+        else if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(getApplicationContext(), "한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else finish();
     }
 
 

@@ -6,7 +6,6 @@ public class Cody {
     private String CodyKey;
     private ArrayList<Clothes> CodyComp;
     private ArrayList<String> CodyTag;
-    //코디도 추가 인포 기입 가능했던가? 요구사항 명세서 확인하기...
 
     Cody (String CodyKey, ArrayList<Clothes> CodyComp, ArrayList<String> CodyTag) {
         this.CodyKey = CodyKey;
