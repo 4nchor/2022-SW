@@ -133,14 +133,14 @@ public class editClothesFrag extends Fragment {
             }
         });
 
-        return view;
+
 
 
 
 
 
         //태그 수정하기 버튼을 누르면 activiy_edit_hashtag 레이아웃으로 화면이 전환됨s
-        Button editHashTag_btn = (Button) view.findViewById(R.id.editHashTag_btn);
+        Button editHashTag_btn = (Button)view.findViewById(R.id.editHashTag_btn);
         editHashTag_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +148,7 @@ public class editClothesFrag extends Fragment {
             }
         });
 
+        return view;
     }
 
     //파이어베이스 이미지 업로드 메소드
