@@ -72,7 +72,12 @@ public class BoardEditActivity extends AppCompatActivity {
                     EditText editText = findViewById(R.id.commentArea);
                     String  comment =editText.getText().toString();
 
-                    FirebaseReference.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel("uid",comment));
+                    if(comment.length()==0){
+                        FirebaseReference.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel(uidString,takeKeyDate));
+                    }
+                    else {
+                        FirebaseReference.boardRef.child(uidString).child(takeKeyDate).setValue(new CommentModel(uidString,comment));
+                    }
 
                     uploadToFirebase(imageUri,uidString,takeKeyDate);
 
