@@ -162,11 +162,9 @@ public class editClothesFrag extends Fragment {
                 startActivity(intent);
             }
         });
-<<<<<<< HEAD
+
 */
 
-=======
->>>>>>> upstream/main
 
         return view;
     }

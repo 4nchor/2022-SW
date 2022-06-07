@@ -44,36 +44,7 @@ import java.util.ArrayList;
   DB에 다시 넣음
    */
 
-<<<<<<< HEAD
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.libienz.se_2022_closet.startApp_1.data.Clothes;
-
-import java.util.ArrayList;
-
-public class editHashTagActivity extends AppCompatActivity {
-=======
 public class editHashTagActivity extends AppCompatActivity implements SendClothesKey {
->>>>>>> upstream/main
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth auth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -150,6 +121,4 @@ public class editHashTagActivity extends AppCompatActivity implements SendClothe
         userRef.child(user.getUid()).child("Clothes").child(ClothesKey).setValue(tag);
     */
     }
-
-
 }

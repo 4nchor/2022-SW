@@ -103,7 +103,7 @@ public class ReadAllClothesFrag extends Fragment {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 readClothesFrag fragment2 = new readClothesFrag();//프래그먼트2 선언
                 fragment2.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
-                transaction.replace(R.id.readClothes_fg, fragment2);
+                transaction.replace(R.id.frag_fl, fragment2);
                 transaction.commit();
 
             }

@@ -27,49 +27,19 @@
 
 
     <FrameLayout
-        android:id="@+id/readAllClothes_fg"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_below="@id/title_layout"
-        android:background="#FFFFFF">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/readClothes_fg"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_below="@id/title_layout"
-        android:layout_above="@id/linearLayout2">
-
-    </FrameLayout>
-
-
-    <FrameLayout
-        android:id="@+id/editClothes_fg"
+        android:id="@+id/frag_fl"
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_below="@id/title_layout">
 
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/addClothes_fg"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_below="@id/title_layout"
-        android:layout_above="@id/linearLayout2"
-        android:background="#FFFFFF"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
-
-    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/readAllClothes_fg"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/frag_fl"
         android:layout_marginTop="-2dp"
         android:orientation="horizontal">
 
@@ -135,6 +105,20 @@
             android:background="@drawable/button_shape"
             android:scaleType="fitCenter"
             android:src="@drawable/icon_search" />
+
+        <Button
+            android:id="@+id/addCody_btn"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="코디추가" />
+
+        <Button
+            android:id="@+id/readCody_btn"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="코디열람" />
 
     </LinearLayout>
 

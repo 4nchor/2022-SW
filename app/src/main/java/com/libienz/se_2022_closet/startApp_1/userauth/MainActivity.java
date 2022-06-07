@@ -35,14 +35,12 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private addClothesFrag addClothesFrag;
-    private readClothesFrag readClothesFrag;
-<<<<<<< HEAD
+    //private readClothesFrag readClothesFrag;
     private ReadAllClothesFrag readAllClothesFrag;
-=======
     private addCodyFrag addCodyFrag;
     private readCodyFrag readCodyFrag;
     private boolean isFrag = false; //프래그먼트 백스택에 남은 것이 있는지 여부를 나타내는 변수
->>>>>>> upstream/main
+
 
     public static String TAG = "["+MainActivity.class.getSimpleName() +"] ";
     Context context = MainActivity.this;
@@ -63,17 +61,15 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         addClothesFrag = new addClothesFrag();
-        readClothesFrag = new readClothesFrag();
-<<<<<<< HEAD
+        //readClothesFrag = new readClothesFrag();
         readAllClothesFrag = new ReadAllClothesFrag();
-=======
         addCodyFrag = new addCodyFrag();
         readCodyFrag = new readCodyFrag();
->>>>>>> upstream/main
+
 
 
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.readAllClothes_fg, readAllClothesFrag).commit();
+        transaction.replace(R.id.frag_fl, readAllClothesFrag).commit();
 
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
 
@@ -105,14 +101,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 transaction = fragmentManager.beginTransaction();
-<<<<<<< HEAD
-                transaction.replace(R.id.addClothes_fg, addClothesFrag).commit();
-                //transaction.addToBackStack(null);
-                //transaction.commit();
-=======
                 transaction.replace(R.id.frag_fl, addClothesFrag).addToBackStack(null).commit();
                 isFrag = true;
->>>>>>> upstream/main
+
             }
         });
 
