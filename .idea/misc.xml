@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable-v24/ic_baseline_add_24.xml" value="0.1155" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable-v24/ic_baseline_add_photo_alternate_24.xml" value="0.1155" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/drawable-v24/ic_baseline_delete_24.xml" value="0.1155" />
@@ -19,7 +18,7 @@
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_initial_setting.xml" value="0.12" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_join.xml" value="0.22" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_login.xml" value="0.11956521739130435" />
-        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_ootdactivity.xml" value="0.11956521739130435" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_search_outfit.xml" value="0.16666666666666666" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/activity_splash.xml" value="0.11956521739130435" />
@@ -29,37 +28,7 @@
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/fragment_read_all_clothes.xml" value="0.13179347826086957" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/fragment_read_clothes.xml" value="0.16666666666666666" />
         <entry key="..\:/SW2022/2022-SW-Engineering/app/src/main/res/layout/recyclerview_clothes.xml" value="0.3333333333333333" />
-=======
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_main.xml" value="0.5536458333333333" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_search_clothes.xml" value="0.5390625" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/activity_search_outfit.xml" value="0.4598623853211009" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_add_clothes.xml" value="0.5536458333333333" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_add_cody.xml" value="0.32065217391304346" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.5536458333333333" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_edit_cody.xml" value="0.5390625" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_read_clothes.xml" value="0.31614583333333335" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/fragment_read_cody.xml" value="0.31197916666666664" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/recyclerview_clothes.xml" value="0.25" />
-        <entry key="..\:/AS-workspace/test/app/src/main/res/layout/recyclerview_cody.xml" value="0.34556159420289856" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/activity_main.xml" value="0.17806484295845998" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_add_clothes.xml" value="0.25" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.19927536231884058" />
-        <entry key="..\:/Code/SE_dev/app/src/main/res/layout/fragment_read_clothes.xml" value="0.19927536231884058" />
-        <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/activity_board.xml" value="0.1" />
-        <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/calender_cell.xml" value="0.1" />
-        <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/fragment_add_clothes.xml" value="0.264" />
-        <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.2" />
-        <entry key="..\:/Program_2022_SMU/Android_Studio/PROJECT_sogong/app/src/main/res/layout/fragment_read_clothes.xml" value="0.2" />
->>>>>>> upstream/main
       </map>
     </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
   </component>
 </project>
