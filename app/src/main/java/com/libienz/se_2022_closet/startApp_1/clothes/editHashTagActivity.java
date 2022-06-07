@@ -32,6 +32,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
+import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 import com.libienz.se_2022_closet.startApp_1.util.FirebaseReference;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ import java.util.ArrayList;
   DB에 다시 넣음
    */
 
+<<<<<<< HEAD
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -69,6 +71,9 @@ import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 import java.util.ArrayList;
 
 public class editHashTagActivity extends AppCompatActivity {
+=======
+public class editHashTagActivity extends AppCompatActivity implements SendClothesKey {
+>>>>>>> upstream/main
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth auth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -86,6 +91,11 @@ public class editHashTagActivity extends AppCompatActivity {
     protected ListView show_tag; //태그를 출력해줄 리스트뷰
     protected Button editHashTag_btn;
     protected EditText editHashTag_et;
+
+    @Override //키 값을 받아옴
+    public void sendCkey(String s) {
+        ClothesKey = s;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,7 +117,7 @@ public class editHashTagActivity extends AppCompatActivity {
                 show_tag = (ListView) findViewById(R.id.show_tag);
 
                 //어뎁터 설정
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_edit_hashtag, prev_tag);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(editHashTagActivity.this, R.layout.activity_edit_hashtag, prev_tag);
                 show_tag.setAdapter(adapter);
                 //listview(tag)를 클릭할 경우 다음 동작을 실행
                 show_tag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -121,14 +131,14 @@ public class editHashTagActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 name_tag = editHashTag_et.getText().toString();
                                 new_tag.set(where_tag, name_tag);
-                                //확인 메세지
-                                Toast.makeText(this, "이 으로 변경되었습니다.", Toast.LENGTH_LONG).show();
+                                //확인 메세지 출력
+                                Toast t = Toast.makeText(editHashTagActivity.this, "해시태그가 변경되었습니다.", Toast.LENGTH_LONG);
+                                t.show();
                             }
                         });
 
                     }
                 });
-
             }
 
             @Override

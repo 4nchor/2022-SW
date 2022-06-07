@@ -2,21 +2,20 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,9 +41,8 @@ public class readClothesFrag extends Fragment {
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
 
 
-
-    //열람할 의류의 키값, 나중에 프래그먼트 간 통신을 통해 [홈 > 열람] 또는 [검색 > 열람]으로 값을 받아올 것
-    private String ClothesKey = "1364804085";
+    //TODO : searchOutfitActivity에서 검색 결과를 클릭하면 readClothesFrag로 넘어오는 리스너가 먹통이라 지금은 ClothesKey가 정적으로 초기화되어 있습니다. searchOutfitActivity를 해결하면 아래 ClotheyKey = "178809003"으로 초기화돼 있는 부분을 삭제합니다.
+    private String ClothesKey = "178809003";
     private ArrayList<String> tag;
     private String info;
 
@@ -55,14 +53,10 @@ public class readClothesFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_read_clothes, container, false);
 
-        //다른 프래그먼트에서 열람할 ClothesKey 받아오는 경우
+        //다른 프래그먼트나 액티비티에서 넘겨 준 ClothesKey 받아옴
         if (getArguments() != null) {
             ClothesKey = getArguments().getString("ClothesKey");
             Log.d("clotheskey", "clotheskey: "+ClothesKey);
-        }
-        //다른 액티비티에서 열람할 ClothesKey 받아오는 경우
-        else {
-
         }
 
         //의류 정보를 띄우는 코드
@@ -122,7 +116,7 @@ public class readClothesFrag extends Fragment {
                 editClothesFrag.setArguments(bundle);
 
                 //열람 중이었던 의류를 수정하도록 함
-                getParentFragmentManager().beginTransaction().replace(R.id.readClothes_fg, editClothesFrag).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, editClothesFrag).addToBackStack(null).commit();
             }
         });
 
@@ -131,19 +125,7 @@ public class readClothesFrag extends Fragment {
         deleteClothes_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //실시간 데이터베이스에서 데이터 삭제
-                userRef.child(user.getUid()).child("Clothes").child(ClothesKey).setValue(null);
-
-                //스토리지에서 사진 삭제
-                storageReference.child(ClothesKey + ".png").delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(container.getContext(), "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                //열람 이전에 보고 있던 화면으로 돌아감
-                getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
+                deleteClothes(readClothesFrag.this);
             }
         });
 
@@ -157,5 +139,35 @@ public class readClothesFrag extends Fragment {
         });
 
         return view;
+    }
+
+    //의류 삭제 메소드
+    void deleteClothes(Fragment fragment) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext()).setTitle("의류 삭제").setMessage("정말로 삭제하시겠습니까?")
+                //삭제 버튼을 눌렀을 때
+                .setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //실시간 데이터베이스에서 데이터 삭제
+                        userRef.child(user.getUid()).child("Clothes").child(ClothesKey).setValue(null);
+
+                        //스토리지에서 사진 삭제
+                        storageReference.child(ClothesKey + ".png").delete();
+
+                        Toast.makeText(fragment.getContext(), "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+
+                        //열람 이전에 보고 있던 화면으로 돌아감
+                        getParentFragmentManager().beginTransaction().remove(fragment).commit();
+                    }
+                })
+                //취소 버튼을 눌렀을 때
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 }
