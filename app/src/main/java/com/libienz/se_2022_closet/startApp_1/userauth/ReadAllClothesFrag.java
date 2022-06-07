@@ -14,7 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,7 +58,8 @@ public class ReadAllClothesFrag extends Fragment {
 
         mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager= new GridLayoutManager(getActivity(),3);
+        //mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(0);
 
@@ -94,7 +97,15 @@ public class ReadAllClothesFrag extends Fragment {
                 //의류 열람 페이지로 넘어감
                 /*Intent intent = new Intent(getActivity(), readClothesFrag.class);
                 startActivity(intent);*/
-                Toast.makeText(view.getContext(),"테스트",Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(),"클릭아이템: "+mClothesList.get(position).getClothesKey(),Toast.LENGTH_LONG).show();
+                Bundle bundle = new Bundle(); // 번들을 통해 값 전달
+                bundle.putString("ClothesKey",mClothesList.get(position).getClothesKey());//번들에 넘길 값 저장
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                readClothesFrag fragment2 = new readClothesFrag();//프래그먼트2 선언
+                fragment2.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
+                transaction.replace(R.id.readClothes_fg, fragment2);
+                transaction.commit();
+
             }
 
         });

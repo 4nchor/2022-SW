@@ -1,6 +1,7 @@
 package com.libienz.se_2022_closet.startApp_1.userauth;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,30 +56,38 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public ClothesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.clothes_items, parent, false);
         ClothesViewHolder holder = new ClothesViewHolder(view);
-
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClothesViewHolder holder, int position) {
+
         Glide.with(holder.itemView)
                 .load(mClothesList.get(position).getClothesImg())
                 .into(holder.iv_clothes);
+        holder.tv_clotheskey.setText(mClothesList.get(position).getClothesKey());
     }
 
     @Override
     public int getItemCount() {
-        return (mClothesList!=null ? mClothesList.size() : 0);
+
+        if (mClothesList != null) {
+            //Log.d("itemCount", "getItemCount: "+mClothesList.size());
+            return mClothesList.size();
+        }
+        return 0;
     }
 
 
 
     public class ClothesViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_clothes;
+        TextView tv_clotheskey;
 
         public ClothesViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_clothes=itemView.findViewById(R.id.iv_clothes);
+            tv_clotheskey=itemView.findViewById(R.id.tv_clotheskey);
 
             itemView.setClickable(true);
 
@@ -89,6 +98,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     if (pos != RecyclerView.NO_POSITION) {
                         // TODO : use pos.
                         mListener.onItemClick(v, pos);
+
+                        Log.d("onclickrecycleritem", "onClick: key"+mClothesList.get(pos).getClothesKey());
                     }
 
                 }

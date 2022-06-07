@@ -91,9 +91,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.addClothes_fg, addClothesFrag).commit();
+                //transaction.addToBackStack(null);
+                //transaction.commit();
             }
         });
 
+        /* (의류클릭->해당의류상세정보보기) 연결해서 주석처리함
         ImageButton readClothes_btn = (ImageButton) findViewById(R.id.readClothes_btn);
         readClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.readClothes_fg, readClothesFrag).commit();
             }
-        });
+        });*/
 
         ImageButton searchOutfit_btn = (ImageButton) findViewById(R.id.searchOutfit_btn);
         searchOutfit_btn.setOnClickListener(new View.OnClickListener() {

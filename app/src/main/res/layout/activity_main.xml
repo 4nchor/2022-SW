@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="464dp"
+            android:layout_width="470dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
@@ -29,15 +29,18 @@
     <FrameLayout
         android:id="@+id/readAllClothes_fg"
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="450dp"
         android:layout_below="@id/title_layout"
-        android:background="#FFFFFF"></FrameLayout>
+        android:background="#FFFFFF">
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/readClothes_fg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="450dp"
         android:layout_below="@id/title_layout"
+        android:layout_above="@id/linearLayout2"
         android:background="#FFFFFF">
 
     </FrameLayout>
@@ -45,8 +48,9 @@
     <FrameLayout
         android:id="@+id/addClothes_fg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="450dp"
         android:layout_below="@id/title_layout"
+        android:layout_above="@id/linearLayout2"
         android:background="#FFFFFF"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp">
@@ -114,14 +118,6 @@
             android:scaleType="fitCenter"
             android:src="@drawable/icon_plus" />
 
-        <ImageButton
-            android:id="@+id/readClothes_btn"
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_shape"
-            android:scaleType="fitCenter"
-            android:src="@drawable/icon_tshirts" />
 
         <ImageButton
             android:id="@+id/searchOutfit_btn"

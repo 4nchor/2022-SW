@@ -41,11 +41,13 @@ public class readClothesFrag extends Fragment {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
 
+
+
     //열람할 의류의 키값, 나중에 프래그먼트 간 통신을 통해 [홈 > 열람] 또는 [검색 > 열람]으로 값을 받아올 것
     private String ClothesKey = "1364804085";
-
     private ArrayList<String> tag;
     private String info;
+
 
     @Nullable
     @Override
@@ -56,6 +58,7 @@ public class readClothesFrag extends Fragment {
         //다른 프래그먼트에서 열람할 ClothesKey 받아오는 경우
         if (getArguments() != null) {
             ClothesKey = getArguments().getString("ClothesKey");
+            Log.d("clotheskey", "clotheskey: "+ClothesKey);
         }
         //다른 액티비티에서 열람할 ClothesKey 받아오는 경우
         else {
