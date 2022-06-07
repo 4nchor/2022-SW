@@ -1,8 +1,10 @@
 package com.libienz.se_2022_closet.startApp_1.ootd;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -146,8 +148,7 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
             case R.id.fabSub1:
                 anim();
                 //Toast.makeText(this, "Button1 삭제버튼", Toast.LENGTH_SHORT).show();
-                onDeleteComment(uidString,takeKeyDate);
-                onDeleteImage(uidString,takeKeyDate);
+                setDelete(uidString,takeKeyDate);
                 break;
             case R.id.fabSub2:
                 anim();
@@ -193,8 +194,24 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-
     }
+
+    private void setDelete(String Uid,String key){
+        AlertDialog.Builder oDialog = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+        oDialog.setMessage("내용을 삭제하시겠습니까?").setTitle("OOTD 삭제").setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                onDeleteComment(Uid,key);
+                onDeleteImage(Uid,key);
+            }
+        }).setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        oDialog.show();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
