@@ -94,7 +94,7 @@ public class editHashTagActivity extends AppCompatActivity implements SendClothe
                 show_tag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        where_tag = position;
+                        where_tag = show_tag.getSelectedItemPosition();
                         //바꿀 tag 의 위치를 where_tag 에 넣어줍니다
                         editHashTag_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
