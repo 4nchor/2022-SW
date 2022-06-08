@@ -37,7 +37,7 @@
         android:text="의류 추가" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_cody"
+        android:id="@+id/codyaddC_rv"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
