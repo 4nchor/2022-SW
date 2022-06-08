@@ -59,6 +59,8 @@
             android:exported="false"/>
         <activity android:name=".startApp_1.clothes.editHashTagActivity"
             android:exported="false"/>
+        <activity android:name=".startApp_1.favorites.favoritesActivity"
+            android:exported="false"/>
 
     </application>
 
