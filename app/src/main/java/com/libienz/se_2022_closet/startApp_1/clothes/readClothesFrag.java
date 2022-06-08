@@ -40,9 +40,9 @@ public class readClothesFrag extends Fragment {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
 
+
     //TODO : searchOutfitActivity에서 검색 결과를 클릭하면 readClothesFrag로 넘어오는 리스너가 먹통이라 지금은 ClothesKey가 정적으로 초기화되어 있습니다. searchOutfitActivity를 해결하면 아래 ClotheyKey = "178809003"으로 초기화돼 있는 부분을 삭제합니다.
     private String ClothesKey = "178809003";
-
     private ArrayList<String> tag;
     private String info;
 
@@ -56,6 +56,7 @@ public class readClothesFrag extends Fragment {
         //다른 프래그먼트나 액티비티에서 넘겨 준 ClothesKey 받아옴
         if (getArguments() != null) {
             ClothesKey = getArguments().getString("ClothesKey");
+            Log.d("clotheskey", "clotheskey: "+ClothesKey);
         }
 
         //의류 정보를 띄우는 코드

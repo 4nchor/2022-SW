@@ -72,6 +72,7 @@ public class editHashTagActivity extends AppCompatActivity implements SendClothe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_hashtag);
+/*오류나서 잠깐 주석 처리할게요!
 
         //의류 정보를 불러옵니다
         userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -118,5 +119,6 @@ public class editHashTagActivity extends AppCompatActivity implements SendClothe
         //DB에 저장
         tag = new_tag;
         userRef.child(user.getUid()).child("Clothes").child(ClothesKey).setValue(tag);
+    */
     }
 }

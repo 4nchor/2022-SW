@@ -11,9 +11,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,14 +35,17 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private addClothesFrag addClothesFrag;
-    private readClothesFrag readClothesFrag;
+    //private readClothesFrag readClothesFrag;
+    private ReadAllClothesFrag readAllClothesFrag;
     private addCodyFrag addCodyFrag;
     private readCodyFrag readCodyFrag;
     private boolean isFrag = false; //프래그먼트 백스택에 남은 것이 있는지 여부를 나타내는 변수
 
+
     public static String TAG = "["+MainActivity.class.getSimpleName() +"] ";
     Context context = MainActivity.this;
     TextView tv_temp;
+    TextView tv_rcmd_outfit;
 
     private long backKeyPressedTime = 0;
 
@@ -58,17 +61,23 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         addClothesFrag = new addClothesFrag();
-        readClothesFrag = new readClothesFrag();
+        //readClothesFrag = new readClothesFrag();
+        readAllClothesFrag = new ReadAllClothesFrag();
         addCodyFrag = new addCodyFrag();
         readCodyFrag = new readCodyFrag();
 
 
+
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frag_fl, readAllClothesFrag).commit();
+
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
 
         tv_temp = (TextView) findViewById(R.id.tv_temp);
+        tv_rcmd_outfit=(TextView) findViewById(R.id.tv_rcmd_outfit);
         requestNetwork();
 
-        Button logout_btn = (Button) findViewById(R.id.logout_btn);
+        ImageButton logout_btn = (ImageButton) findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button ootd_btn = (Button) findViewById(R.id.ootd_btn);
+        ImageButton ootd_btn = (ImageButton) findViewById(R.id.ootd_btn);
         ootd_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,17 +96,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button addClothes_btn = (Button) findViewById(R.id.addClothes_btn);
+        ImageButton addClothes_btn = (ImageButton) findViewById(R.id.addClothes_btn);
         addClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, addClothesFrag).addToBackStack(null).commit();
                 isFrag = true;
+
             }
         });
 
-        Button readClothes_btn = (Button) findViewById(R.id.readClothes_btn);
+        /* (의류클릭->해당의류상세정보보기) 연결해서 주석처리함
+        ImageButton readClothes_btn = (ImageButton) findViewById(R.id.readClothes_btn);
         readClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.frag_fl, readClothesFrag).addToBackStack(null).commit();
                 isFrag = true;
             }
-        });
+        });*/
 
-        Button searchOutfit_btn = (Button) findViewById(R.id.searchOutfit_btn);
+        ImageButton searchOutfit_btn = (ImageButton) findViewById(R.id.searchOutfit_btn);
         searchOutfit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -187,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
             RequestHttpUrlConnection requestHttpUrlConnection = new RequestHttpUrlConnection();
             result = requestHttpUrlConnection.request(url, values, "GET");  //HttpURLConnection 통신 요청
 
-            Log.d(TAG, "NetworkTask >> doInBackground() - result : " + result);
+            //Log.d(TAG, "NetworkTask >> doInBackground() - result : " + result);
             return result;
         }
 
@@ -197,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d(TAG, "NetworkTask >> onPostExecute() - result : " + result);
+            //Log.d(TAG, "NetworkTask >> onPostExecute() - result : " + result);
 
             if (result != null && !result.equals("")) {
                 JsonParser jp = new JsonParser();
@@ -224,8 +235,35 @@ public class MainActivity extends AppCompatActivity {
 
     /* 통신하여 받아온 날씨 데이터를 통해 UI 업데이트 메소드 */
     private void setWeatherData(WeatherModel model) {
-        Log.d(TAG, "setWeatherData");
+        //Log.d(TAG, "setWeatherData");
+        double temp=model.getTemp();
+        String rcmdOutfit=null;
+        if(temp<4){
+            rcmdOutfit= "패딩이나 두꺼운 코트, 목도리와 장갑";
+        }
+        else if(temp>=5 && temp<8){
+            rcmdOutfit="코트,레더자켓,니트,플리스";
+        }
+        else if(temp>=9 && temp<12){
+            rcmdOutfit="트렌치코트, 야상점퍼, 자켓";
+        }
+        else if(temp>=12 && temp<17){
+            rcmdOutfit="기모후드티, 가디건, 맨투맨";
+        }
+        else if(temp>=17 && temp<20){
+            rcmdOutfit="후드티, 바람막이, 슬랙스";
+        }
+        else if(temp>=20 && temp<23){
+            rcmdOutfit="셔츠, 얇은 바지";
+        }
+        else if(temp>=23 && temp<27){
+            rcmdOutfit="반팔티, 반바지";
+        }
+        else{
+            rcmdOutfit="민소매, 반바지, 샌들";
+        }
         tv_temp.setText(doubleToStrFormat(1, model.getTemp()) + " °C");  //소수점 2번째 자리까지 반올림하기
+        tv_rcmd_outfit.setText(rcmdOutfit);
     }
 
 
@@ -255,6 +293,11 @@ public class MainActivity extends AppCompatActivity {
     /* 소수점 n번째 자리까지 반올림하기 */
     private String doubleToStrFormat(int n, double value) {
         return String.format("%."+n+"f", value);
+    }
+
+    private Integer doubleToInt(double value){
+        int intValue = (int) value;
+        return intValue;
     }
 
 

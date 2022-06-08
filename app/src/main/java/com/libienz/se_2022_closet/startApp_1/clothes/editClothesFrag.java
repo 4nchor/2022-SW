@@ -149,7 +149,7 @@ public class editClothesFrag extends Fragment {
         });
 
 
-
+/*
         //태그 수정하기 버튼을 누르면 activiy_edit_hashtag 레이아웃으로 화면이 전환됨
         //수정할 의류의 키값을 editHashTagActivity로 넘김
         Button editHashTag_btn = (Button) view.findViewById(R.id.editHashTag_btn);
@@ -162,6 +162,9 @@ public class editClothesFrag extends Fragment {
                 startActivity(intent);
             }
         });
+
+*/
+
 
         return view;
     }
