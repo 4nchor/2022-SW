@@ -7,10 +7,10 @@
     tools:context=".startApp_1.cody.addCodyFrag">
 
     <Button
-        android:id="@+id/addCodyComp_btn"
+        android:id="@+id/doneAddCody_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="의류 추가" />
+        android:text="코디 세트 등록" />
 
     <EditText
         android:id="@+id/addCodyKey_et"
@@ -31,9 +31,17 @@
         android:layout_height="50dp"></EditText>
 
     <Button
-        android:id="@+id/doneAddCody_btn"
+        android:id="@+id/addCodyComp_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="코디 세트 등록" />
+        android:text="의류 추가" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_cody"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

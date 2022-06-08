@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:hint="새로운 태그를 입력하세요." />
+            android:hint="태그를 선택 → 새로운 태그를 입력 → 확인" />
 
     </LinearLayout>
 
