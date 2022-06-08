@@ -103,6 +103,16 @@ public class readClothesFrag extends Fragment {
             }
         });
 
+        //즐겨찾기 버튼을 클릭했을 때
+        Button favorite_btn = (Button) view.findViewById(R.id.favorite_btn);
+        favorite_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //해당 의류의 키 값을 즐겨찾기 목록에 저장
+
+            }
+        });
+
         //의류 수정 버튼을 클릭했을 때
         Button editClothes_btn = (Button) view.findViewById(R.id.editClothes_btn);
         editClothes_btn.setOnClickListener(new View.OnClickListener(){
