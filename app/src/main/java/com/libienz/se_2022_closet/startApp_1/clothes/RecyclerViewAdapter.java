@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.userauth;
+package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import android.content.Context;
 import android.util.Log;

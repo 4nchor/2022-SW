@@ -1,9 +1,8 @@
-package com.libienz.se_2022_closet.startApp_1.userauth;
+package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,20 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
-import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 
 import java.util.ArrayList;
