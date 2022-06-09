@@ -65,7 +65,6 @@ public class ReadAllClothesFrag extends Fragment {
 
 
 
-
         userRef.child(user.getUid()).child("Clothes").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
