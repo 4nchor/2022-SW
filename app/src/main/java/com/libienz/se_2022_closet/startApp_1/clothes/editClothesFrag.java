@@ -5,7 +5,6 @@ import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userR
 
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.SensorEventListener;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -37,7 +36,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
-import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
 import java.util.ArrayList;
 
@@ -51,12 +49,12 @@ public class editClothesFrag extends Fragment {
     //private Button editHashTag_btn;
     
     //의류키를 editHashTagActivity로 보내기 위한 작업 (인터페이스 세팅)
-    private SendClothesKey sendCKey;
+    private SendCKey sendCKey;
     @Override
     public void onAttach(@NonNull Context context){
         super.onAttach(context);
         try {
-            sendCKey = (SendClothesKey) context;
+            sendCKey = (SendCKey) context;
         }catch (ClassCastException e){
             throw new ClassCastException(context.toString() + "must implement SendClothesKey");
         }
