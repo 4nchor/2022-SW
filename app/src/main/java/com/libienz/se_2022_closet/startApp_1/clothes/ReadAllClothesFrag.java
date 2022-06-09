@@ -3,6 +3,7 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -89,8 +90,8 @@ public class ReadAllClothesFrag extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 //의류 열람 페이지로 넘어감
-                /*Intent intent = new Intent(getActivity(), readClothesFrag.class);
-                startActivity(intent);*/
+
+
                 Toast.makeText(view.getContext(),"클릭아이템: "+mClothesList.get(position).getClothesKey(),Toast.LENGTH_LONG).show();
                 Bundle bundle = new Bundle(); // 번들을 통해 값 전달
                 bundle.putString("ClothesKey",mClothesList.get(position).getClothesKey());//번들에 넘길 값 저장
@@ -99,6 +100,14 @@ public class ReadAllClothesFrag extends Fragment {
                 fragment2.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
                 transaction.replace(R.id.frag_fl, fragment2);
                 transaction.commit();
+
+                /*
+                //액티비티 이동
+                Intent intent = new Intent(getActivity(), showDetailsActivity.class);
+                intent.putExtra("ClothesKey",mClothesList.get(position).getClothesKey());
+                startActivity(intent);
+                */
+
 
             }
 

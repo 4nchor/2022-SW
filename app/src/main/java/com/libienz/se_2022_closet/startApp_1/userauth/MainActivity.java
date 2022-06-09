@@ -22,6 +22,8 @@ import com.google.gson.JsonParser;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.clothes.ReadAllClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
+import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
+import com.libienz.se_2022_closet.startApp_1.clothes.showDetailsActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.readCodyFrag;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private addClothesFrag addClothesFrag;
-    //private readClothesFrag readClothesFrag;
+    private com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag readClothesFrag;
     private ReadAllClothesFrag readAllClothesFrag;
     private addCodyFrag addCodyFrag;
     private readCodyFrag readCodyFrag;
@@ -61,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         addClothesFrag = new addClothesFrag();
-        //readClothesFrag = new readClothesFrag();
         readAllClothesFrag = new ReadAllClothesFrag();
         addCodyFrag = new addCodyFrag();
         readCodyFrag = new readCodyFrag();
@@ -100,9 +101,13 @@ public class MainActivity extends AppCompatActivity {
         addClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, addClothesFrag).addToBackStack(null).commit();
-                isFrag = true;
+                isFrag = true;*/
+
+                Intent intent = new Intent(getApplicationContext(), showDetailsActivity.class);
+                startActivity(intent);
 
             }
         });

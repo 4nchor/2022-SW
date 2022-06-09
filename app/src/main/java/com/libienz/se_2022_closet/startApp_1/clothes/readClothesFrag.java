@@ -42,7 +42,7 @@ public class readClothesFrag extends Fragment {
 
 
     //TODO : searchOutfitActivity에서 검색 결과를 클릭하면 readClothesFrag로 넘어오는 리스너가 먹통이라 지금은 ClothesKey가 정적으로 초기화되어 있습니다. searchOutfitActivity를 해결하면 아래 ClotheyKey = "178809003"으로 초기화돼 있는 부분을 삭제합니다.
-    private String ClothesKey = "178809003";
+    private String ClothesKey; //= "178809003"
     private ArrayList<String> tag;
     private String info;
 

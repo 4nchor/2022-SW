@@ -61,6 +61,8 @@
             android:exported="false"/>
         <activity android:name=".startApp_1.favorites.favoritesActivity"
             android:exported="false"/>
+        <activity android:name=".startApp_1.clothes.showDetailsActivity"
+            android:exported="false"/>
 
     </application>
 
