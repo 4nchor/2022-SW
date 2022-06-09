@@ -10,14 +10,18 @@
     <LinearLayout
         android:id="@+id/title_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow"
+        android:layout_alignParentStart="true">
+
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="470dp"
+            android:layout_width="475dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:padding="5dp"
             android:text="#MyCloset"
             android:textAlignment="center"
             android:textColor="#FF8BB2"
@@ -39,7 +43,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/frag_fl"
+        android:layout_above="@+id/linearLayout"
         android:layout_marginTop="-2dp"
         android:orientation="horizontal">
 
@@ -65,9 +69,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="112dp"
-        android:layout_below="@id/linearLayout2"
         android:layout_marginTop="6dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
 
         <ImageButton
             android:id="@+id/logout_btn"
@@ -121,8 +125,6 @@
             android:text="코디열람" />
 
     </LinearLayout>
-
-
 
 
 </RelativeLayout>
