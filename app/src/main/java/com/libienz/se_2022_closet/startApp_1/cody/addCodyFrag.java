@@ -47,17 +47,14 @@ public class addCodyFrag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_cody, container, false);
 
         //TODO : 코디를 구성하는 의류를 입력받는 부분을 작성합니다. 입력받은 의류의 키를 ArrayList<String> codycomp에 집어넣는 것만 구현하면 됩니다
-        /*아래 부분은 기능 테스트를 위해 임시로 add함. LINE 42 TODO를 완료하면 아래 세 줄은 삭제
-        codycomp.add("178809003");
-        codycomp.add("000000000");
-        codycomp.add("111111111");*/
 
-        //리사이클 뷰로 현재 의류를 출력, 선택하면 의류 키 값이 넘어오고 의류 추가 버튼을 누를 시 codycomp에 add
+        //리사이클러뷰와 어댑터 세팅
         RecyclerView codyaddC_rv = (RecyclerView) view.findViewById(R.id.codyaddC_rv);
         codyaddC_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new ClothesAdapter(clothes);
         codyaddC_rv.setAdapter(adapter);
 
+        //ClothesAdaper에서 선택한 의류의 포지션을 받아온다
         adapter.setOnItemClickListener(new ClothesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -65,6 +62,7 @@ public class addCodyFrag extends Fragment {
             }
         });
 
+        //버튼을 누를 시 포지션에 해당하는 clotheskey를 codycomp에 add
         Button addCodyComp_btn = (Button) view.findViewById(R.id.addCodyComp_btn);
         addCodyComp_btn.setOnClickListener(new View.OnClickListener() {
             @Override
