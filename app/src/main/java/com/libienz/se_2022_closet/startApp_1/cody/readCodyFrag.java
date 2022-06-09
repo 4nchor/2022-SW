@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +37,9 @@ import java.util.Iterator;
 
 public class readCodyFrag extends Fragment {
 
+    private String clothesKey = null;
+    private ClothesAdapter adapter;
+    private ArrayList<Clothes> clothes = new ArrayList<>();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
@@ -79,7 +84,7 @@ public class readCodyFrag extends Fragment {
                 for (int i = 0; i < tag.size(); i++)
                     readCodyTag_tv.append("#" + tag.get(i) + " ");
 
-                //TODO : 구성 의류 목록을 출력합니다 (구성 의류들의 Key는 ArrayList<String> codyComp에 저장되어 있습니다. Line 71의 updateCody() 참고)
+
             }
 
             @Override
@@ -87,6 +92,31 @@ public class readCodyFrag extends Fragment {
                 Toast.makeText(container.getContext(), "의류 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //TODO : 구성 의류 목록을 출력합니다 (구성 의류들의 Key는 ArrayList<String> codyComp에 저장되어 있습니다. Line 71의 updateCody() 참고)
+        //리사이클러뷰와 어댑터 세팅
+        RecyclerView readCodycomp_rv = (RecyclerView) view.findViewById(R.id.readCodycomp_rv);
+        readCodycomp_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        //codyComp에 해당하는 의류를 가져옵니다
+        for(String key : codyComp) {
+            userRef.child(user.getUid()).child("Clothes").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    clothes.add(snapshot.getValue(Clothes.class));
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(container.getContext(), "의류 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        //출력
+        adapter = new ClothesAdapter(clothes);
+        readCodycomp_rv.setAdapter(adapter);
+
+
 
         //코디 수정 버튼을 클릭했을 때
         Button editCody_btn = (Button) view.findViewById(R.id.editCody_btn);

@@ -7,11 +7,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.clothes.ClothesAdapter;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 import com.libienz.se_2022_closet.startApp_1.data.Cody;
@@ -29,6 +33,9 @@ import java.util.ArrayList;
 
 public class addCodyFrag extends Fragment {
 
+    private String clothesKey = null;
+    private ClothesAdapter adapter;
+    private ArrayList<Clothes> clothes = new ArrayList<>();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private ArrayList<String> codycomp = new ArrayList<>();
     private ArrayList<String> hashtag = new ArrayList<>(10);
@@ -40,10 +47,31 @@ public class addCodyFrag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_cody, container, false);
 
         //TODO : 코디를 구성하는 의류를 입력받는 부분을 작성합니다. 입력받은 의류의 키를 ArrayList<String> codycomp에 집어넣는 것만 구현하면 됩니다
-        //아래 부분은 기능 테스트를 위해 임시로 add함. LINE 42 TODO를 완료하면 아래 세 줄은 삭제
-        codycomp.add("178809003");
-        codycomp.add("000000000");
-        codycomp.add("111111111");
+
+        //리사이클러뷰와 어댑터 세팅
+        RecyclerView codyaddC_rv = (RecyclerView) view.findViewById(R.id.codyaddC_rv);
+        codyaddC_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new ClothesAdapter(clothes);
+        codyaddC_rv.setAdapter(adapter);
+
+        //ClothesAdaper에서 선택한 의류의 포지션을 받아온다
+        adapter.setOnItemClickListener(new ClothesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                clothesKey = clothes.get(pos).getClothesKey();
+            }
+        });
+
+        //버튼을 누를 시 포지션에 해당하는 clotheskey를 codycomp에 add
+        Button addCodyComp_btn = (Button) view.findViewById(R.id.addCodyComp_btn);
+        addCodyComp_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                codycomp.add(clothesKey);
+                clothesKey = null;
+            }
+        });
+
 
         //코디세트 이름(키워드)을 입력받음
         EditText addCodyKey_et = (EditText) view.findViewById(R.id.addCodyKey_et);

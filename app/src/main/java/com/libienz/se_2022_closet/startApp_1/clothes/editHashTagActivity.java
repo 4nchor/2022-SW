@@ -1,39 +1,20 @@
 package com.libienz.se_2022_closet.startApp_1.clothes;
 
-import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.animation.BounceInterpolator;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.circularreveal.CircularRevealHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
-import com.libienz.se_2022_closet.startApp_1.data.Clothes;
-import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
-import com.libienz.se_2022_closet.startApp_1.util.FirebaseReference;
 
 import java.util.ArrayList;
     /* 태그 수정하기
@@ -44,7 +25,7 @@ import java.util.ArrayList;
   DB에 다시 넣음
    */
 
-public class editHashTagActivity extends AppCompatActivity implements SendClothesKey {
+public class editHashTagActivity extends AppCompatActivity implements SendCKey {
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth auth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();

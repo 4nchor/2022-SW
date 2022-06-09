@@ -54,7 +54,7 @@ public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHold
         }
     }
 
-    ClothesAdapter(ArrayList<Clothes> list) { findRes = list; }
+    public ClothesAdapter(ArrayList<Clothes> list) { findRes = list; }
 
     //아이템 뷰를 위한 뷰 홀더 객체 생성해서 리턴
     @Override
