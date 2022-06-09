@@ -12,6 +12,7 @@ import com.libienz.se_2022_closet.R;
 
 public class showDetailsActivity extends AppCompatActivity {
 
+    //옷&코디 상세 보기or수정 등등을 다 여기로 옮길까 생각중입니다..
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

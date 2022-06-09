@@ -67,16 +67,16 @@ public class MainActivity extends AppCompatActivity {
         addCodyFrag = new addCodyFrag();
         readCodyFrag = new readCodyFrag();
 
-
-
         transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frag_fl, readAllClothesFrag).commit();
 
+        //날씨에 따른 코디
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
 
         tv_temp = (TextView) findViewById(R.id.tv_temp);
         tv_rcmd_outfit=(TextView) findViewById(R.id.tv_rcmd_outfit);
         requestNetwork();
+
 
         ImageButton logout_btn = (ImageButton) findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(new View.OnClickListener() {
@@ -101,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
         addClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
+
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, addClothesFrag).addToBackStack(null).commit();
-                isFrag = true;*/
-
+                isFrag = true;
+                /*
                 Intent intent = new Intent(getApplicationContext(), showDetailsActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
 
             }
         });

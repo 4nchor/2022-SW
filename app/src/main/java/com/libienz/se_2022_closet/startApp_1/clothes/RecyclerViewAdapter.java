@@ -99,7 +99,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         // TODO : use pos.
                         mListener.onItemClick(v, pos);
 
-                        Log.d("onclickrecycleritem", "onClick: key"+mClothesList.get(pos).getClothesKey());
+                        //Log.d("onclickrecycleritem", "onClick: key"+mClothesList.get(pos).getClothesKey());
                     }
 
                 }
