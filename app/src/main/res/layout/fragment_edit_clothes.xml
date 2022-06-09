@@ -20,6 +20,9 @@
 
         <Button
             android:id="@+id/editClothesImg_btn"
+            android:fontFamily="@font/bmjua_ttf"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/buttonColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="이미지 추가" />
@@ -27,8 +30,10 @@
         <EditText
             android:id="@+id/editTag_et"
             android:layout_width="match_parent"
-            android:hint="태그 입력"
-            android:layout_height="50dp"></EditText>
+            android:hint="# 태그 입력"
+            android:layout_height="50dp">
+
+        </EditText>
 
         <EditText
             android:id="@+id/editInfo_et"
@@ -45,6 +50,9 @@
                 android:id="@+id/editHashTag_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bmjua_ttf"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/buttonColor"
                 android:text="태그 수정하기" />
 
         </LinearLayout>
@@ -53,6 +61,9 @@
             android:id="@+id/doneeditClothes_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua_ttf"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/buttonColor"
             android:text="수정 완료"
             tools:layout_editor_absoluteY="" />
 

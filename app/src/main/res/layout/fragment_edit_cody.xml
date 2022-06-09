@@ -16,18 +16,25 @@
             android:id="@+id/editCodyname_et"
             android:layout_width="match_parent"
             android:hint="코디 세트 이름 입력"
-            android:layout_height="50dp"></EditText>
+            android:layout_height="50dp">
+        </EditText>
 
         <Button
             android:id="@+id/editHashTag_btn3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="태그 수정하기" />
+            android:fontFamily="@font/bmjua_ttf"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/buttonColor"
+            android:text="# 태그 수정하기" />
 
         <Button
             android:id="@+id/editCodyClothes_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua_ttf"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/buttonColor"
             android:text="의류 변경"
             tools:layout_editor_absoluteY="" />
 
@@ -35,6 +42,9 @@
             android:id="@+id/doneeditCody_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua_ttf"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/buttonColor"
             android:text="수정 완료"
             tools:layout_editor_absoluteY="" />
 

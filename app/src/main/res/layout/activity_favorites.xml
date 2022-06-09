@@ -8,7 +8,8 @@
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/shadow_bottom">
 
         <TextView
             android:id="@+id/favorites_title"
@@ -16,8 +17,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:padding="5dp"
             android:textAlignment="center"
-            android:textColor="#FF8BB2"
+            android:textColor="@color/mainColor"
             android:textStyle="bold|italic"
             android:text="#Favorites"
             android:textSize="24sp" />
@@ -39,6 +41,7 @@
 
             <RadioButton
                 android:id="@+id/searchClothes_rb"
+                android:fontFamily="@font/bmjua_ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -47,6 +50,7 @@
 
             <RadioButton
                 android:id="@+id/searchCody_rb"
+                android:fontFamily="@font/bmjua_ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

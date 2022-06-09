@@ -88,9 +88,9 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:textColor="#595959"
                 android:background="@drawable/button"
                 android:text="로그인"
+                android:textColor="#FFFFFF"
                 android:textSize="16dp" />
 
 
@@ -123,9 +123,9 @@
                 android:layout_width="300dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:textColor="#595959"
                 android:background="@drawable/button"
                 android:text="계정 만들기"
+                android:textColor="#FFFFFF"
                 android:textSize="16dp" />
 
 

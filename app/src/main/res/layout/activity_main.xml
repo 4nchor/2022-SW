@@ -9,41 +9,32 @@
 
     <LinearLayout
         android:id="@+id/title_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shadow"
+        android:background="@drawable/shadow_bottom"
         android:layout_alignParentStart="true">
 
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="475dp"
+            android:fontFamily="@font/bmjua_ttf"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
             android:text="#MyCloset"
             android:textAlignment="center"
-            android:textColor="#FF8BB2"
+            android:textColor="@color/mainColor"
             android:textSize="24sp"
             android:textStyle="bold|italic" />
     </LinearLayout>
 
-
-    <FrameLayout
-        android:id="@+id/frag_fl"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_below="@id/title_layout">
-
-    </FrameLayout>
-
-
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/weatherLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
+        android:layout_below="@id/title_layout"
         android:layout_marginTop="-2dp"
         android:orientation="horizontal">
 
@@ -65,40 +56,53 @@
 
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/frag_fl"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_below="@id/weatherLayout">
+
+    </FrameLayout>
+
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shadow_top">
 
         <ImageButton
             android:id="@+id/logout_btn"
             android:layout_width="2dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@drawable/button_shape"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_logout" />
+            android:background="#FFFFFF"
+            android:src="@drawable/ic_baseline_logout_24"
+            android:layout_marginTop="5dp"/>
 
         <ImageButton
             android:id="@+id/ootd_btn"
             android:layout_width="25dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@drawable/button_shape"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_ootd" />
+            android:background="#FFFFFF"
+            android:src="@drawable/ic_baseline_calendar_month_24"
+            android:layout_marginTop="5dp"/>
 
         <ImageButton
             android:id="@+id/addClothes_btn"
             android:layout_width="25dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@drawable/button_shape"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_plus" />
+            android:src="@drawable/ic_baseline_add_24"
+            android:background="#FFFFFF"
+            android:layout_marginTop="5dp"/>
 
 
         <ImageButton
@@ -106,23 +110,26 @@
             android:layout_width="25dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            android:background="@drawable/button_shape"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_search" />
+            android:src="@drawable/ic_baseline_search_24"
+            android:background="#FFFFFF"
+            android:layout_marginTop="5dp"/>
 
         <Button
             android:id="@+id/addCody_btn"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="코디추가" />
+            android:text="코디추가"
+            android:layout_marginTop="5dp"/>
 
         <Button
             android:id="@+id/readCody_btn"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="코디열람" />
+            android:text="코디열람"
+            android:layout_marginTop="5dp"/>
 
     </LinearLayout>
 
