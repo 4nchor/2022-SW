@@ -25,18 +25,25 @@
             android:text="태그 수정하기" />
 
         <Button
-            android:id="@+id/editCodyClothes_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="의류 변경"
-            tools:layout_editor_absoluteY="" />
-
-        <Button
             android:id="@+id/doneeditCody_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="수정 완료"
             tools:layout_editor_absoluteY="" />
+
+        <TextView
+            android:id="@+id/editCody_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="이미 포함되어 있는 의류를 선택하면 취소,\n 포함되지 않은 의류를 선택하면 추가됩니다." />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/editCodycomp_rv"
+            android:scrollbars="vertical"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
