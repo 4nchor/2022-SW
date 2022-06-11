@@ -33,7 +33,7 @@
     <LinearLayout
         android:id="@+id/weatherLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="62dp"
         android:layout_below="@id/title_layout"
         android:layout_marginTop="-2dp"
         android:orientation="horizontal">
@@ -43,7 +43,7 @@
             android:id="@+id/tv_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:textSize="20sp" />
 
@@ -53,6 +53,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center" />
+
+        <Button
+            android:id="@+id/favorites_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:text="즐겨찾기" />
 
     </LinearLayout>
 

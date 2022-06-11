@@ -1,6 +1,7 @@
 package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 
@@ -23,6 +28,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<Clothes> mClothesList;
     private FirebaseStorage storage;
     private Context context;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("clothes").child(user.getUid());
 
 
     //아이템 클릭 리스너 인터페이스
@@ -62,10 +69,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ClothesViewHolder holder, int position) {
 
+        if (storageReference != null) {
+            StorageReference submitReference = storageReference.child(mClothesList.get(position).getClothesKey() + ".png");
+            submitReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+
+                    Glide.with(holder.itemView)
+                            .load(uri).
+                            into(holder.iv_clothes);
+                }
+            });
+        }
+        holder.tv_clotheskey.setText(mClothesList.get(position).getClothesKey());
+
+        /*
+
         Glide.with(holder.itemView)
                 .load(mClothesList.get(position).getClothesImg())
                 .into(holder.iv_clothes);
         holder.tv_clotheskey.setText(mClothesList.get(position).getClothesKey());
+
+         */
     }
 
     @Override

@@ -58,16 +58,16 @@
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_find_pw.xml" value="0.15806159420289856" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_initial_setting.xml" value="0.22" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_join.xml" value="0.22" />
-        <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
+        <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_ootdactivity.xml" value="0.17916666666666667" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_search_outfit.xml" value="0.11917098445595854" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_show_details.xml" value="0.14130434782608695" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/activity_splash.xml" value="0.17916666666666667" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/calender_cell.xml" value="0.1" />
-        <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/clothes_items.xml" value="0.3333333333333333" />
+        <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/clothes_items.xml" value="0.16666666666666666" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/fragment_add_clothes.xml" value="0.17916666666666667" />
-        <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/fragment_add_cody.xml" value="0.22" />
+        <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/fragment_add_cody.xml" value="0.1" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/fragment_edit_clothes.xml" value="0.17916666666666667" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/fragment_edit_cody.xml" value="0.17916666666666667" />
         <entry key="..\:/SW_2022/2022-SW-Engineering/app/src/main/res/layout/fragment_read_all_clothes.xml" value="0.14130434782608695" />
