@@ -188,8 +188,8 @@ public class editClothesFrag extends Fragment {
         });
     }
 
-    public void editClothes(String idToken, String Img, ArrayList<String> Tag, String Info, ViewGroup container){
-        Clothes clothes = new Clothes(Img, Tag, Info, ClothesKey);
+    public void editClothes(String idToken, String Img, ArrayList<String> Tag, String Info, Boolean isFavoriteClothes, ViewGroup container){
+        Clothes clothes = new Clothes(Img, Tag, Info, ClothesKey, isFavoriteClothes);
 
         //파이어베이스 리얼타임 데이터베이스에 의류 정보 저장
         userRef.child(idToken).child("Clothes").child(ClothesKey).setValue(clothes);

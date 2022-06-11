@@ -108,7 +108,27 @@ public class readClothesFrag extends Fragment {
         favorite_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //해당 의류의 키 값을 즐겨찾기 목록에 저장
+                //즐겨찾기에 추가
+                userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Clothes clothes = snapshot.getValue(Clothes.class);
+                        if (!clothes.getIsFavoriteClothes()){ //즐겨찾기 추가
+                            clothes.setIsFavoriteClothes(true);
+                            Log.d("addFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
+                        }
+                        else{ //즐겨찾기 해제
+                            clothes.setIsFavoriteClothes(false);
+                            Log.d("removeFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
             }
         });
@@ -144,7 +164,9 @@ public class readClothesFrag extends Fragment {
         readtomain_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
+                ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
+                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).addToBackStack(null).commit();
+                //getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
             }
         });
 

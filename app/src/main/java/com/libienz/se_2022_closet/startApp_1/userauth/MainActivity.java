@@ -29,7 +29,7 @@ import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.readCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.ootd.OOTDActivity;
 import com.libienz.se_2022_closet.startApp_1.util.RequestHttpUrlConnection;
-import com.libienz.se_2022_closet.startApp_1.util.WeatherModel;
+import com.libienz.se_2022_closet.startApp_1.weather.WeatherModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private addClothesFrag addClothesFrag;
-    private com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag readClothesFrag;
     private ReadAllClothesFrag readAllClothesFrag;
     private addCodyFrag addCodyFrag;
     private readCodyFrag readCodyFrag;
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         readCodyFrag = new readCodyFrag();
 
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frag_fl, readAllClothesFrag).commit();
+        transaction.add(R.id.frag_fl, readAllClothesFrag).commit();
 
         //날씨에 따른 코디
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용

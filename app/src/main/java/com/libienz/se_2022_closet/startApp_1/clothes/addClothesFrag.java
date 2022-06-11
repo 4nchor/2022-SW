@@ -104,7 +104,7 @@ public class addClothesFrag extends Fragment {
 
                 //유저 정보 및 이미지 삽입, 태그 작성을 확인 후 의류 등록
                 if (user != null && imguri != null && !hashtag.isEmpty()){
-                    addClothes(user.getUid(), imguri.toString(), hashtag, addInfo_et.getText().toString(), container);
+                    addClothes(user.getUid(), imguri.toString(), hashtag, addInfo_et.getText().toString(),false, container);
                     Toast.makeText(container.getContext(), "의류 정보가 등록되었습니다", Toast.LENGTH_SHORT).show();
 
                     hashtag.clear();
@@ -142,9 +142,9 @@ public class addClothesFrag extends Fragment {
     }
 
     //의류 추가 메소드
-    public void addClothes(String idToken, String Img, ArrayList<String> Tag, String Info, ViewGroup container) {
+    public void addClothes(String idToken, String Img, ArrayList<String> Tag, String Info, Boolean isFavoriteClothes, ViewGroup container) {
         String Key = Img.substring(Img.lastIndexOf("/") + 1);
-        Clothes clothes = new Clothes(Img, Tag, Info, Key);
+        Clothes clothes = new Clothes(Img, Tag, Info, Key, isFavoriteClothes);
 
         //파이어베이스 리얼타임 데이터베이스에 의류 정보 저장
         userRef.child(idToken).child("Clothes").child(Key).setValue(clothes);

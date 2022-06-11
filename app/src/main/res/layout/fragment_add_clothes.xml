@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/addclothes_iv"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
         android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
