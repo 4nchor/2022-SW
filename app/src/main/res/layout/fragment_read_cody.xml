@@ -13,6 +13,9 @@
 
         <Button
             android:id="@+id/editCody_btn"
+            android:fontFamily="@font/bmjua_ttf"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/buttonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -20,6 +23,9 @@
 
         <Button
             android:id="@+id/deleteCody_btn"
+            android:fontFamily="@font/bmjua_ttf"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/buttonColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

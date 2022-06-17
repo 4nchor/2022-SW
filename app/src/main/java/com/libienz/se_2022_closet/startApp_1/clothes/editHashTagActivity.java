@@ -1,20 +1,30 @@
 package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 
 import java.util.ArrayList;
     /* 태그 수정하기
@@ -53,7 +63,7 @@ public class editHashTagActivity extends AppCompatActivity implements SendCKey {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_hashtag);
-/*오류나서 잠깐 주석 처리할게요!
+
 
         //의류 정보를 불러옵니다
         userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -100,6 +110,6 @@ public class editHashTagActivity extends AppCompatActivity implements SendCKey {
         //DB에 저장
         tag = new_tag;
         userRef.child(user.getUid()).child("Clothes").child(ClothesKey).setValue(tag);
-    */
+
     }
 }

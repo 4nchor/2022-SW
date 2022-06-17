@@ -9,14 +9,16 @@
     tools:context=".startApp_1.ootd.BoardActivity">
 
     <LinearLayout
+
         android:id="@+id/dateBarLayout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#7087FF"
+        android:background="@color/buttonColor"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/boardDate"
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -39,10 +41,10 @@
             />
         <TextView
             android:id="@+id/getTextArea"
-            android:layout_margin="10dp"
-            android:textAlignment="center"
+            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:gravity="left"
             android:textSize="20dp"
             android:text=""/>
     </LinearLayout>

@@ -276,6 +276,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/button"
                 android:text="계정 만들기"
+                android:textColor="#FFFFFF"
                 android:textSize="16dp" />
 
             <Button
@@ -287,6 +288,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/button"
                 android:text="취소"
+                android:textColor="#FFFFFF"
                 android:textSize="16dp" />
 
 

@@ -8,9 +8,6 @@
     android:orientation="vertical"
     tools:context=".startApp_1.clothes.searchOutfitActivity">
 
-
-
-
     <TextView
         android:id="@+id/searchOutfit_tv"
         android:layout_width="match_parent"
@@ -23,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="태그로 검색"
+        android:hint="# 태그로 검색"
         android:inputType="textPersonName"
         android:minHeight="48dp" />
 
@@ -47,11 +44,11 @@
         android:id="@+id/searchWhat_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/searchClothes_rb"
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -60,6 +57,7 @@
 
         <RadioButton
             android:id="@+id/searchCody_rb"
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -70,6 +68,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResult_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>

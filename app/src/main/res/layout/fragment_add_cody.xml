@@ -8,6 +8,9 @@
 
     <Button
         android:id="@+id/doneAddCody_btn"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/buttonColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="코디 세트 등록" />
@@ -27,11 +30,14 @@
     <EditText
         android:id="@+id/addCodyTag_et"
         android:layout_width="match_parent"
-        android:hint="태그 입력"
+        android:hint="# 태그 입력"
         android:layout_height="50dp"></EditText>
 
     <Button
         android:id="@+id/addCodyComp_btn"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/buttonColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="의류 추가" />

@@ -9,12 +9,14 @@ public class Clothes {
     private ArrayList<String> ClothesTag;
     private String ClothesInfo;
     private String ClothesKey;
+    private Boolean isFavoriteClothes;
 
-    public Clothes(String ClothesImg, ArrayList<String> ClothesTag, String ClothesInfo, String ClothesKey){
+    public Clothes(String ClothesImg, ArrayList<String> ClothesTag, String ClothesInfo, String ClothesKey, Boolean isFavoriteClothes){
         this.ClothesImg = ClothesImg;
         this.ClothesTag = ClothesTag;
         this.ClothesInfo = ClothesInfo;
         this.ClothesKey = ClothesKey;
+        this.isFavoriteClothes = isFavoriteClothes;
     }
 
     public Clothes (){}
@@ -28,6 +30,9 @@ public class Clothes {
         return ClothesInfo;
     }
     public String getClothesKey() { return ClothesKey; }
+    public Boolean getIsFavoriteClothes() {
+        return isFavoriteClothes;
+    }
 
     //setter
     public void setClothesImg(String img){
@@ -38,4 +43,7 @@ public class Clothes {
         this.ClothesInfo = ClothesInfo;
     }
     public void setClothesKey(String ClothesKey) { this.ClothesKey = ClothesKey; }
+    public void setIsFavoriteClothes(Boolean isFavoriteClothes){
+        this.isFavoriteClothes = isFavoriteClothes;
+    }
 }

@@ -20,14 +20,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.libienz.se_2022_closet.R;
+import com.libienz.se_2022_closet.startApp_1.clothes.ReadAllClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
+import com.libienz.se_2022_closet.startApp_1.clothes.showDetailsActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.readCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.ootd.OOTDActivity;
 import com.libienz.se_2022_closet.startApp_1.util.RequestHttpUrlConnection;
-import com.libienz.se_2022_closet.startApp_1.util.WeatherModel;
+import com.libienz.se_2022_closet.startApp_1.weather.WeatherModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private addClothesFrag addClothesFrag;
-    //private readClothesFrag readClothesFrag;
     private ReadAllClothesFrag readAllClothesFrag;
     private addCodyFrag addCodyFrag;
     private readCodyFrag readCodyFrag;
@@ -61,21 +62,20 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         addClothesFrag = new addClothesFrag();
-        //readClothesFrag = new readClothesFrag();
         readAllClothesFrag = new ReadAllClothesFrag();
         addCodyFrag = new addCodyFrag();
         readCodyFrag = new readCodyFrag();
 
-
-
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frag_fl, readAllClothesFrag).commit();
+        transaction.add(R.id.frag_fl, readAllClothesFrag).commit();
 
+        //날씨에 따른 코디
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
 
         tv_temp = (TextView) findViewById(R.id.tv_temp);
         tv_rcmd_outfit=(TextView) findViewById(R.id.tv_rcmd_outfit);
         requestNetwork();
+
 
         ImageButton logout_btn = (ImageButton) findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(new View.OnClickListener() {
@@ -100,23 +100,17 @@ public class MainActivity extends AppCompatActivity {
         addClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, addClothesFrag).addToBackStack(null).commit();
                 isFrag = true;
+                /*
+                Intent intent = new Intent(getApplicationContext(), showDetailsActivity.class);
+                startActivity(intent);*/
 
             }
         });
 
-        /* (의류클릭->해당의류상세정보보기) 연결해서 주석처리함
-        ImageButton readClothes_btn = (ImageButton) findViewById(R.id.readClothes_btn);
-        readClothes_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.frag_fl, readClothesFrag).addToBackStack(null).commit();
-                isFrag = true;
-            }
-        });*/
 
         ImageButton searchOutfit_btn = (ImageButton) findViewById(R.id.searchOutfit_btn);
         searchOutfit_btn.setOnClickListener(new View.OnClickListener() {

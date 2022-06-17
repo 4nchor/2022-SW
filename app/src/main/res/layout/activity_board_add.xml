@@ -17,9 +17,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/shadow_bottom">
 
                 <TextView
+                    android:fontFamily="@font/bmjua_ttf"
                     android:text="글쓰기 페이지"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -30,8 +32,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#000000"/>
+                android:layout_height="1dp" />
 
             <ImageView
                 android:id="@+id/imageArea"
@@ -46,6 +47,7 @@
 
             <EditText
                 android:id="@+id/commentArea"
+                android:fontFamily="@font/bmjua_ttf"
                 android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:hint="남기고 싶은 코멘트..."
@@ -53,6 +55,9 @@
 
             <Button
                 android:id="@+id/writeBtn"
+                android:fontFamily="@font/bmjua_ttf"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/buttonColor"
                 android:text="입력"
                 android:layout_width="match_parent"
                 android:layout_marginTop="50dp"

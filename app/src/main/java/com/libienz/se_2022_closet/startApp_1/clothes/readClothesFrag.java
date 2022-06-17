@@ -42,7 +42,7 @@ public class readClothesFrag extends Fragment {
 
 
     //TODO : searchOutfitActivity에서 검색 결과를 클릭하면 readClothesFrag로 넘어오는 리스너가 먹통이라 지금은 ClothesKey가 정적으로 초기화되어 있습니다. searchOutfitActivity를 해결하면 아래 ClotheyKey = "178809003"으로 초기화돼 있는 부분을 삭제합니다.
-    private String ClothesKey = "178809003";
+    private String ClothesKey; //= "178809003"
     private ArrayList<String> tag;
     private String info;
 
@@ -103,6 +103,36 @@ public class readClothesFrag extends Fragment {
             }
         });
 
+        //즐겨찾기 버튼을 클릭했을 때
+        Button favorite_btn = (Button) view.findViewById(R.id.favorite_btn);
+        favorite_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //즐겨찾기에 추가
+                userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Clothes clothes = snapshot.getValue(Clothes.class);
+                        if (!clothes.getIsFavoriteClothes()){ //즐겨찾기 추가
+                            clothes.setIsFavoriteClothes(true);
+                            Log.d("addFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
+                        }
+                        else{ //즐겨찾기 해제
+                            clothes.setIsFavoriteClothes(false);
+                            Log.d("removeFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+        });
+
         //의류 수정 버튼을 클릭했을 때
         Button editClothes_btn = (Button) view.findViewById(R.id.editClothes_btn);
         editClothes_btn.setOnClickListener(new View.OnClickListener(){
@@ -134,7 +164,9 @@ public class readClothesFrag extends Fragment {
         readtomain_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
+                ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
+                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).addToBackStack(null).commit();
+                //getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
             }
         });
 

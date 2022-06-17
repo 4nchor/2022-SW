@@ -1,4 +1,4 @@
-package com.libienz.se_2022_closet.startApp_1.util;
+package com.libienz.se_2022_closet.startApp_1.weather;
 
 public class WeatherModel {
     double temp = 0.0;  //온도
