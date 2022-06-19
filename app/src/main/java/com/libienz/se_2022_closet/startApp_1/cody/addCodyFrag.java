@@ -2,14 +2,17 @@ package com.libienz.se_2022_closet.startApp_1.cody;
 
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +25,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.clothes.ClothesAdapter;
+import com.libienz.se_2022_closet.startApp_1.clothes.RecyclerViewAdapter;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 import com.libienz.se_2022_closet.startApp_1.data.Cody;
@@ -33,12 +40,14 @@ import java.util.ArrayList;
 
 public class addCodyFrag extends Fragment {
 
-    private String clothesKey = null;
-    private ClothesAdapter adapter;
-    private ArrayList<Clothes> clothes = new ArrayList<>();
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private ArrayList<String> codycomp = new ArrayList<>();
     private ArrayList<String> hashtag = new ArrayList<>(10);
+    private ArrayList<String> clothesKey = new ArrayList<>();
+    private RecyclerView codyaddC_rv;
+    private RecyclerViewAdapter adapter;
+    private ArrayList<Clothes> clothes;
+    Context context;
 
     @Nullable
     @Override
@@ -46,19 +55,44 @@ public class addCodyFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_add_cody, container, false);
 
-        //TODO : 코디를 구성하는 의류를 입력받는 부분을 작성합니다. 입력받은 의류의 키를 ArrayList<String> codycomp에 집어넣는 것만 구현하면 됩니다
-
+        //완료 : 코디를 구성하는 의류를 입력받는 부분을 작성합니다. 입력받은 의류의 키를 ArrayList<String> codycomp에 집어넣는 것만 구현하면 됩니다
         //리사이클러뷰와 어댑터 세팅
-        RecyclerView codyaddC_rv = (RecyclerView) view.findViewById(R.id.codyaddC_rv);
-        codyaddC_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new ClothesAdapter(clothes);
-        codyaddC_rv.setAdapter(adapter);
+        codyaddC_rv = (RecyclerView) view.findViewById(R.id.codyaddC_rv);
+        codyaddC_rv.setHasFixedSize(true);
 
-        //ClothesAdaper에서 선택한 의류의 포지션을 받아온다
-        adapter.setOnItemClickListener(new ClothesAdapter.OnItemClickListener() {
+        codyaddC_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        codyaddC_rv.scrollToPosition(0);
+        context = container.getContext();
+        clothes = new ArrayList<>();
+        adapter = new RecyclerViewAdapter(clothes, context);
+
+        userRef.child(user.getUid()).child("Clothes").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(View v, int pos) {
-                clothesKey = clothes.get(pos).getClothesKey();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                clothes.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { //여러값을 하나씩 불러옴
+                    Clothes cl = snapshot.getValue(Clothes.class);
+                    clothes.add(cl);
+
+                    Log.d("ReadAllClothesFrag", "Single ValueEventListener : " + snapshot.getValue());
+                }
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        codyaddC_rv.setAdapter(adapter);
+        codyaddC_rv.setItemAnimator(new DefaultItemAnimator());
+
+        //RecyclerViewAdapter에서 선택한 의류의 포지션을 받아온다
+        //여러 개를 선택한 후 의류 추가 버튼을 누르면 한번에 등록됩니다.
+        adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                clothesKey.add(clothes.get(position).getClothesKey());
             }
         });
 
@@ -67,7 +101,15 @@ public class addCodyFrag extends Fragment {
         addCodyComp_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                codycomp.add(clothesKey);
+                if(clothesKey.isEmpty()){
+                    Toast.makeText(container.getContext(), "의류를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    for(String k : clothesKey){
+                        codycomp.add(k);
+                    }
+                    Toast.makeText(container.getContext(), "의류를 추가하였습니다.", Toast.LENGTH_SHORT).show();
+                }
                 clothesKey = null;
             }
         });

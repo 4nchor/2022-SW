@@ -90,6 +90,7 @@ public class editCodyFrag extends Fragment {
 
 
         //리사이클러뷰와 어댑터 세팅
+        //TODO: 이러면 선택한 의류만 출력되게 됨.. 전체 의류를 출력해야 함
         RecyclerView editCodycomp_rv = (RecyclerView) view.findViewById(R.id.editCodycomp_rv);
         editCodycomp_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new ClothesAdapter(clothes);
