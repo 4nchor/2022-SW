@@ -3,12 +3,14 @@ package com.libienz.se_2022_closet.startApp_1.cody;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.clothes.ClothesAdapter;
+import com.libienz.se_2022_closet.startApp_1.clothes.RecyclerViewAdapter;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 import com.libienz.se_2022_closet.startApp_1.data.Cody;
 
@@ -38,14 +41,15 @@ import java.util.Iterator;
 public class readCodyFrag extends Fragment {
 
     private String clothesKey = null;
-    private ClothesAdapter adapter;
-    private ArrayList<Clothes> clothes = new ArrayList<>();
+    private RecyclerViewAdapter adapter;
+    private ArrayList<Clothes> clothes;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
+    Context context;
 
     //TODO : searchOutfitActivity에서 검색 결과를 클릭하면 readCodyFrag로 넘어오는 리스너가 먹통이라 지금은 CodyKey가 정적으로 초기화되어 있습니다. searchOutfitActivity를 해결하면 아래 CodyKey = "코디세트1"로 초기화돼 있는 부분을 삭제합니다.
-    private String CodyKey = "코디세트1";
+    private String CodyKey = "cody0";
 
     private ArrayList<String> codyComp = new ArrayList<String>();
     private ArrayList<String> tag = new ArrayList<String>();
@@ -93,10 +97,15 @@ public class readCodyFrag extends Fragment {
             }
         });
 
-        //TODO : 구성 의류 목록을 출력합니다 (구성 의류들의 Key는 ArrayList<String> codyComp에 저장되어 있습니다. Line 71의 updateCody() 참고)
+        //완료 : 구성 의류 목록을 출력합니다 (구성 의류들의 Key는 ArrayList<String> codyComp에 저장되어 있습니다. Line 71의 updateCody() 참고)
         //리사이클러뷰와 어댑터 세팅
         RecyclerView readCodycomp_rv = (RecyclerView) view.findViewById(R.id.readCodycomp_rv);
         readCodycomp_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        readCodycomp_rv.setHasFixedSize(true);
+        readCodycomp_rv.scrollToPosition(0);
+        clothes = new ArrayList<>();
+        context = container.getContext();
+        adapter = new RecyclerViewAdapter(clothes, context);
 
         //codyComp에 해당하는 의류를 가져옵니다
         for(String key : codyComp) {
@@ -107,14 +116,15 @@ public class readCodyFrag extends Fragment {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(container.getContext(), "의류 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(container.getContext(), "의류 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             });
+            adapter.notifyDataSetChanged();
         }
 
         //출력
-        adapter = new ClothesAdapter(clothes);
         readCodycomp_rv.setAdapter(adapter);
+        readCodycomp_rv.setItemAnimator(new DefaultItemAnimator());
 
 
 

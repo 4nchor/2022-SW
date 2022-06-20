@@ -2,13 +2,17 @@ package com.libienz.se_2022_closet.startApp_1.cody;
 
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.clothes.ClothesAdapter;
+import com.libienz.se_2022_closet.startApp_1.clothes.RecyclerViewAdapter;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 import com.libienz.se_2022_closet.startApp_1.data.Cody;
 
@@ -36,13 +41,16 @@ public class editCodyFrag extends Fragment {
 
     private ArrayList<String> hashtag = new ArrayList<>(10);
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private String prevCodyname = null;
     private String newCodyname = null;
     private String clothesKey = null;
     private String CodyKey; //수정할 코디 세트의 key
-    private ClothesAdapter adapter;
-    private ArrayList<Clothes> clothes = new ArrayList<>();
+    private RecyclerViewAdapter adapter;
+    private ArrayList<Clothes> codyCompCl;
+    private ArrayList<Clothes> clothes;
     private ArrayList<String> codyComp = new ArrayList<>();
-    private ArrayList<String> hashTag = new ArrayList<String>();
+    private ArrayList<String> hashTag = new ArrayList<>();
+    Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,19 +58,21 @@ public class editCodyFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_cody, container, false);
 
+        //CodyKey = "34";
         //수정할 코디 세트의 key를 readCodyFrag로부터 받아옴
         CodyKey = getArguments().getString("CodyKey");
         //TODO : 코디 세트 수정 기능 만들기...
-        //TODO : Layout도 만들기...
+        //완료 : Layout도 만들기...
 
         EditText editCodyname_et = (EditText) view.findViewById(R.id.editCodyname_et);
         Button doneeditCody_btn = (Button) view.findViewById(R.id.doneeditCody_btn);
 
-        //코디에 있는 의류 key를 긁어오기
+        //코디 정보를 긁어오기
         userRef.child(user.getUid()).child("Cody").child(CodyKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Cody cody = snapshot.getValue(Cody.class);
+                prevCodyname = cody.getCodyKey();
                 codyComp = cody.getCodyComp();
                 hashTag = cody.getCodyTag();
             }
@@ -78,7 +88,7 @@ public class editCodyFrag extends Fragment {
             userRef.child(user.getUid()).child("Clothes").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    clothes.add(snapshot.getValue(Clothes.class));
+                    codyCompCl.add(snapshot.getValue(Clothes.class));
                 }
 
                 @Override
@@ -90,14 +100,37 @@ public class editCodyFrag extends Fragment {
 
 
         //리사이클러뷰와 어댑터 세팅
-        //TODO: 이러면 선택한 의류만 출력되게 됨.. 전체 의류를 출력해야 함
         RecyclerView editCodycomp_rv = (RecyclerView) view.findViewById(R.id.editCodycomp_rv);
         editCodycomp_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new ClothesAdapter(clothes);
-        editCodycomp_rv.setAdapter(adapter);
+        editCodycomp_rv.setHasFixedSize(true);
+        editCodycomp_rv.scrollToPosition(0);
+        context = container.getContext();
+        clothes = new ArrayList<>();
+        adapter = new RecyclerViewAdapter(clothes, context);
 
-        //ClothesAdaper에서 선택한 의류의 포지션을 받아온다
-        adapter.setOnItemClickListener(new ClothesAdapter.OnItemClickListener() {
+        userRef.child(user.getUid()).child("Clothes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                clothes.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { //여러값을 하나씩 불러옴
+                    Clothes cl = snapshot.getValue(Clothes.class);
+                    clothes.add(cl);
+
+                    Log.d("ReadAllClothesFrag", "Single ValueEventListener : " + snapshot.getValue());
+                }
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        editCodycomp_rv.setAdapter(adapter);
+        editCodycomp_rv.setItemAnimator(new DefaultItemAnimator());
+
+        //RecyclerViewAdapter에서 선택한 의류의 포지션을 받아온다
+        adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
                 clothesKey = clothes.get(pos).getClothesKey();
@@ -106,17 +139,42 @@ public class editCodyFrag extends Fragment {
                 for(String key : codyComp){
                     if(key != clothesKey){
                         codyComp.add(clothesKey);
+                        Toast.makeText(container.getContext(), "코디에 의류를 추가하였습니다.", Toast.LENGTH_SHORT).show();
                     }
-                    else if(key == clothesKey) { //Codycomp에 있는 clothesKey이면 Codycomp에서 아웃
+                    else { //Codycomp에 있는 clothesKey이면 Codycomp에서 아웃
                         codyComp.remove(clothesKey);
-                    }
-                    else {
-
+                        Toast.makeText(container.getContext(), "코디에 의류를 제거하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
-        
+
+
+        //이미 있는 해시태그를 출력, 있는 해시태그를 또 작성하면 삭제 & 없는 해시태그를 작성하면 추가
+        Button editHashTag_btn3 = (Button) view.findViewById(R.id.editHashTag_btn3);
+        TextView showeditTag_tv = (TextView) view.findViewById(R.id.showeditTag_tv);
+        EditText editCodytag_et = (EditText) view.findViewById(R.id.editCodytag_et);
+        showeditTag_tv.append("#" + hashTag.get(hashTag.size() - 1) + " ");
+
+        editHashTag_btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newtag = editCodytag_et.getText().toString();
+
+                for (String tag : hashTag){
+                    if(tag==newtag){
+                        hashtag.remove(newtag);
+                    }
+                    else if (tag!=newtag){
+                        hashtag.add(newtag);
+                    }
+                }
+                showeditTag_tv.append("#" + hashTag.get(hashTag.size() - 1) + " ");
+            }
+        });
+
+
+
         
 
         //코디 세트 이름 수정과 등록
@@ -124,6 +182,8 @@ public class editCodyFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 newCodyname = editCodyname_et.getText().toString();
+
+                if(newCodyname.isEmpty()){ newCodyname = prevCodyname; }
 
                 //유저 정보 및 키워드, 태그 입력을 확인하고 코디 등록
                 if (user != null && newCodyname != null && !hashTag.isEmpty()){
