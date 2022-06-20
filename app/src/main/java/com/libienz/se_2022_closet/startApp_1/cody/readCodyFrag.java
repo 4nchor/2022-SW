@@ -88,7 +88,6 @@ public class readCodyFrag extends Fragment {
                 for (int i = 0; i < tag.size(); i++)
                     readCodyTag_tv.append("#" + tag.get(i) + " ");
 
-
             }
 
             @Override
@@ -107,20 +106,25 @@ public class readCodyFrag extends Fragment {
         context = container.getContext();
         adapter = new RecyclerViewAdapter(clothes, context);
 
-        //codyComp에 해당하는 의류를 가져옵니다
-        for(String key : codyComp) {
-            userRef.child(user.getUid()).child("Clothes").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    clothes.add(snapshot.getValue(Clothes.class));
+        userRef.child(user.getUid()).child("Clothes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                clothes.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { //여러값을 하나씩 불러옴
+                    Clothes cl = snapshot.getValue(Clothes.class);
+                    for(String k : codyComp){
+                        if(cl.getClothesKey().toString() == k){
+                            clothes.add(cl);
+                        }
+                    }
+                    Log.d("ReadAllClothesFrag", "Single ValueEventListener : " + snapshot.getValue());
                 }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    //Toast.makeText(container.getContext(), "의류 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
-                }
-            });
-            adapter.notifyDataSetChanged();
-        }
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
         //출력
         readCodycomp_rv.setAdapter(adapter);
@@ -141,7 +145,7 @@ public class readCodyFrag extends Fragment {
                 editCodyFrag.setArguments(bundle);
 
                 //열람 중이었던 코디를 수정하도록 함
-                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, editCodyFrag).addToBackStack(null).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl , editCodyFrag).addToBackStack(null).commitAllowingStateLoss();
             }
         });
 

@@ -20,15 +20,6 @@
             android:layout_height="50dp">
         </EditText>
 
-        <Button
-            android:id="@+id/editHashTag_btn3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/bmjua_ttf"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="@color/buttonColor"
-            android:text="# 태그 수정하기" />
-
         <TextView
             android:id="@+id/showeditTag_tv"
             android:layout_width="match_parent"
@@ -41,6 +32,15 @@
             android:hint="# 새로운 해시태그 입력"
             android:layout_height="50dp">
         </EditText>
+
+        <Button
+            android:id="@+id/editHashTag_btn3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/buttonColor"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="# 태그 수정하기"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/doneeditCody_btn"
@@ -68,7 +68,6 @@
             android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

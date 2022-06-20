@@ -58,9 +58,9 @@ public class editCodyFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_cody, container, false);
 
-        //CodyKey = "34";
+        CodyKey = "cody0";
         //수정할 코디 세트의 key를 readCodyFrag로부터 받아옴
-        CodyKey = getArguments().getString("CodyKey");
+        //CodyKey = getArguments().getString("CodyKey");
         //TODO : 코디 세트 수정 기능 만들기...
         //완료 : Layout도 만들기...
 
@@ -154,7 +154,9 @@ public class editCodyFrag extends Fragment {
         Button editHashTag_btn3 = (Button) view.findViewById(R.id.editHashTag_btn3);
         TextView showeditTag_tv = (TextView) view.findViewById(R.id.showeditTag_tv);
         EditText editCodytag_et = (EditText) view.findViewById(R.id.editCodytag_et);
-        showeditTag_tv.append("#" + hashTag.get(hashTag.size() - 1) + " ");
+        for (int i = 0; i < hashTag.size(); i++){
+            showeditTag_tv.append("#" + hashTag.get(i) + " ");
+        }
 
         editHashTag_btn3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,13 +171,14 @@ public class editCodyFrag extends Fragment {
                         hashtag.add(newtag);
                     }
                 }
-                showeditTag_tv.append("#" + hashTag.get(hashTag.size() - 1) + " ");
+                showeditTag_tv.setText(null);
+                for (int i = 0; i < hashTag.size(); i++){
+                    showeditTag_tv.append("#" + hashTag.get(i) + " ");
+                }
             }
         });
 
 
-
-        
 
         //코디 세트 이름 수정과 등록
         doneeditCody_btn.setOnClickListener(new View.OnClickListener() {

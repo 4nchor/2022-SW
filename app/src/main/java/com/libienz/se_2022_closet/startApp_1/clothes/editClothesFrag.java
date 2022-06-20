@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -45,10 +46,9 @@ public class editClothesFrag extends Fragment {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
     private String ClothesKey;
+    private ArrayList<String> clothesTag = new ArrayList<>();
     private Uri imguri;
-    //private Button editHashTag_btn;
-    
-    //의류키를 editHashTagActivity로 보내기 위한 작업 (인터페이스 세팅)
+    /*
     private SendCKey sendCKey;
     @Override
     public void onAttach(@NonNull Context context){
@@ -58,7 +58,7 @@ public class editClothesFrag extends Fragment {
         }catch (ClassCastException e){
             throw new ClassCastException(context.toString() + "must implement SendClothesKey");
         }
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +69,6 @@ public class editClothesFrag extends Fragment {
         ClothesKey = getArguments().getString("ClothesKey");
 
         ImageView editImg_iv = view.findViewById(R.id.editImg_iv);
-        EditText editTag_et = view.findViewById(R.id.editTag_et);
         EditText editInfo_et = view.findViewById(R.id.editInfo_et);
 
         //수정 전 원본 데이터 불러오기
@@ -80,6 +79,7 @@ public class editClothesFrag extends Fragment {
 
                 //editTag_et.setText(clothes.gettag());
                 editInfo_et.setText(clothes.getClothesInfo());
+                clothesTag = clothes.getClothesTag();
 
                 StorageReference submitReference = storageReference.child(ClothesKey + ".png");
                 submitReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -121,6 +121,33 @@ public class editClothesFrag extends Fragment {
             }
         });
 
+        //이미 있는 해시태그를 출력, 있는 해시태그를 또 작성하면 삭제 & 없는 해시태그를 작성하면 추가
+        Button editHashTag_btn = (Button) view.findViewById(R.id.editHashTag_btn);
+        TextView showECTag_tv = (TextView) view.findViewById(R.id.showECTag_tv);
+        EditText editTag_et = (EditText) view.findViewById(R.id.editTag_et);
+        for (int i = 0; i < clothesTag.size(); i++){
+            showECTag_tv.append("#" + clothesTag.get(i) + " ");
+        }
+
+        editHashTag_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newtag = editTag_et.getText().toString();
+
+                for (String tag : clothesTag){
+                    if(tag==newtag){
+                        clothesTag.remove(newtag);
+                    }
+                    else if (tag!=newtag){
+                        clothesTag.add(newtag);
+                    }
+                }
+                for (int i = 0; i < clothesTag.size(); i++){
+                    showECTag_tv.append("#" + clothesTag.get(i) + " ");
+                }
+            }
+        });
+
         //수정 완료 버튼을 눌러 의류를 수정함
         Button doneeditClothes_btn = (Button) view.findViewById(R.id.doneeditClothes_btn);
         doneeditClothes_btn.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +156,7 @@ public class editClothesFrag extends Fragment {
 
                 //유저 정보 확인 후 의류 수정
                 if (user != null){
-                    //editClothes(user.getUid(), imguri.toString(), editTag_et.getText().toString(), editInfo_et.getText().toString(), container);
+                    //editClothes(user.getUid(), imguri.toString(), clothesTag, editInfo_et.getText().toString(), container);
                     Toast.makeText(container.getContext(), "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
 
                     //수정 완료된 의류의 키값을 열람 프래그먼트에 넘김
@@ -166,13 +193,6 @@ public class editClothesFrag extends Fragment {
 
         return view;
     }
-
-    @Override
-    public void onDetach(){
-        super.onDetach();
-        sendCKey = null;
-    }
-
 
     //파이어베이스 이미지 업로드 메소드
     private void uploadToFirebase(Uri uri, String idToken, String ClothesKey, ViewGroup container){
