@@ -24,4 +24,5 @@ public class Cody {
     public void setCodyKey(String CodyKey) { this.CodyKey = CodyKey; }
     public void setCodyComp(ArrayList<String> CodyComp) { this.CodyComp = CodyComp; }
     public void setCodyTag(ArrayList<String> CodyTag) { this.CodyTag = CodyTag; }
+
 }

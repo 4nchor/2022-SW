@@ -16,6 +16,20 @@
             android:id="@+id/editCodyname_et"
             android:layout_width="match_parent"
             android:hint="코디 세트 이름 입력"
+            android:layout_marginTop="10dp"
+            android:layout_height="50dp">
+        </EditText>
+
+        <TextView
+            android:id="@+id/showeditTag_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/editCodytag_et"
+            android:layout_width="match_parent"
+            android:hint="# 새로운 해시태그 입력"
             android:layout_height="50dp">
         </EditText>
 
@@ -23,10 +37,10 @@
             android:id="@+id/editHashTag_btn3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/bmjua_ttf"
-            android:textColor="#FFFFFF"
             android:backgroundTint="@color/buttonColor"
-            android:text="# 태그 수정하기" />
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="# 태그 수정하기"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/doneeditCody_btn"
@@ -43,18 +57,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bmjua_ttf"
-            android:textColor="#FFFFFF"
             android:backgroundTint="@color/buttonColor"
             android:layout_margin="8dp"
             android:text="이미 포함되어 있는 의류를 선택하면 취소,\n 포함되지 않은 의류를 선택하면 추가됩니다." />
+        <!--android:textColor="#FFFFFF"-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/editCodycomp_rv"
             android:scrollbars="vertical"
             android:layout_margin="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

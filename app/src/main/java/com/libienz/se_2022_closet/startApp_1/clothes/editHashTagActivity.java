@@ -54,6 +54,7 @@ public class editHashTagActivity extends AppCompatActivity implements SendCKey {
     protected Button editHashTag_btn;
     protected EditText editHashTag_et;
 
+    //TODO : 슬프게도 뜯어 고쳐야 할 것 같습니다..
     @Override //키 값을 받아옴
     public void sendCkey(String s) {
         ClothesKey = s;
