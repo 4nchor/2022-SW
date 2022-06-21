@@ -3,6 +3,7 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +34,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
+import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
 import java.util.ArrayList;
 
 public class readClothesFrag extends Fragment {
 
+    private View header;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
@@ -45,6 +50,7 @@ public class readClothesFrag extends Fragment {
     private String ClothesKey; //= "178809003"
     private ArrayList<String> tag;
     private String info;
+
 
 
     @Nullable
@@ -135,6 +141,7 @@ public class readClothesFrag extends Fragment {
             }
         });
 
+
         //의류 수정 버튼을 클릭했을 때
         Button editClothes_btn = (Button) view.findViewById(R.id.editClothes_btn);
         editClothes_btn.setOnClickListener(new View.OnClickListener(){
@@ -204,4 +211,5 @@ public class readClothesFrag extends Fragment {
         AlertDialog dialog = alert.create();
         dialog.show();
     }
+
 }

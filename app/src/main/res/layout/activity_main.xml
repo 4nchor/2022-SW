@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,16 +12,16 @@
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shadow_bottom"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@drawable/shadow_bottom">
 
 
         <TextView
             android:id="@+id/tv_title"
-            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/bmjua_ttf"
             android:gravity="center"
             android:padding="5dp"
             android:text="#MyCloset"
@@ -76,69 +77,69 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/shadow_top">
+        android:layout_marginTop="6dp"
+        android:background="@drawable/shadow_top"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/logout_btn"
             android:layout_width="2dp"
             android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:background="#FFFFFF"
-            android:src="@drawable/ic_baseline_logout_24"
-            android:layout_marginTop="5dp"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_logout_24" />
 
         <ImageButton
             android:id="@+id/ootd_btn"
             android:layout_width="25dp"
             android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
             android:background="#FFFFFF"
-            android:src="@drawable/ic_baseline_calendar_month_24"
-            android:layout_marginTop="5dp"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_calendar_month_24" />
 
         <ImageButton
             android:id="@+id/addClothes_btn"
             android:layout_width="25dp"
             android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_add_24"
             android:background="#FFFFFF"
-            android:layout_marginTop="5dp"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_add_24" />
 
 
         <ImageButton
             android:id="@+id/searchOutfit_btn"
             android:layout_width="25dp"
             android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_search_24"
             android:background="#FFFFFF"
-            android:layout_marginTop="5dp"/>
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_search_24" />
 
         <Button
             android:id="@+id/addCody_btn"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="코디추가"
             android:backgroundTint="#c3f1ff"
-            android:layout_margin="8dp" />
+            android:text="코디추가" />
 
         <Button
             android:id="@+id/readCody_btn"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="코디열람"
             android:backgroundTint="#c3f1ff"
-            android:layout_margin="8dp" />
+            android:text="코디열람" />
 
     </LinearLayout>
 

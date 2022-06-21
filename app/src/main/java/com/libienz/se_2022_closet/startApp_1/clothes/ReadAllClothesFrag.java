@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,11 +31,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
+import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
 import java.util.ArrayList;
 
 public class ReadAllClothesFrag extends Fragment {
-
 
 
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -44,6 +47,7 @@ public class ReadAllClothesFrag extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Clothes> mClothesList;
     Context context;
+
 
     @Nullable
     @Override
@@ -62,6 +66,8 @@ public class ReadAllClothesFrag extends Fragment {
 
         context=container.getContext();
         mRecyclerAdapter = new RecyclerViewAdapter(mClothesList, context);
+
+
 
 
 
@@ -84,14 +90,13 @@ public class ReadAllClothesFrag extends Fragment {
         });
 
         mRecyclerAdapter.setOnItemClickListener (new RecyclerViewAdapter.OnItemClickListener() {
-
             //아이템 클릭시
+
             @Override
             public void onItemClick(View view, int position) {
+
                 //의류 열람 페이지로 넘어감
-
-
-                Toast.makeText(view.getContext(),"클릭아이템: "+mClothesList.get(position).getClothesKey(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(view.getContext(),"클릭아이템: "+mClothesList.get(position).getClothesKey(),Toast.LENGTH_LONG).show();
                 Bundle bundle = new Bundle(); // 번들을 통해 값 전달
                 bundle.putString("ClothesKey",mClothesList.get(position).getClothesKey());//번들에 넘길 값 저장
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -99,14 +104,6 @@ public class ReadAllClothesFrag extends Fragment {
                 fragment2.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
                 transaction.replace(R.id.frag_fl, fragment2);
                 transaction.commit();
-
-                /*
-                //액티비티 이동
-                Intent intent = new Intent(getActivity(), showDetailsActivity.class);
-                intent.putExtra("ClothesKey",mClothesList.get(position).getClothesKey());
-                startActivity(intent);
-                */
-
 
             }
 
@@ -116,7 +113,7 @@ public class ReadAllClothesFrag extends Fragment {
         mRecyclerView.setAdapter(mRecyclerAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        return view; //super.onCreateView(inflater, container, savedInstanceState)
+        return view;
     }
 
 

@@ -74,7 +74,7 @@ public class FavoriteClothesAdapter extends RecyclerView.Adapter<FavoriteClothes
                     Glide.with(viewHolder.itemView).load(uri).into(viewHolder.iv_favclothes);
                 }
             });
-            viewHolder.tv_clothesKey.setText(favClothes.get(position).getClothesKey());
+            viewHolder.tv_clothesKey.setText(favClothes.get(position).getClothesInfo());
         }
         /*
         ArrayList<String> tag = favClothes.get(position).getClothesTag();
