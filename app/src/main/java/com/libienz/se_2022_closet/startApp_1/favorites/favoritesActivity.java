@@ -8,6 +8,8 @@ import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,9 +31,6 @@ import java.util.ArrayList;
 
 public class favoritesActivity extends AppCompatActivity {
 
-    private ArrayList<Clothes> favoriteClothes = new ArrayList<Clothes>();
-    private ArrayList<Cody> favoriteCodySets = new ArrayList<Cody>();
-
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth auth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -39,11 +38,12 @@ public class favoritesActivity extends AppCompatActivity {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
 
+    private FragmentTransaction transaction;
+    private FragmentManager fragmentManager;
+    private favoriteClothesFrag favClothesFrag;
+    private favoriteCodyFrag favCodyFrag;
+    private boolean isFrag = false;
 
-    public void clearFavoriteListArray() {
-        favoriteClothes.clear();
-        favoriteCodySets.clear();
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,11 +53,13 @@ public class favoritesActivity extends AppCompatActivity {
         RadioGroup show_what_rg = (RadioGroup) findViewById(R.id.show_what_rg);
         RadioButton show_favoriteClothes_rb = (RadioButton) findViewById(R.id.show_favoriteClothes_rb);
         RadioButton show_favoriteCodySets_rb = (RadioButton) findViewById(R.id.show_favoriteCodySets_rb);
+        favClothesFrag= new favoriteClothesFrag();
+        favCodyFrag = new favoriteCodyFrag();
+        fragmentManager = getSupportFragmentManager();
 
-        RecyclerView show_what_rv = findViewById(R.id.show_what_rv);
-        show_what_rv.setLayoutManager(new LinearLayoutManager(this));
 
-        show_favoriteClothes_rb.setChecked(true);
+        transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.frag_fl, favClothesFrag).commit();
 
 
         //의류랑 코디 세트 중 어느 것을 보여줄 것인지 체크
@@ -66,10 +68,16 @@ public class favoritesActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (show_favoriteClothes_rb.isChecked()) { //옷
                     //clearFavoriteListArray();
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.frag_fl, favClothesFrag).addToBackStack(null).commit();
+                    isFrag = true;
 
                 }
                 else { //코디세트
                     //clearFavoriteListArray();
+                    transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.frag_fl, favCodyFrag).addToBackStack(null).commit();
+                    isFrag = true;
                 }
             }
         });
@@ -78,8 +86,9 @@ public class favoritesActivity extends AppCompatActivity {
 
 
 
+        /*
         //어댑터
-        FavoriteClothesAdapter favoriteClothesAdapter = new FavoriteClothesAdapter(favoriteClothes);
+        FavoriteClothesAdapter favoriteClothesAdapter = new FavoriteClothesAdapter(favoriteClothes, getApplicationContext());
         favoriteClothesAdapter.setOnItemClickListener(new FavoriteClothesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -119,7 +128,7 @@ public class favoritesActivity extends AppCompatActivity {
 
 
             }
-        });
+        }); */
 
 
 

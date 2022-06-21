@@ -28,7 +28,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout1"
         android:orientation="vertical">
 
@@ -58,11 +58,12 @@
                 android:text="코디 세트" />
         </RadioGroup>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/show_what_rv"
+        <FrameLayout
+            android:id="@+id/frag_fl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_height="450dp">
+
+        </FrameLayout>
 
 
     </LinearLayout>

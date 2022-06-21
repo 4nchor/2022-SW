@@ -51,7 +51,6 @@ public class ReadAllClothesFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_read_all_clothes, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.clothes_recyclerview);
-
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager= new GridLayoutManager(getActivity(),3);
