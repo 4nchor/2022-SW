@@ -49,7 +49,7 @@ public class readCodyFrag extends Fragment {
     Context context;
 
     //TODO : searchOutfitActivity에서 검색 결과를 클릭하면 readCodyFrag로 넘어오는 리스너가 먹통이라 지금은 CodyKey가 정적으로 초기화되어 있습니다. searchOutfitActivity를 해결하면 아래 CodyKey = "코디세트1"로 초기화돼 있는 부분을 삭제합니다.
-    private String CodyKey = "cody0";
+    private String CodyKey = "cody1";
 
     private ArrayList<String> codyComp = new ArrayList<String>();
     private ArrayList<String> tag = new ArrayList<String>();
@@ -130,6 +130,36 @@ public class readCodyFrag extends Fragment {
         readCodycomp_rv.setAdapter(adapter);
         readCodycomp_rv.setItemAnimator(new DefaultItemAnimator());
 
+
+
+        //즐겨찾기 추가 버튼 클릭
+        Button isfavorite_btn = (Button) view.findViewById(R.id.isfavorite_btn);
+        isfavorite_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userRef.child(user.getUid()).child("Cody").child(CodyKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Cody cody = snapshot.getValue(Cody.class);
+
+                        if (!cody.getIsFavoriteCody()){ //즐겨찾기 추가 여기가 문제...왜지
+                            userRef.child(user.getUid()).child("Cody").child(CodyKey).child("isFavoriteCody").setValue(true);
+                            Log.d("addFavoriteCody", "isFavorite :"+cody.getIsFavoriteCody());
+                        }
+                        else{ //즐겨찾기 해제
+                            //clothes.setIsFavoriteClothes(false);
+                            userRef.child(user.getUid()).child("Cody").child(CodyKey).child("isFavoriteCody").setValue(false);
+                            Log.d("removeFavoriteCody", "isFavorite :"+cody.getIsFavoriteCody());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
 
 
         //코디 수정 버튼을 클릭했을 때

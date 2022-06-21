@@ -168,7 +168,7 @@ public class addCodyFrag extends Fragment {
 
     //코디 추가 메소드
     public void addCody(String idToken, ArrayList<String> Comp, String Key, ArrayList<String> Tag) {
-        Cody cody = new Cody(Key, Comp, Tag);
+        Cody cody = new Cody(Key, Comp, Tag, false);
 
         //파이어베이스 리얼타임 데이터베이스에 의류 정보 저장
         userRef.child(idToken).child("Cody").child(Key).setValue(cody);

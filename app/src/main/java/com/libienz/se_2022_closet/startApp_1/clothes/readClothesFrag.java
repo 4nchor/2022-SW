@@ -109,7 +109,7 @@ public class readClothesFrag extends Fragment {
             @Override
             public void onClick(View view) {
                 //즐겨찾기에 추가
-                userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addValueEventListener(new ValueEventListener() {
+                userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Clothes clothes = snapshot.getValue(Clothes.class);
@@ -120,7 +120,7 @@ public class readClothesFrag extends Fragment {
                         }
                         else{ //즐겨찾기 해제
                             //clothes.setIsFavoriteClothes(false);
-                            userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(true);
+                            userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(false);
                             Log.d("removeFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
                         }
                     }
