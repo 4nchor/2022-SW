@@ -176,6 +176,9 @@ public class readClothesFrag extends Fragment {
                 ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
                 getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).addToBackStack(null).commit();
                 //getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                LinearLayout weatherLayout= mainActivity.findViewById(R.id.weatherLayout);
+                weatherLayout.setVisibility(View.VISIBLE);
             }
         });
 

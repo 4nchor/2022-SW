@@ -94,6 +94,10 @@ public class ReadAllClothesFrag extends Fragment {
 
             @Override
             public void onItemClick(View view, int position) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                LinearLayout weatherLayout= mainActivity.findViewById(R.id.weatherLayout);
+                weatherLayout.setVisibility(View.GONE);
+
 
                 //의류 열람 페이지로 넘어감
                 //Toast.makeText(view.getContext(),"클릭아이템: "+mClothesList.get(position).getClothesKey(),Toast.LENGTH_LONG).show();

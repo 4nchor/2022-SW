@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     Context context = MainActivity.this;
     TextView tv_temp;
     TextView tv_rcmd_outfit;
-    LinearLayout weatherLayout;
+    static LinearLayout weatherLayout;
 
 
     private long backKeyPressedTime = 0;
