@@ -27,6 +27,7 @@ import com.libienz.se_2022_closet.startApp_1.clothes.showDetailsActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.readCodyFrag;
+import com.libienz.se_2022_closet.startApp_1.favorites.favoritesActivity;
 import com.libienz.se_2022_closet.startApp_1.ootd.OOTDActivity;
 import com.libienz.se_2022_closet.startApp_1.util.RequestHttpUrlConnection;
 import com.libienz.se_2022_closet.startApp_1.weather.WeatherModel;
@@ -138,6 +139,15 @@ public class MainActivity extends AppCompatActivity {
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, readCodyFrag).addToBackStack(null).commit();
                 isFrag = true;
+            }
+        });
+
+        Button favorites_btn = (Button) findViewById(R.id.favorites_btn);
+        favorites_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), favoritesActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -113,12 +113,14 @@ public class readClothesFrag extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Clothes clothes = snapshot.getValue(Clothes.class);
+
                         if (!clothes.getIsFavoriteClothes()){ //즐겨찾기 추가
-                            clothes.setIsFavoriteClothes(true);
+                            userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(true);
                             Log.d("addFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
                         }
                         else{ //즐겨찾기 해제
-                            clothes.setIsFavoriteClothes(false);
+                            //clothes.setIsFavoriteClothes(false);
+                            userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(true);
                             Log.d("removeFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
                         }
                     }
