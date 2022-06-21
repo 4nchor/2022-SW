@@ -46,6 +46,8 @@ public class editClothesFrag extends Fragment {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
     private String ClothesKey;
+    private String cInfo;
+    private boolean isFavoriteClothes;
     private ArrayList<String> clothesTag = new ArrayList<>();
     private Uri imguri;
     /*
@@ -78,8 +80,10 @@ public class editClothesFrag extends Fragment {
                 Clothes clothes = snapshot.getValue(Clothes.class);
 
                 //editTag_et.setText(clothes.gettag());
-                editInfo_et.setText(clothes.getClothesInfo());
+                cInfo = clothes.getClothesInfo();
+                editInfo_et.setText(cInfo);
                 clothesTag = clothes.getClothesTag();
+                isFavoriteClothes = clothes.getIsFavoriteClothes();
 
                 StorageReference submitReference = storageReference.child(ClothesKey + ".png");
                 submitReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -142,6 +146,7 @@ public class editClothesFrag extends Fragment {
                         clothesTag.add(newtag);
                     }
                 }
+                showECTag_tv.setText(null);
                 for (int i = 0; i < clothesTag.size(); i++){
                     showECTag_tv.append("#" + clothesTag.get(i) + " ");
                 }
@@ -154,9 +159,11 @@ public class editClothesFrag extends Fragment {
             @Override
             public void onClick(View v){
 
+                if(editInfo_et.getText().toString()!=null){ cInfo = editInfo_et.getText().toString(); }
+
                 //유저 정보 확인 후 의류 수정
                 if (user != null){
-                    //editClothes(user.getUid(), imguri.toString(), clothesTag, editInfo_et.getText().toString(), container);
+                    editClothes(user.getUid(), imguri.toString(), clothesTag, cInfo, isFavoriteClothes, container);
                     Toast.makeText(container.getContext(), "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
 
                     //수정 완료된 의류의 키값을 열람 프래그먼트에 넘김
@@ -173,7 +180,6 @@ public class editClothesFrag extends Fragment {
             }
         });
 
-
 /*
         //태그 수정하기 버튼을 누르면 activiy_edit_hashtag 레이아웃으로 화면이 전환됨
         //수정할 의류의 키값을 editHashTagActivity로 넘김
@@ -187,7 +193,6 @@ public class editClothesFrag extends Fragment {
                 startActivity(intent);
             }
         });
-
 */
 
 

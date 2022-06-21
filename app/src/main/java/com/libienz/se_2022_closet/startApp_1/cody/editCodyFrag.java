@@ -58,9 +58,9 @@ public class editCodyFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_cody, container, false);
 
-        CodyKey = "cody0";
+        //CodyKey = "cody0";
         //수정할 코디 세트의 key를 readCodyFrag로부터 받아옴
-        //CodyKey = getArguments().getString("CodyKey");
+        CodyKey = getArguments().getString("CodyKey");
         //TODO : 코디 세트 수정 기능 만들기...
         //완료 : Layout도 만들기...
 
@@ -137,11 +137,11 @@ public class editCodyFrag extends Fragment {
                 
                 //Codycomp에 없는 clothesKey이면 Codycomp에 추가한다
                 for(String key : codyComp){
-                    if(key != clothesKey){
+                    if (key != clothesKey){
                         codyComp.add(clothesKey);
                         Toast.makeText(container.getContext(), "코디에 의류를 추가하였습니다.", Toast.LENGTH_SHORT).show();
                     }
-                    else { //Codycomp에 있는 clothesKey이면 Codycomp에서 아웃
+                    else if (key == clothesKey) { //Codycomp에 있는 clothesKey이면 Codycomp에서 아웃
                         codyComp.remove(clothesKey);
                         Toast.makeText(container.getContext(), "코디에 의류를 제거하였습니다.", Toast.LENGTH_SHORT).show();
                     }
@@ -154,9 +154,8 @@ public class editCodyFrag extends Fragment {
         Button editHashTag_btn3 = (Button) view.findViewById(R.id.editHashTag_btn3);
         TextView showeditTag_tv = (TextView) view.findViewById(R.id.showeditTag_tv);
         EditText editCodytag_et = (EditText) view.findViewById(R.id.editCodytag_et);
-        for (int i = 0; i < hashTag.size(); i++){
+        for (int i = 0; i < hashTag.size(); i++)
             showeditTag_tv.append("#" + hashTag.get(i) + " ");
-        }
 
         editHashTag_btn3.setOnClickListener(new View.OnClickListener() {
             @Override
