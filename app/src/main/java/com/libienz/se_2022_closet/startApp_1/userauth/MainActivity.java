@@ -2,7 +2,6 @@ package com.libienz.se_2022_closet.startApp_1.userauth;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,10 +11,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +23,6 @@ import com.google.gson.JsonParser;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.clothes.ReadAllClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
-import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.readCodyFrag;

@@ -84,53 +84,5 @@ public class favoritesActivity extends AppCompatActivity {
 
 
 
-
-
-        /*
-        //어댑터
-        FavoriteClothesAdapter favoriteClothesAdapter = new FavoriteClothesAdapter(favoriteClothes, getApplicationContext());
-        favoriteClothesAdapter.setOnItemClickListener(new FavoriteClothesAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int pos) {
-                readClothesFrag fragment = new readClothesFrag();
-
-                //열람 프래그먼트 띄움, 프래그먼트 띄울 프레임 추가가 필요함
-                //getSupportFragmentManager().beginTransaction().replace("프래그먼트 들어갈 프레임 이름", fragment).commit();
-
-                //ClothesKey를 열람 프래그먼트에 번들로 전달
-                String ClothesKey = favoriteClothes.get(pos).getClothesKey();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("ClothesKey", ClothesKey);
-
-                fragment.setArguments(bundle);
-
-                Log.d("Clicked", favoriteClothes.get(pos).getClothesKey());
-            }
-        });
-
-        //검색 결과 클릭했을 때 열람 페이지를 띄움 (코디)
-        FavoriteCodySetsAdapter favoriteCodySetsAdapter = new FavoriteCodySetsAdapter(favoriteCodySets);
-        favoriteCodySetsAdapter.setOnItemClickListener(new FavoriteCodySetsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int pos) {
-                readCodyFrag fragment2 = new readCodyFrag();
-
-                String CodyKey = favoriteCodySets.get(pos).getCodyKey();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("CodyKey", CodyKey);
-
-                fragment2.setArguments(bundle);
-
-                Log.d("Clicked", favoriteCodySets.get(pos).getCodyKey());
-
-
-
-            }
-        }); */
-
-
-
     }
 }
