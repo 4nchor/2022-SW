@@ -111,6 +111,9 @@ public class addClothesFrag extends Fragment {
                     hashtag.clear();
                     addInfo_et.setText(null);
 
+                    //프래그먼트 종료, 메인 화면으로 돌아감
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
 
                 }
                 else if (imguri == null) {
@@ -122,14 +125,6 @@ public class addClothesFrag extends Fragment {
                 else {
                     Toast.makeText(container.getContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
-
-                //프래그먼트 종료, 추가하기 전 화면으로 돌아감
-                //getParentFragmentManager().beginTransaction().remove(addClothesFrag.this).commit();
-                ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
-                MainActivity mainActivity = (MainActivity) getActivity();
-                LinearLayout weatherLayout= mainActivity.findViewById(R.id.weatherLayout);
-                weatherLayout.setVisibility(View.VISIBLE);
-                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).commit();
 
             }
         });

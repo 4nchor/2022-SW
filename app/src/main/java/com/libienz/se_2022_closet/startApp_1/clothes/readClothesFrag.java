@@ -5,6 +5,7 @@ import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userR
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -178,12 +179,9 @@ public class readClothesFrag extends Fragment {
         readtomain_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
-                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).addToBackStack(null).commit();
-                //getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
-                MainActivity mainActivity = (MainActivity) getActivity();
-                LinearLayout weatherLayout= mainActivity.findViewById(R.id.weatherLayout);
-                weatherLayout.setVisibility(View.VISIBLE);
+                //프래그먼트 종료, 메인 화면으로 돌아감
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
