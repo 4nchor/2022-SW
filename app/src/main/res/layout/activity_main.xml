@@ -94,10 +94,11 @@
         android:layout_marginTop="6dp"
         android:background="@drawable/shadow_top"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
+
             <ImageButton
                 android:id="@+id/logout_btn"
                 android:layout_width="25dp"
@@ -147,6 +148,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#c3f1ff"
                 android:text="코디열람" />
+
             <ImageButton
                 android:id="@+id/searchOutfit_btn"
                 android:layout_width="25dp"

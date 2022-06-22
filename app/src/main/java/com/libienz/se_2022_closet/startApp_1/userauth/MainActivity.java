@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button addCody_btn = (Button) findViewById(R.id.addCody_btn);
+        ImageButton addCody_btn = (ImageButton) findViewById(R.id.addCody_btn);
         addCody_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
