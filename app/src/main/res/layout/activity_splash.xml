@@ -5,11 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".startApp_1.userauth.SplashActivity">
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/loading_img" />
 
     <TextView
         android:fontFamily="@font/bmjua_ttf"
@@ -17,8 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="need logo and design in this activity"
-        android:textColor="@color/white" />
+        android:text="로딩중..."
+        android:textColor="@color/black" />
 
 
 </LinearLayout>

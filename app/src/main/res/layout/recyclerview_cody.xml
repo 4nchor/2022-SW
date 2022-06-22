@@ -8,14 +8,15 @@
         android:id="@+id/viewCodyKey_tv"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:fontFamily="@font/bmjua_ttf"
+        android:text="TextView"
+        android:textSize="18dp"/>
 
     <TextView
         android:id="@+id/viewCodyTag_tv"
+        android:layout_marginLeft="15dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:text="TextView" />
 
 </LinearLayout>

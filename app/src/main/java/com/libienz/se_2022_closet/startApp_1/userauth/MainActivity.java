@@ -2,6 +2,7 @@ package com.libienz.se_2022_closet.startApp_1.userauth;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -11,9 +12,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean isFrag = false; //프래그먼트 백스택에 남은 것이 있는지 여부를 나타내는 변수
 
 
+
     public static String TAG = "["+MainActivity.class.getSimpleName() +"] ";
     Context context = MainActivity.this;
     TextView tv_temp;
     TextView tv_rcmd_outfit;
+    static LinearLayout weatherLayout;
+
 
     private long backKeyPressedTime = 0;
 
@@ -68,10 +75,16 @@ public class MainActivity extends AppCompatActivity {
         readCodyFrag = new readCodyFrag();
 
         transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.frag_fl, readAllClothesFrag).commit();
+        transaction.add(R.id.frag_fl, readAllClothesFrag, "MainFrag").commit();
 
         //날씨에 따른 코디
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
+
+
+
+        weatherLayout = (LinearLayout) findViewById(R.id.weatherLayout);
+        weatherLayout.setVisibility(View.VISIBLE);
+
 
         tv_temp = (TextView) findViewById(R.id.tv_temp);
         tv_rcmd_outfit=(TextView) findViewById(R.id.tv_rcmd_outfit);
@@ -101,13 +114,10 @@ public class MainActivity extends AppCompatActivity {
         addClothes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                weatherLayout.setVisibility(View.GONE);
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, addClothesFrag).addToBackStack(null).commit();
                 isFrag = true;
-                /*
-                Intent intent = new Intent(getApplicationContext(), showDetailsActivity.class);
-                startActivity(intent);*/
 
             }
         });
@@ -126,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         addCody_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                weatherLayout.setVisibility(View.GONE);
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, addCodyFrag).addToBackStack(null).commit();
                 isFrag = true;
@@ -136,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
         readCody_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                weatherLayout.setVisibility(View.GONE);
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frag_fl, readCodyFrag).addToBackStack(null).commit();
                 isFrag = true;
@@ -150,14 +162,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     //뒤로가기 버튼 두 번 누르면 앱 종료
     @Override
     public void onBackPressed() {
         if (isFrag == true) {
-            super.onBackPressed();
-            if (fragmentManager.getBackStackEntryCount() == 0) isFrag = false;
+            //super.onBackPressed();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            if (fragmentManager.getBackStackEntryCount() == 0)
+                isFrag = false;
         }
         else if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
