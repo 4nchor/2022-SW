@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,8 +110,8 @@ public class addClothesFrag extends Fragment {
 
                     hashtag.clear();
                     addInfo_et.setText(null);
-                    //프래그먼트 종료, 추가하기 전 화면으로 돌아감
-                    getParentFragmentManager().beginTransaction().remove(addClothesFrag.this).commit();
+
+
                 }
                 else if (imguri == null) {
                     Toast.makeText(container.getContext(), "사진을 등록해 주세요.", Toast.LENGTH_SHORT).show();
@@ -121,6 +122,14 @@ public class addClothesFrag extends Fragment {
                 else {
                     Toast.makeText(container.getContext(), "등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
+
+                //프래그먼트 종료, 추가하기 전 화면으로 돌아감
+                //getParentFragmentManager().beginTransaction().remove(addClothesFrag.this).commit();
+                ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                LinearLayout weatherLayout= mainActivity.findViewById(R.id.weatherLayout);
+                weatherLayout.setVisibility(View.VISIBLE);
+                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).commit();
 
             }
         });
@@ -152,5 +161,6 @@ public class addClothesFrag extends Fragment {
         //파이어베이스 스토리지에 의류 사진 저장
         uploadToFirebase(imguri, idToken, container);
     }
+
 
 }

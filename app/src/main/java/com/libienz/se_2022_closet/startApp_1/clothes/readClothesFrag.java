@@ -117,17 +117,22 @@ public class readClothesFrag extends Fragment {
                 //즐겨찾기에 추가
                 userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
+
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Clothes clothes = snapshot.getValue(Clothes.class);
 
                         if (!clothes.getIsFavoriteClothes()){ //즐겨찾기 추가
                             userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(true);
                             Log.d("addFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
+                            favorite_btn.setText("즐겨찾기 해제");
+                            Toast.makeText(container.getContext(), "즐겨찾기에 추가되었습니다", Toast.LENGTH_SHORT).show();
                         }
                         else{ //즐겨찾기 해제
                             //clothes.setIsFavoriteClothes(false);
                             userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(false);
                             Log.d("removeFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
+                            favorite_btn.setText("즐겨찾기");
+                            Toast.makeText(container.getContext(), "즐겨찾기 해제되었습니다", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -201,7 +206,12 @@ public class readClothesFrag extends Fragment {
                         Toast.makeText(fragment.getContext(), "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
 
                         //열람 이전에 보고 있던 화면으로 돌아감
-                        getParentFragmentManager().beginTransaction().remove(fragment).commit();
+                        MainActivity mainActivity = (MainActivity) getActivity();
+                        LinearLayout weatherLayout= mainActivity.findViewById(R.id.weatherLayout);
+                        weatherLayout.setVisibility(View.VISIBLE);
+                        ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
+                        getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).addToBackStack(null).commit();
+                        //getParentFragmentManager().beginTransaction().remove(fragment).commit();
                     }
                 })
                 //취소 버튼을 눌렀을 때
