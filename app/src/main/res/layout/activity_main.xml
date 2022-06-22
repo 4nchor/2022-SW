@@ -93,66 +93,125 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="6dp"
         android:background="@drawable/shadow_top"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/logout_btn"
-            android:layout_width="2dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_logout_24" />
-
-        <ImageButton
-            android:id="@+id/ootd_btn"
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_calendar_month_24" />
-
-        <ImageButton
-            android:id="@+id/addClothes_btn"
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_add_24" />
-
-
-        <ImageButton
-            android:id="@+id/searchOutfit_btn"
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_search_24" />
-
-        <Button
-            android:id="@+id/addCody_btn"
-            android:layout_width="25dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#c3f1ff"
-            android:text="코디추가" />
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/logout_btn"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_logout_24" />
 
-        <Button
-            android:id="@+id/readCody_btn"
-            android:layout_width="25dp"
+            <ImageButton
+                android:id="@+id/ootd_btn"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_calendar_month_24" />
+
+            <ImageButton
+                android:id="@+id/addClothes_btn"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_add_24" />
+
+
+            <ImageButton
+                android:id="@+id/addCody_btn"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+                android:src="@drawable/baseline_checkroom_24" />
+
+            <Button
+                android:id="@+id/readCody_btn"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#c3f1ff"
+                android:text="코디열람" />
+            <ImageButton
+                android:id="@+id/searchOutfit_btn"
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_search_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#c3f1ff"
-            android:text="코디열람" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:gravity="center"
+                android:text="로그아웃"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:text="OOTD"
+                android:gravity="center"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:text="의류추가"
+                android:gravity="center"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:text="코디추가"
+                android:gravity="center"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:text="검색"
+                android:gravity="center"
+                android:textColor="@color/black"/>
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
