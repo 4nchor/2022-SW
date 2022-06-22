@@ -66,6 +66,30 @@ public class readClothesFrag extends Fragment {
             Log.d("clotheskey", "clotheskey: "+ClothesKey);
         }
 
+        //즐겨찾기 상태
+        Button favorite_btn = (Button) view.findViewById(R.id.favorite_btn);
+        userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Clothes clothes = snapshot.getValue(Clothes.class);
+
+                if (!clothes.getIsFavoriteClothes()){ //즐겨찾기 추가
+                    favorite_btn.setText("즐겨찾기");
+                }
+                else{ //즐겨찾기 해제
+                    favorite_btn.setText("즐겨찾기 해제");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
         //의류 정보를 띄우는 코드
         userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -111,7 +135,7 @@ public class readClothesFrag extends Fragment {
         });
 
         //즐겨찾기 버튼을 클릭했을 때
-        Button favorite_btn = (Button) view.findViewById(R.id.favorite_btn);
+        //Button favorite_btn = (Button) view.findViewById(R.id.favorite_btn);
         favorite_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
