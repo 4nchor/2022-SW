@@ -27,7 +27,6 @@ import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.clothes.ReadAllClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
-import com.libienz.se_2022_closet.startApp_1.clothes.showDetailsActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.readCodyFrag;
@@ -79,12 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
         //날씨에 따른 코디
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
-
-
-
         weatherLayout = (LinearLayout) findViewById(R.id.weatherLayout);
         weatherLayout.setVisibility(View.VISIBLE);
-
 
         tv_temp = (TextView) findViewById(R.id.tv_temp);
         tv_rcmd_outfit=(TextView) findViewById(R.id.tv_rcmd_outfit);
@@ -282,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             rcmdOutfit="민소매, 반바지, 샌들";
         }
-        tv_temp.setText(doubleToStrFormat(1, model.getTemp()) + " °C");  //소수점 2번째 자리까지 반올림하기
+        tv_temp.setText(doubleToStrFormat(1, model.getTemp()) + "ºC");  //소수점 2번째 자리까지 반올림하기
         tv_rcmd_outfit.setText(rcmdOutfit);
     }
 

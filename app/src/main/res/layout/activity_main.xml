@@ -44,15 +44,22 @@
             android:id="@+id/tv_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="0.5"
             android:gravity="center"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_rcmd_outfit"
+            android:fontFamily="@font/bmjua_ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
+            android:textSize="18sp"
             android:gravity="center" />
 
         <Button
@@ -60,7 +67,13 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
-            android:text="즐겨찾기" />
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/buttonColor"
+            android:fontFamily="@font/bmjua_ttf"
+            android:text="즐겨찾기"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 
