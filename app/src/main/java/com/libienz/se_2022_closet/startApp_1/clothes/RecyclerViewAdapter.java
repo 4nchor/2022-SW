@@ -81,16 +81,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
             });
         }
-        holder.tv_clotheskey.setText(mClothesList.get(position).getClothesKey());
+        holder.tv_clotheskey.setText(mClothesList.get(position).getClothesInfo());
 
-        /*
-
-        Glide.with(holder.itemView)
-                .load(mClothesList.get(position).getClothesImg())
-                .into(holder.iv_clothes);
-        holder.tv_clotheskey.setText(mClothesList.get(position).getClothesKey());
-
-         */
     }
 
     @Override

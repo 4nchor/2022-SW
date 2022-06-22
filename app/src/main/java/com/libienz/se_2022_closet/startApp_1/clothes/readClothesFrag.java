@@ -3,7 +3,9 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -17,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +35,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
+import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
 import java.util.ArrayList;
 
 public class readClothesFrag extends Fragment {
 
+    private View header;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference().child("clothes").child(user.getUid());
@@ -45,6 +51,7 @@ public class readClothesFrag extends Fragment {
     private String ClothesKey; //= "178809003"
     private ArrayList<String> tag;
     private String info;
+
 
 
     @Nullable
@@ -58,6 +65,30 @@ public class readClothesFrag extends Fragment {
             ClothesKey = getArguments().getString("ClothesKey");
             Log.d("clotheskey", "clotheskey: "+ClothesKey);
         }
+
+        //즐겨찾기 상태
+        Button favorite_btn = (Button) view.findViewById(R.id.favorite_btn);
+        userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Clothes clothes = snapshot.getValue(Clothes.class);
+
+                if (!clothes.getIsFavoriteClothes()){ //즐겨찾기 추가
+                    favorite_btn.setText("즐겨찾기");
+                }
+                else{ //즐겨찾기 해제
+                    favorite_btn.setText("즐겨찾기 해제");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
         //의류 정보를 띄우는 코드
         userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -104,24 +135,29 @@ public class readClothesFrag extends Fragment {
         });
 
         //즐겨찾기 버튼을 클릭했을 때
-        Button favorite_btn = (Button) view.findViewById(R.id.favorite_btn);
+        //Button favorite_btn = (Button) view.findViewById(R.id.favorite_btn);
         favorite_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //즐겨찾기에 추가
-                userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addValueEventListener(new ValueEventListener() {
+                userRef.child(user.getUid()).child("Clothes").child(ClothesKey).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
+
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Clothes clothes = snapshot.getValue(Clothes.class);
 
                         if (!clothes.getIsFavoriteClothes()){ //즐겨찾기 추가
                             userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(true);
                             Log.d("addFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
+                            favorite_btn.setText("즐겨찾기 해제");
+                            Toast.makeText(container.getContext(), "즐겨찾기에 추가되었습니다", Toast.LENGTH_SHORT).show();
                         }
                         else{ //즐겨찾기 해제
                             //clothes.setIsFavoriteClothes(false);
-                            userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(true);
+                            userRef.child(user.getUid()).child("Clothes").child(ClothesKey).child("isFavoriteClothes").setValue(false);
                             Log.d("removeFavorite", "isFavorite :"+clothes.getIsFavoriteClothes());
+                            favorite_btn.setText("즐겨찾기");
+                            Toast.makeText(container.getContext(), "즐겨찾기 해제되었습니다", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -134,6 +170,7 @@ public class readClothesFrag extends Fragment {
 
             }
         });
+
 
         //의류 수정 버튼을 클릭했을 때
         Button editClothes_btn = (Button) view.findViewById(R.id.editClothes_btn);
@@ -167,9 +204,9 @@ public class readClothesFrag extends Fragment {
         readtomain_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
-                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).addToBackStack(null).commit();
-                //getParentFragmentManager().beginTransaction().remove(readClothesFrag.this).commit();
+                //프래그먼트 종료, 메인 화면으로 돌아감
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -192,7 +229,12 @@ public class readClothesFrag extends Fragment {
                         Toast.makeText(fragment.getContext(), "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
 
                         //열람 이전에 보고 있던 화면으로 돌아감
-                        getParentFragmentManager().beginTransaction().remove(fragment).commit();
+                        MainActivity mainActivity = (MainActivity) getActivity();
+                        LinearLayout weatherLayout= mainActivity.findViewById(R.id.weatherLayout);
+                        weatherLayout.setVisibility(View.VISIBLE);
+                        ReadAllClothesFrag readAllClothesFrag = new ReadAllClothesFrag();
+                        getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, readAllClothesFrag).addToBackStack(null).commit();
+                        //getParentFragmentManager().beginTransaction().remove(fragment).commit();
                     }
                 })
                 //취소 버튼을 눌렀을 때
@@ -205,4 +247,5 @@ public class readClothesFrag extends Fragment {
         AlertDialog dialog = alert.create();
         dialog.show();
     }
+
 }

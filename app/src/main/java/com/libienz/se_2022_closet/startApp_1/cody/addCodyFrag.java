@@ -3,6 +3,7 @@ package com.libienz.se_2022_closet.startApp_1.cody;
 import static com.libienz.se_2022_closet.startApp_1.util.FirebaseReference.userRef;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ import com.libienz.se_2022_closet.startApp_1.clothes.RecyclerViewAdapter;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.data.Clothes;
 import com.libienz.se_2022_closet.startApp_1.data.Cody;
+import com.libienz.se_2022_closet.startApp_1.userauth.MainActivity;
 
 import java.util.ArrayList;
 
@@ -147,8 +149,9 @@ public class addCodyFrag extends Fragment {
                     hashtag.clear();
                     addCodyTag_et.setText(null);
                     addCodyKey_et.setText(null);
-                    //프래그먼트 종료, 추가하기 전 화면으로 돌아감
-                    getParentFragmentManager().beginTransaction().remove(addCodyFrag.this).commit();
+                    //프래그먼트 종료, 메인 화면으로 돌아감
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
                 }
                 else if (addCodyKey_et.getText() == null) {
                     Toast.makeText(container.getContext(), "코디 이름을을 등록해 주세요.", Toast.LENGTH_SHORT).show();
@@ -168,7 +171,7 @@ public class addCodyFrag extends Fragment {
 
     //코디 추가 메소드
     public void addCody(String idToken, ArrayList<String> Comp, String Key, ArrayList<String> Tag) {
-        Cody cody = new Cody(Key, Comp, Tag);
+        Cody cody = new Cody(Key, Comp, Tag, false);
 
         //파이어베이스 리얼타임 데이터베이스에 의류 정보 저장
         userRef.child(idToken).child("Cody").child(Key).setValue(cody);
