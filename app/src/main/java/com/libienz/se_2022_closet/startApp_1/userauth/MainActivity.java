@@ -2,7 +2,6 @@ package com.libienz.se_2022_closet.startApp_1.userauth;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,10 +11,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,8 +23,6 @@ import com.google.gson.JsonParser;
 import com.libienz.se_2022_closet.R;
 import com.libienz.se_2022_closet.startApp_1.clothes.ReadAllClothesFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.addClothesFrag;
-import com.libienz.se_2022_closet.startApp_1.clothes.readClothesFrag;
-import com.libienz.se_2022_closet.startApp_1.clothes.showDetailsActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.addCodyFrag;
 import com.libienz.se_2022_closet.startApp_1.clothes.searchOutfitActivity;
 import com.libienz.se_2022_closet.startApp_1.cody.readCodyFrag;
@@ -79,12 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         //날씨에 따른 코디
         strUrl = getString(R.string.weather_url)+"data/2.5/weather";  //Strings.xml 의 weather_url 로 통신할 URL 사용
-
-
-
         weatherLayout = (LinearLayout) findViewById(R.id.weatherLayout);
         weatherLayout.setVisibility(View.VISIBLE);
-
 
         tv_temp = (TextView) findViewById(R.id.tv_temp);
         tv_rcmd_outfit=(TextView) findViewById(R.id.tv_rcmd_outfit);
@@ -132,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button addCody_btn = (Button) findViewById(R.id.addCody_btn);
+        ImageButton addCody_btn = (ImageButton) findViewById(R.id.addCody_btn);
         addCody_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -282,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             rcmdOutfit="민소매, 반바지, 샌들";
         }
-        tv_temp.setText(doubleToStrFormat(1, model.getTemp()) + " °C");  //소수점 2번째 자리까지 반올림하기
+        tv_temp.setText(doubleToStrFormat(1, model.getTemp()) + "ºC");  //소수점 2번째 자리까지 반올림하기
         tv_rcmd_outfit.setText(rcmdOutfit);
     }
 

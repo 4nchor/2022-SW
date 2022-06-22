@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -39,7 +42,8 @@ public class LoginActiyity extends AppCompatActivity {
                             Log.d("logincheck",email.toString() + password.toString());
                             Log.d("login", "signInWithEmail:success");
                             FirebaseUser user = auth.getCurrentUser();
-                            //로그인 성공 메인액티비티로 이동!
+
+                            //로그인 성공 메인액티비티로 이동
                             Intent intent = new Intent(getApplicationContext(),InitialSettingActivity.class);
                             startActivity(intent);
 
@@ -108,5 +112,8 @@ public class LoginActiyity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
+
 }

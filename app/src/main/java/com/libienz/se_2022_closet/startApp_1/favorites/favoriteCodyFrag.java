@@ -49,7 +49,6 @@ public class favoriteCodyFrag extends Fragment {
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager= new GridLayoutManager(getActivity(),3);
-        //mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(0);
 

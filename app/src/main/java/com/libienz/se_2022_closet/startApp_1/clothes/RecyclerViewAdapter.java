@@ -2,7 +2,6 @@ package com.libienz.se_2022_closet.startApp_1.clothes;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +51,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     {
         this.mClothesList = mClothesList;
         this.context=context;
-        //storage = FirebaseStorage.getInstance();
         notifyDataSetChanged();
     }
 
