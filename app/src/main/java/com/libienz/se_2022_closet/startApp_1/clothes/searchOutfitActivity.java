@@ -272,8 +272,6 @@ public class searchOutfitActivity extends AppCompatActivity {
 
                 fragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().add(R.id.frag_fl, fragment).commitAllowingStateLoss();
-
-                Log.d("Clicked", findClothes.get(pos).getClothesKey());
             }
         });
 
@@ -294,6 +292,7 @@ public class searchOutfitActivity extends AppCompatActivity {
                 bundle.putString("ClothesKey", ClothesKey);
 
                 fragment.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().add(R.id.frag_fl, fragment).commitAllowingStateLoss();
 
                 Log.d("Clicked", findClothes.get(pos).getClothesKey());
             }

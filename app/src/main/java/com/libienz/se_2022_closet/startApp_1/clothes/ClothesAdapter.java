@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHolder> {
 
     private ArrayList<Clothes> findRes = null;
-    private OnItemClickListener myListener = null;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("clothes").child(user.getUid());
 
@@ -77,6 +76,8 @@ public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHold
         void onItemClick(View v, int pos);
     }
 
+    private OnItemClickListener myListener = null;
+
     //리스너 객체를 전달하는 메소드 정의
     public void setOnItemClickListener(OnItemClickListener listener){
         this.myListener = listener;
@@ -94,13 +95,12 @@ public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHold
             viewClothes_tv = itemView.findViewById(R.id.viewClothes_tv);
             viewClothes_iv = itemView.findViewById(R.id.viewClothes_iv);
 
-            itemView.setClickable(true);
-
             //아이템 뷰 클릭 리스너
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     int pos = getBindingAdapterPosition();
+                    Log.d("test", "position = "+ pos);
                     if (pos != RecyclerView.NO_POSITION) {
                         myListener.onItemClick(v, pos);
                     }

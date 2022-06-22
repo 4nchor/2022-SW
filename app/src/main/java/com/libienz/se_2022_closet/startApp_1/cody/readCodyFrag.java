@@ -41,7 +41,7 @@ import java.util.Iterator;
 public class readCodyFrag extends Fragment {
 
     private String clothesKey = null;
-    private RecyclerViewAdapter adapter;
+    private ClothesAdapter adapter;
     private ArrayList<Clothes> clothes;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -119,35 +119,30 @@ public class readCodyFrag extends Fragment {
 
         //완료 : 구성 의류 목록을 출력합니다 (구성 의류들의 Key는 ArrayList<String> codyComp에 저장되어 있습니다. Line 71의 updateCody() 참고)
         //리사이클러뷰와 어댑터 세팅
+
+        clothes = new ArrayList<>();
+        //context = container.getContext();
+
+        for(int key = 0; key < codyComp.size(); key++) {
+            userRef.child(user.getUid()).child("Clothes").child(codyComp.get(key)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    clothes.add(snapshot.getValue(Clothes.class));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(container.getContext(), "의류 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
         RecyclerView readCodycomp_rv = (RecyclerView) view.findViewById(R.id.readCodycomp_rv);
         readCodycomp_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         readCodycomp_rv.setHasFixedSize(true);
         readCodycomp_rv.scrollToPosition(0);
-        clothes = new ArrayList<>();
-        context = container.getContext();
-        adapter = new RecyclerViewAdapter(clothes, context);
-
-        userRef.child(user.getUid()).child("Clothes").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                clothes.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { //여러값을 하나씩 불러옴
-                    Clothes cl = snapshot.getValue(Clothes.class);
-                    for(String k : codyComp){
-                        if(cl.getClothesKey().toString() == k){
-                            clothes.add(cl);
-                        }
-                    }
-                    Log.d("ReadAllClothesFrag", "Single ValueEventListener : " + snapshot.getValue());
-                }
-                adapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
         //출력
+        ClothesAdapter adapter = new ClothesAdapter(clothes);
         readCodycomp_rv.setAdapter(adapter);
         readCodycomp_rv.setItemAnimator(new DefaultItemAnimator());
 
