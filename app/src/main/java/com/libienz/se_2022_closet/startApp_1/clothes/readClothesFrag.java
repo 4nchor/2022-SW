@@ -177,6 +177,7 @@ public class readClothesFrag extends Fragment {
         editClothes_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 //열람 중이었던 의류의 키값을 수정 프래그먼트에 넘김
                 Bundle bundle = new Bundle();
                 bundle.putString("ClothesKey", ClothesKey);
@@ -185,7 +186,7 @@ public class readClothesFrag extends Fragment {
                 editClothesFrag.setArguments(bundle);
 
                 //열람 중이었던 의류를 수정하도록 함
-                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, editClothesFrag).addToBackStack(null).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.frag_fl, editClothesFrag).addToBackStack(null).commitAllowingStateLoss();
             }
         });
 

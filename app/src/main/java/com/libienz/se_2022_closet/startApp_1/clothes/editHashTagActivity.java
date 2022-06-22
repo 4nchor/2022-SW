@@ -35,7 +35,7 @@ import java.util.ArrayList;
   DB에 다시 넣음
    */
 
-public class editHashTagActivity extends AppCompatActivity implements SendCKey {
+public class editHashTagActivity extends AppCompatActivity {
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseAuth auth;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -55,10 +55,6 @@ public class editHashTagActivity extends AppCompatActivity implements SendCKey {
     protected EditText editHashTag_et;
 
     //TODO : 슬프게도 뜯어 고쳐야 할 것 같습니다..
-    @Override //키 값을 받아옴
-    public void sendCkey(String s) {
-        ClothesKey = s;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

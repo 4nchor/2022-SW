@@ -50,6 +50,7 @@ public class editClothesFrag extends Fragment {
     private boolean isFavoriteClothes;
     private ArrayList<String> clothesTag = new ArrayList<>();
     private Uri imguri;
+    private TextView showECTag_tv;
     /*
     private SendCKey sendCKey;
     @Override
@@ -79,11 +80,15 @@ public class editClothesFrag extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Clothes clothes = snapshot.getValue(Clothes.class);
 
-                //editTag_et.setText(clothes.gettag());
                 cInfo = clothes.getClothesInfo();
                 editInfo_et.setText(cInfo);
                 clothesTag = clothes.getClothesTag();
                 isFavoriteClothes = clothes.getIsFavoriteClothes();
+
+                showECTag_tv = (TextView) view.findViewById(R.id.showECTag_tv);
+                for (int i = 0; i < clothesTag.size(); i++){
+                    showECTag_tv.append("#" + clothesTag.get(i) + " ");
+                }
 
                 StorageReference submitReference = storageReference.child(ClothesKey + ".png");
                 submitReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -127,11 +132,7 @@ public class editClothesFrag extends Fragment {
 
         //이미 있는 해시태그를 출력, 있는 해시태그를 또 작성하면 삭제 & 없는 해시태그를 작성하면 추가
         Button editHashTag_btn = (Button) view.findViewById(R.id.editHashTag_btn);
-        TextView showECTag_tv = (TextView) view.findViewById(R.id.showECTag_tv);
         EditText editTag_et = (EditText) view.findViewById(R.id.editTag_et);
-        for (int i = 0; i < clothesTag.size(); i++){
-            showECTag_tv.append("#" + clothesTag.get(i) + " ");
-        }
 
         editHashTag_btn.setOnClickListener(new View.OnClickListener() {
             @Override
