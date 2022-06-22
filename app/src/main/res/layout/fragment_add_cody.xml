@@ -32,6 +32,14 @@
         android:layout_width="match_parent"
         android:hint="# 태그 입력"
         android:layout_height="50dp"></EditText>
+    <TextView
+        android:id="@+id/editcl_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bmjua_ttf"
+        android:backgroundTint="@color/buttonColor"
+        android:layout_margin="5dp"
+        android:text="의류를 클릭한 후 의류 추가 버튼을 눌러주세요" />
 
     <Button
         android:id="@+id/addCodyComp_btn"

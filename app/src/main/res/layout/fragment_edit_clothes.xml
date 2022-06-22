@@ -28,6 +28,15 @@
             android:text="이미지 추가" />
 
         <TextView
+            android:id="@+id/editcl_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bmjua_ttf"
+            android:backgroundTint="@color/buttonColor"
+            android:layout_margin="5dp"
+            android:text="같은 해시태그를 작성한 후 버튼을 누르면 제거\n포함되지 않은 해시태그라면 추가됩니다" />
+
+        <TextView
             android:id="@+id/showECTag_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

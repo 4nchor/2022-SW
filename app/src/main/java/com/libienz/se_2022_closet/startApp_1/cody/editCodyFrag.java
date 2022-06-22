@@ -77,6 +77,7 @@ public class editCodyFrag extends Fragment {
                 codyComp = cody.getCodyComp();
                 hashTag = cody.getCodyTag();
 
+                editCodyname_et.setText(prevCodyname);
                 showeditTag_tv = (TextView) view.findViewById(R.id.showeditTag_tv);
                 for (int i = 0; i < hashTag.size(); i++)
                     showeditTag_tv.append("#" + hashTag.get(i) + " ");
@@ -202,7 +203,7 @@ public class editCodyFrag extends Fragment {
             public void onClick(View v) {
                 newCodyname = editCodyname_et.getText().toString();
 
-                if(newCodyname.isEmpty()){ newCodyname = prevCodyname; }
+                //if(newCodyname.isEmpty()){ newCodyname = prevCodyname; }
 
                 //유저 정보 및 키워드, 태그 입력을 확인하고 코디 등록
                 if (user != null && newCodyname != null && !hashTag.isEmpty()){
