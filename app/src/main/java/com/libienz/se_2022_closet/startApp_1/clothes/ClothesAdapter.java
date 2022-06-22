@@ -31,29 +31,6 @@ public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHold
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("clothes").child(user.getUid());
 
-    //아이템 뷰를 저장하는 뷰 홀더 클래스
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout layout;
-        TextView viewClothes_tv = (TextView) itemView.findViewById(R.id.viewClothes_tv);
-        ImageView viewClothes_iv = (ImageView) itemView.findViewById(R.id.viewClothes_iv);
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            layout = itemView.findViewById(R.id.searchResult_ll);
-
-            //아이템 뷰 클릭 리스너
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) {
-                        if (myListener != null) myListener.onItemClick(v, pos);
-                    }
-                }
-            });
-        }
-    }
-
     public ClothesAdapter(ArrayList<Clothes> list) { findRes = list; }
 
     //아이템 뷰를 위한 뷰 홀더 객체 생성해서 리턴
@@ -103,5 +80,32 @@ public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHold
     //리스너 객체를 전달하는 메소드 정의
     public void setOnItemClickListener(OnItemClickListener listener){
         this.myListener = listener;
+    }
+
+    //아이템 뷰를 저장하는 뷰 홀더 클래스
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout layout;
+        TextView viewClothes_tv;
+        ImageView viewClothes_iv;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            layout = itemView.findViewById(R.id.searchResult_ll);
+            viewClothes_tv = itemView.findViewById(R.id.viewClothes_tv);
+            viewClothes_iv = itemView.findViewById(R.id.viewClothes_iv);
+
+            itemView.setClickable(true);
+
+            //아이템 뷰 클릭 리스너
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    int pos = getBindingAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        myListener.onItemClick(v, pos);
+                    }
+                }
+            });
+        }
     }
 }
