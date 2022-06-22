@@ -173,7 +173,7 @@ public class editClothesFrag extends Fragment {
 
                 //유저 정보 확인 후 의류 수정
                 if (user != null){
-                    editClothes(user.getUid(), imguri.toString(), clothesTag, cInfo, isFavoriteClothes, container);
+                    editClothes(user.getUid(), imguri.toString(), clothesTag, cInfo, container);
                     Toast.makeText(container.getContext(), "수정 완료되었습니다", Toast.LENGTH_SHORT).show();
 
                     //수정 완료된 의류의 키값을 열람 프래그먼트에 넘김
@@ -189,22 +189,6 @@ public class editClothesFrag extends Fragment {
                 }
             }
         });
-
-/*
-        //태그 수정하기 버튼을 누르면 activiy_edit_hashtag 레이아웃으로 화면이 전환됨
-        //수정할 의류의 키값을 editHashTagActivity로 넘김
-        Button editHashTag_btn = (Button) view.findViewById(R.id.editHashTag_btn);
-        editHashTag_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //화면 전환 및 키 전달
-                sendCKey.sendCkey(ClothesKey);
-                Intent intent = new Intent(getActivity(), editHashTagActivity.class);
-                startActivity(intent);
-            }
-        });
-*/
-
 
         return view;
     }
@@ -223,7 +207,7 @@ public class editClothesFrag extends Fragment {
         });
     }
 
-    public void editClothes(String idToken, String Img, ArrayList<String> Tag, String Info, Boolean isFavoriteClothes, ViewGroup container){
+    public void editClothes(String idToken, String Img, ArrayList<String> Tag, String Info, ViewGroup container){
         Clothes clothes = new Clothes(Img, Tag, Info, ClothesKey, isFavoriteClothes);
 
         //파이어베이스 리얼타임 데이터베이스에 의류 정보 저장
