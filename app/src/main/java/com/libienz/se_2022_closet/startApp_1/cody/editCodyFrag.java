@@ -138,18 +138,23 @@ public class editCodyFrag extends Fragment {
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                clothesKey = clothes.get(pos).getClothesKey();
-                
-                //Codycomp에 없는 clothesKey이면 Codycomp에 추가한다
-                for(String key : codyComp){
-                    if (key != clothesKey){
-                        codyComp.add(clothesKey);
-                        Toast.makeText(container.getContext(), "코디에 의류를 추가하였습니다.", Toast.LENGTH_SHORT).show();
+                String clothesKey = clothes.get(pos).getClothesKey();
+                boolean check = false;
+
+                for (int i = 0; i < codyComp.size(); i++){
+                    if(codyComp.get(i).equals(clothesKey)){
+                        check = true;
+                        break;
                     }
-                    else if (key == clothesKey) { //Codycomp에 있는 clothesKey이면 Codycomp에서 아웃
-                        codyComp.remove(clothesKey);
-                        Toast.makeText(container.getContext(), "코디에 의류를 제거하였습니다.", Toast.LENGTH_SHORT).show();
-                    }
+                }
+
+                if(check){ //Codycomp에 없는 clothesKey이면 Codycomp에 추가한다
+                    codyComp.remove(clothesKey);
+                    Toast.makeText(container.getContext(), "코디에 의류를 제거하였습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else { //Codycomp에 있는 clothesKey이면 Codycomp에서 아웃
+                    codyComp.add(clothesKey);
+                    Toast.makeText(container.getContext(), "코디에 의류를 추가하였습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -163,24 +168,29 @@ public class editCodyFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 String newtag = editCodytag_et.getText().toString();
+                boolean check = false;
 
-                if(newtag != null) {
+                if(newtag !=  null) {
                     for (int i = 0; i < hashTag.size(); i++) {
-                        if (hashTag.get(i) != newtag) {
-                            hashtag.add(newtag);
-                            Toast.makeText(container.getContext(), "태그를 추가하였습니다.", Toast.LENGTH_SHORT).show();
-                        } else if (hashTag.get(i) == newtag) {
-                            hashtag.remove(newtag);
-                            Toast.makeText(container.getContext(), "태그를 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                        if (hashTag.get(i).equals(newtag)) {
+                            check = true;
+                            break;
                         }
                     }
                 }
+                if(check) {
+                    hashTag.remove(newtag);
+                    Toast.makeText(container.getContext(), "태그를 제거하였습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    hashTag.add(newtag);
+                    Toast.makeText(container.getContext(), "태그를 추가하였습니다.", Toast.LENGTH_SHORT).show();
+                }
                 showeditTag_tv.setText(null);
-                for (int i = 0; i < hashTag.size(); i++){
+                for (int i = 0; i < hashTag.size(); i++) {
                     showeditTag_tv.append("#" + hashTag.get(i) + " ");
                 }
             }
-
         });
 
 
