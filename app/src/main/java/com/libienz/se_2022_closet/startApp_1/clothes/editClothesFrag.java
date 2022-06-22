@@ -138,17 +138,26 @@ public class editClothesFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 String newtag = editTag_et.getText().toString();
+                boolean check = false;
 
-                for (String tag : clothesTag){
-                    if(tag==newtag){
-                        clothesTag.remove(newtag);
-                    }
-                    else if (tag!=newtag){
-                        clothesTag.add(newtag);
+                if(newtag !=  null) {
+                    for (int i = 0; i < clothesTag.size(); i++) {
+                        if (clothesTag.get(i).equals(newtag)) {
+                            check = true;
+                            break;
+                        }
                     }
                 }
+                if(check) {
+                    clothesTag.remove(newtag);
+                    Toast.makeText(container.getContext(), "태그를 제거하였습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    clothesTag.add(newtag);
+                    Toast.makeText(container.getContext(), "태그를 추가하였습니다.", Toast.LENGTH_SHORT).show();
+                }
                 showECTag_tv.setText(null);
-                for (int i = 0; i < clothesTag.size(); i++){
+                for (int i = 0; i < clothesTag.size(); i++) {
                     showECTag_tv.append("#" + clothesTag.get(i) + " ");
                 }
             }

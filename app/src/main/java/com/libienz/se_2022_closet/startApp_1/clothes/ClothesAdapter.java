@@ -27,32 +27,8 @@ import java.util.ArrayList;
 public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHolder> {
 
     private ArrayList<Clothes> findRes = null;
-    private OnItemClickListener myListener = null;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("clothes").child(user.getUid());
-
-    //아이템 뷰를 저장하는 뷰 홀더 클래스
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout layout;
-        TextView viewClothes_tv = (TextView) itemView.findViewById(R.id.viewClothes_tv);
-        ImageView viewClothes_iv = (ImageView) itemView.findViewById(R.id.viewClothes_iv);
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            layout = itemView.findViewById(R.id.searchResult_ll);
-
-            //아이템 뷰 클릭 리스너
-            itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) {
-                        if (myListener != null) myListener.onItemClick(v, pos);
-                    }
-                }
-            });
-        }
-    }
 
     public ClothesAdapter(ArrayList<Clothes> list) { findRes = list; }
 
@@ -100,8 +76,36 @@ public class ClothesAdapter extends RecyclerView.Adapter<ClothesAdapter.ViewHold
         void onItemClick(View v, int pos);
     }
 
+    private OnItemClickListener myListener = null;
+
     //리스너 객체를 전달하는 메소드 정의
     public void setOnItemClickListener(OnItemClickListener listener){
         this.myListener = listener;
+    }
+
+    //아이템 뷰를 저장하는 뷰 홀더 클래스
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout layout;
+        TextView viewClothes_tv;
+        ImageView viewClothes_iv;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            layout = itemView.findViewById(R.id.searchResult_ll);
+            viewClothes_tv = itemView.findViewById(R.id.viewClothes_tv);
+            viewClothes_iv = itemView.findViewById(R.id.viewClothes_iv);
+
+            //아이템 뷰 클릭 리스너
+            itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    int pos = getBindingAdapterPosition();
+                    Log.d("test", "position = "+ pos);
+                    if (pos != RecyclerView.NO_POSITION) {
+                        myListener.onItemClick(v, pos);
+                    }
+                }
+            });
+        }
     }
 }

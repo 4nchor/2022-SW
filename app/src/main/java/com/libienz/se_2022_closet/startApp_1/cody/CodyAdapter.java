@@ -46,9 +46,10 @@ public class CodyAdapter extends RecyclerView.Adapter<CodyAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
+                    int pos = getBindingAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
-                        if (myListener != null) myListener.onItemClick(v, pos);
+                        //if (myListener != null)
+                        myListener.onItemClick(v, pos);
                     }
                 }
             });

@@ -112,7 +112,7 @@ public class addCodyFrag extends Fragment {
                     }
                     Toast.makeText(container.getContext(), "의류를 추가하였습니다.", Toast.LENGTH_SHORT).show();
                 }
-                clothesKey = null;
+                clothesKey.clear();
             }
         });
 
