@@ -122,14 +122,19 @@ public class readCodyFrag extends Fragment {
 
         clothes = new ArrayList<>();
         //context = container.getContext();
+        RecyclerView readCodycomp_rv = (RecyclerView) view.findViewById(R.id.readCodycomp_rv);
+        readCodycomp_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        readCodycomp_rv.setHasFixedSize(true);
+        readCodycomp_rv.scrollToPosition(0);
+
 
         for(int key = 0; key < codyComp.size(); key++) {
             userRef.child(user.getUid()).child("Clothes").child(codyComp.get(key)).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    clothes.add(snapshot.getValue(Clothes.class));
+                    Clothes c1 = snapshot.getValue(Clothes.class);
+                    clothes.add(c1);
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     Toast.makeText(container.getContext(), "의류 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -137,10 +142,6 @@ public class readCodyFrag extends Fragment {
             });
         }
 
-        RecyclerView readCodycomp_rv = (RecyclerView) view.findViewById(R.id.readCodycomp_rv);
-        readCodycomp_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        readCodycomp_rv.setHasFixedSize(true);
-        readCodycomp_rv.scrollToPosition(0);
         //출력
         ClothesAdapter adapter = new ClothesAdapter(clothes);
         readCodycomp_rv.setAdapter(adapter);
