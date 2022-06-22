@@ -50,6 +50,7 @@ public class editCodyFrag extends Fragment {
     private ArrayList<Clothes> clothes;
     private ArrayList<String> codyComp = new ArrayList<>();
     private ArrayList<String> hashTag = new ArrayList<>();
+    private TextView showeditTag_tv;
     Context context;
 
     @Override
@@ -75,6 +76,10 @@ public class editCodyFrag extends Fragment {
                 prevCodyname = cody.getCodyKey();
                 codyComp = cody.getCodyComp();
                 hashTag = cody.getCodyTag();
+
+                showeditTag_tv = (TextView) view.findViewById(R.id.showeditTag_tv);
+                for (int i = 0; i < hashTag.size(); i++)
+                    showeditTag_tv.append("#" + hashTag.get(i) + " ");
             }
 
             @Override
@@ -152,22 +157,22 @@ public class editCodyFrag extends Fragment {
 
         //이미 있는 해시태그를 출력, 있는 해시태그를 또 작성하면 삭제 & 없는 해시태그를 작성하면 추가
         Button editHashTag_btn3 = (Button) view.findViewById(R.id.editHashTag_btn3);
-        TextView showeditTag_tv = (TextView) view.findViewById(R.id.showeditTag_tv);
         EditText editCodytag_et = (EditText) view.findViewById(R.id.editCodytag_et);
-        for (int i = 0; i < hashTag.size(); i++)
-            showeditTag_tv.append("#" + hashTag.get(i) + " ");
 
         editHashTag_btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String newtag = editCodytag_et.getText().toString();
 
-                for (String tag : hashTag){
-                    if(tag==newtag){
-                        hashtag.remove(newtag);
-                    }
-                    else if (tag!=newtag){
-                        hashtag.add(newtag);
+                if(newtag != null) {
+                    for (int i = 0; i < hashTag.size(); i++) {
+                        if (hashTag.get(i) != newtag) {
+                            hashtag.add(newtag);
+                            Toast.makeText(container.getContext(), "태그를 추가하였습니다.", Toast.LENGTH_SHORT).show();
+                        } else if (hashTag.get(i) == newtag) {
+                            hashtag.remove(newtag);
+                            Toast.makeText(container.getContext(), "태그를 삭제하였습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
                 showeditTag_tv.setText(null);
@@ -175,7 +180,9 @@ public class editCodyFrag extends Fragment {
                     showeditTag_tv.append("#" + hashTag.get(i) + " ");
                 }
             }
+
         });
+
 
 
 
